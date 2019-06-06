@@ -8,7 +8,16 @@ class CrossDataProviders
         return new CrossDataProviders();
     }
 
-    public function cross(array $array1, array $array2): array
+    public function cross(array ...$dataProviders): array
+    {
+        $result = array_shift($dataProviders);
+        foreach ($dataProviders as $dataProvider) {
+            $result = $this->crossTwo($result, $dataProvider);
+        }
+        return $result;
+    }
+
+    public function crossTwo(array $array1, array $array2): array
     {
         $result = [];
         foreach ($array1 as $key1 => $value1) {
