@@ -32,6 +32,11 @@ class DataProviders
         return (new KeyMapper($this->mapper))->map((new ArrayMatrix())->cross($this->dataProviders));
     }
 
+    public static function builder(): DataProvidersBuilder
+    {
+        return new DataProvidersBuilder([], '\json_encode');
+    }
+
     public static function configure(): DataProviders
     {
         return new DataProviders([], '\json_encode');

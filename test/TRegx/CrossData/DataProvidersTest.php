@@ -45,4 +45,28 @@ class DataProvidersTest extends TestCase
         ];
         $this->assertEquals($expected, $result);
     }
+
+    /**
+     * @test
+     */
+    public function shouldBuild()
+    {
+        // when
+        $result = DataProviders::builder()
+            ->crossing([[1], [2]])
+            ->crossing([['A'], ['B']])
+            ->keyMapper(function ($keys) {
+                return join('+', $keys);
+            })
+            ->build();
+
+        // then
+        $expected = [
+            '0+0' => [1, 'A'],
+            '0+1' => [1, 'B'],
+            '1+0' => [2, 'A'],
+            '1+1' => [2, 'B'],
+        ];
+        $this->assertEquals($expected, $result);
+    }
 }
