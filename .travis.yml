@@ -1,0 +1,33 @@
+language: php
+php:
+  - 7.1.0
+  - 7.1.27
+  - 7.2.0
+  - 7.2.15
+  - 7.3.0
+  - 7.3.5
+  - 7.4snapshot
+
+branches:
+  only:
+    - master
+
+before_install:
+  - travis_retry composer self-update
+  - composer install
+
+before_script:
+  - mkdir -p build/logs
+  - mkdir -p build/cov
+
+script:
+  - ./vendor/bin/phpunit test
+
+after_script:
+  - travis_retry php ./vendor/bin/php-coveralls -v
+
+matrix:
+  fast_finish: true
+  allow_failures:
+    - php: 7.3.5
+    - php: 7.4snapshot
