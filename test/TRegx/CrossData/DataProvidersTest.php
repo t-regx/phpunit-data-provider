@@ -26,6 +26,23 @@ class DataProvidersTest extends TestCase
     /**
      * @test
      */
+    public function shouldKeyMap_regular()
+    {
+        // when
+        $result = DataProviders::configure()
+            ->input([[1], [2]])
+            ->keyMapper(function (array $keys) {
+                return join('+', $keys);
+            })
+            ->create();
+
+        // then
+        $this->assertEquals([[1], [2]], $result);
+    }
+
+    /**
+     * @test
+     */
     public function shouldKeyMapper()
     {
         // when

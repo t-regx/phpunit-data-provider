@@ -29,4 +29,28 @@ class KeyMapperTest extends TestCase
         ];
         $this->assertEquals($expected, $result);
     }
+
+    /**
+     * @test
+     */
+    public function shouldKeyMapper_mapRegularKey()
+    {
+        // given
+        $keyMapper = new KeyMapper(function (array $keys) {
+            return \json_encode($keys);
+        });
+
+        // when
+        $result = $keyMapper->map([
+            0 => true,
+            1 => false,
+        ]);
+
+        // then
+        $expected = [
+            '[0]' => true,
+            '[1]' => false,
+        ];
+        $this->assertEquals($expected, $result);
+    }
 }
