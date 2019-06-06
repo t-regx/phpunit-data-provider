@@ -89,6 +89,30 @@ class ArrayMatrixTest extends TestCase
     /**
      * @test
      */
+    public function shouldCross_multipleItemArrays()
+    {
+        // given
+        $array1 = [[1, 2], [3, 4], [5, 6]];
+        $arrayA = [['A', 'B', 'C'], ['D', 'E', 'F']];
+
+        // when
+        $result = (new ArrayMatrix())->cross([$array1, $arrayA]);
+
+        // then
+        $expected = [
+            '[0,0]' => [1, 2, 'A', 'B', 'C'],
+            '[0,1]' => [1, 2, 'D', 'E', 'F'],
+            '[1,0]' => [3, 4, 'A', 'B', 'C'],
+            '[1,1]' => [3, 4, 'D', 'E', 'F'],
+            '[2,0]' => [5, 6, 'A', 'B', 'C'],
+            '[2,1]' => [5, 6, 'D', 'E', 'F'],
+        ];
+        $this->assertEquals($expected, $result);
+    }
+
+    /**
+     * @test
+     */
     public function shouldCross_singleItemArrays_withNames()
     {
         // given
