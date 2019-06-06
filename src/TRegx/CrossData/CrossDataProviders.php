@@ -8,15 +8,15 @@ class CrossDataProviders
         return new CrossDataProviders();
     }
 
-    public function create(array $array1, array $array2): array
+    public function cross(array $array1, array $array2): array
     {
         $result = [];
         foreach ($array1 as $key1 => $value1) {
             foreach ($array2 as $key2 => $value2) {
                 if (is_int($key1) && is_int($key2)) {
-                    $result[] = [$value1, $value2];
+                    $result[] = array_merge($value1, $value2);
                 } else {
-                    $result[self::keyName($key1, $key2)] = [$value1, $value2];
+                    $result[self::keyName($key1, $key2)] = array_merge($value1, $value2);
                 }
             }
         }

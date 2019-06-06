@@ -12,10 +12,10 @@ class CrossDataProvidersTest extends TestCase
     public function shouldCrossEmptyArray_first()
     {
         // given
-        $array = ['A', 'B', 'C', 'D', 'E'];
+        $array = [['A'], ['B'], ['C'], ['D'], ['E']];
 
         // when
-        $result = CrossDataProviders::builder()->create([], $array);
+        $result = CrossDataProviders::builder()->cross([], $array);
 
         // then
         $this->assertEmpty($result);
@@ -27,10 +27,10 @@ class CrossDataProvidersTest extends TestCase
     public function shouldCrossEmptyArray_second()
     {
         // given
-        $array = ['A', 'B', 'C', 'D', 'E'];
+        $array = [['A'], ['B'], ['C'], ['D'], ['E']];
 
         // when
-        $result = CrossDataProviders::builder()->create($array, []);
+        $result = CrossDataProviders::builder()->cross($array, []);
 
         // then
         $this->assertEmpty($result);
@@ -42,11 +42,11 @@ class CrossDataProvidersTest extends TestCase
     public function shouldCross_singleItemArrays()
     {
         // given
-        $array1 = [1, 2, 3, 4, 5];
-        $arrayA = ['A', 'B', 'C', 'D', 'E'];
+        $array1 = [[1], [2], [3], [4], [5]];
+        $arrayA = [['A'], ['B'], ['C'], ['D'], ['E']];
 
         // when
-        $result = CrossDataProviders::builder()->create($array1, $arrayA);
+        $result = CrossDataProviders::builder()->cross($array1, $arrayA);
 
         // then
         $expected = [
@@ -65,11 +65,11 @@ class CrossDataProvidersTest extends TestCase
     public function shouldCross_singleItemArrays_withNames()
     {
         // given
-        $array1 = [1, 'two' => 2, 3];
-        $arrayA = ['a' => 'A', 'B', 'C', 'D'];
+        $array1 = [[1], 'two' => [2], [3]];
+        $arrayA = ['a' => ['A'], ['B'], ['C'], ['D']];
 
         // when
-        $result = CrossDataProviders::builder()->create($array1, $arrayA);
+        $result = CrossDataProviders::builder()->cross($array1, $arrayA);
 
         // then
         $expected = [
