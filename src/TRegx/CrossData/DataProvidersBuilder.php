@@ -15,19 +15,30 @@ class DataProvidersBuilder
         $this->mapper = $mapper;
     }
 
-    public function crossing(array $singleDataProvider): DataProvidersBuilder
+    /**
+     * @param array $singleDataProvider
+     * @return DataProvidersBuilder
+     */
+    public function crossing(array $singleDataProvider)
     {
         $this->dataProviders[] = $singleDataProvider;
         return $this;
     }
 
-    public function keyMapper(callable $mapper): DataProvidersBuilder
+    /**
+     * @param callable $mapper
+     * @return DataProvidersBuilder
+     */
+    public function keyMapper(callable $mapper)
     {
         $this->mapper = $mapper;
         return $this;
     }
 
-    public function build(): array
+    /**
+     * @return array
+     */
+    public function build()
     {
         return (new KeyMapper($this->mapper))->map((new ArrayMatrix())->cross($this->dataProviders));
     }

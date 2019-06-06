@@ -11,7 +11,11 @@ class KeyMapper
         $this->mapper = $mapper;
     }
 
-    public function map(array $input): array
+    /**
+     * @param array $input
+     * @return array
+     */
+    public function map(array $input)
     {
         $result = [];
         foreach ($input as $key => $value) {

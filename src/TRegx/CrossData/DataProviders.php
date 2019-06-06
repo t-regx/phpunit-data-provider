@@ -15,34 +15,55 @@ class DataProviders
         $this->mapper = $mapper;
     }
 
-    public function input(array ...$dataProviders): DataProviders
+    /**
+     * @param array ...$dataProviders
+     * @return DataProviders
+     */
+    public function input(array ...$dataProviders)
     {
         $this->dataProviders = $dataProviders;
         return $this;
     }
 
-    public function keyMapper(callable $mapper): DataProviders
+    /**
+     * @param callable $mapper
+     * @return DataProviders
+     */
+    public function keyMapper(callable $mapper)
     {
         $this->mapper = $mapper;
         return $this;
     }
 
-    public function create(): array
+    /**
+     * @return array
+     */
+    public function create()
     {
         return (new KeyMapper($this->mapper))->map((new ArrayMatrix())->cross($this->dataProviders));
     }
 
-    public static function builder(): DataProvidersBuilder
+    /**
+     * @return DataProvidersBuilder
+     */
+    public static function builder()
     {
         return new DataProvidersBuilder([], '\json_encode');
     }
 
-    public static function configure(): DataProviders
+    /**
+     * @return DataProviders
+     */
+    public static function configure()
     {
         return new DataProviders([], '\json_encode');
     }
 
-    public static function crossAll(array ...$dataProviders): array
+    /**
+     * @param array ...$dataProviders
+     * @return array
+     */
+    public static function crossAll(array ...$dataProviders)
     {
         return (new DataProviders($dataProviders, '\json_encode'))->create();
     }
