@@ -22,23 +22,19 @@ class CrossDataProviders
         $result = [];
         foreach ($array1 as $key1 => $value1) {
             foreach ($array2 as $key2 => $value2) {
-                if (is_int($key1) && is_int($key2)) {
-                    $result[] = array_merge($value1, $value2);
-                } else {
-                    $result[self::keyName($key1, $key2)] = array_merge($value1, $value2);
-                }
+                $result[self::keyName($key1, $key2)] = array_merge($value1, $value2);
             }
         }
         return $result;
     }
 
-    private function keyName($key1, $key2): string
+    private function keyName($previous, $new): string
     {
-        return self::formatKey($key1) . ' / ' . self::formatKey($key2);
-    }
-
-    private function formatKey($key)
-    {
-        return is_int($key) ? "#$key" : $key;
+        $keys = json_decode($previous);
+        if (!is_array($keys)) {
+            $keys = [$previous];
+        }
+        $keys[] = $new;
+        return json_encode($keys);
     }
 }
