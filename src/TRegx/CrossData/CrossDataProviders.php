@@ -11,6 +11,7 @@ class CrossDataProviders
     public function cross(array ...$dataProviders): array
     {
         $result = array_shift($dataProviders);
+        $result = $this->quoteKeys($result);
         foreach ($dataProviders as $dataProvider) {
             $result = $this->crossTwo($result, $dataProvider);
         }
@@ -36,5 +37,14 @@ class CrossDataProviders
         }
         $keys[] = $new;
         return json_encode($keys);
+    }
+
+    private function quoteKeys(array $array): array
+    {
+        $result = [];
+        foreach ($array as $key => $value) {
+            $result[json_encode([$key])] = $value;
+        }
+        return $result;
     }
 }

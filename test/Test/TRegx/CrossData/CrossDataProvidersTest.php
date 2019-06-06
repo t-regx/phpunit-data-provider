@@ -185,4 +185,26 @@ class CrossDataProvidersTest extends TestCase
         ];
         $this->assertEquals($expected, $result);
     }
+
+    /**
+     * @test
+     */
+    public function shouldQuote_firstArray()
+    {
+        // given
+        $array1 = ['[6,7]' => [1], [2]];
+        $arrayA = ['[4,5]' => ['A'], ['B']];
+
+        // when
+        $result = CrossDataProviders::builder()->cross($array1, $arrayA);
+
+        // then
+        $expected = [
+            '["[6,7]","[4,5]"]' => [1, 'A'],
+            '["[6,7]",0]'       => [1, 'B'],
+            '[0,"[4,5]"]'       => [2, 'A'],
+            '[0,0]'             => [2, 'B'],
+        ];
+        $this->assertEquals($expected, $result);
+    }
 }
