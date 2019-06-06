@@ -3,7 +3,7 @@ namespace TRegx\CrossData;
 
 class CrossDataProviders
 {
-    public static function create(array ...$dataProviders): array
+    public static function cross(array ...$dataProviders): array
     {
         return DataProviders::crossAll(...$dataProviders);
     }
