@@ -5,6 +5,6 @@ class CrossDataProviders
 {
     public static function create(array ...$dataProviders): array
     {
-        return DataProviders::cross(...$dataProviders);
+        return DataProviders::crossAll(...$dataProviders);
     }
 }

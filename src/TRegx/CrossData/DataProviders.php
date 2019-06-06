@@ -9,10 +9,16 @@ class DataProviders
     /** @var callable */
     private $mapper;
 
-    public function __construct(array $dataProviders)
+    public function __construct(array $dataProviders, callable $mapper)
     {
         $this->dataProviders = $dataProviders;
-        $this->mapper = '\json_encode';
+        $this->mapper = $mapper;
+    }
+
+    public function input(array ...$dataProviders): DataProviders
+    {
+        $this->dataProviders = $dataProviders;
+        return $this;
     }
 
     public function keyMapper(callable $mapper): DataProviders
@@ -26,13 +32,13 @@ class DataProviders
         return (new KeyMapper($this->mapper))->map((new ArrayMatrix())->cross($this->dataProviders));
     }
 
-    public static function input(array ...$dataProviders): DataProviders
+    public static function configure(): DataProviders
     {
-        return new DataProviders($dataProviders);
+        return new DataProviders([], '\json_encode');
     }
 
-    public static function cross(array ...$dataProviders): array
+    public static function crossAll(array ...$dataProviders): array
     {
-        return (new DataProviders($dataProviders))->create();
+        return (new DataProviders($dataProviders, '\json_encode'))->create();
     }
 }

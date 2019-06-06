@@ -11,7 +11,7 @@ class DataProvidersTest extends TestCase
     public function shouldCross()
     {
         // when
-        $result = DataProviders::cross([[1], [2]], [['A'], ['B']]);
+        $result = DataProviders::crossAll([[1], [2]], [['A'], ['B']]);
 
         // then
         $expected = [
@@ -29,7 +29,8 @@ class DataProvidersTest extends TestCase
     public function shouldKeyMapper()
     {
         // when
-        $result = DataProviders::input([[1], [2]], [['A'], ['B']])
+        $result = DataProviders::configure()
+            ->input([[1], [2]], [['A'], ['B']])
             ->keyMapper(function ($keys) {
                 return join('+', $keys);
             })
