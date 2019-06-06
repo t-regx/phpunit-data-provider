@@ -15,7 +15,7 @@ class CrossDataProvidersTest extends TestCase
         $array = ['A', 'B', 'C', 'D', 'E'];
 
         // when
-        $result = CrossDataProviders::create([], $array);
+        $result = CrossDataProviders::builder()->create([], $array);
 
         // then
         $this->assertEmpty($result);
@@ -30,7 +30,7 @@ class CrossDataProvidersTest extends TestCase
         $array = ['A', 'B', 'C', 'D', 'E'];
 
         // when
-        $result = CrossDataProviders::create($array, []);
+        $result = CrossDataProviders::builder()->create($array, []);
 
         // then
         $this->assertEmpty($result);
@@ -46,7 +46,7 @@ class CrossDataProvidersTest extends TestCase
         $arrayA = ['A', 'B', 'C', 'D', 'E'];
 
         // when
-        $result = CrossDataProviders::create($array1, $arrayA);
+        $result = CrossDataProviders::builder()->create($array1, $arrayA);
 
         // then
         $expected = [
@@ -55,6 +55,32 @@ class CrossDataProvidersTest extends TestCase
             [3, 'A'], [3, 'B'], [3, 'C'], [3, 'D'], [3, 'E'],
             [4, 'A'], [4, 'B'], [4, 'C'], [4, 'D'], [4, 'E'],
             [5, 'A'], [5, 'B'], [5, 'C'], [5, 'D'], [5, 'E'],
+        ];
+        $this->assertEquals($expected, $result);
+    }
+
+    /**
+     * @test
+     */
+    public function shouldCross_singleItemArrays_withNames()
+    {
+        // given
+        $array1 = [1, 'two' => 2, 3];
+        $arrayA = ['a' => 'A', 'B', 'C', 'D'];
+
+        // when
+        $result = CrossDataProviders::builder()->create($array1, $arrayA);
+
+        // then
+        $expected = [
+            '#0 / a' => [1, 'A'], [1, 'B'], [1, 'C'], [1, 'D'],
+
+            'two / a'  => [2, 'A'],
+            'two / #0' => [2, 'B'],
+            'two / #1' => [2, 'C'],
+            'two / #2' => [2, 'D'],
+
+            '#1 / a' => [3, 'A'], [3, 'B'], [3, 'C'], [3, 'D'],
         ];
         $this->assertEquals($expected, $result);
     }
