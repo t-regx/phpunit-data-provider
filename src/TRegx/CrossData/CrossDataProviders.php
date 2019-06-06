@@ -10,6 +10,9 @@ class CrossDataProviders
 
     public function cross(array ...$dataProviders): array
     {
+        if (count($dataProviders) === 1) {
+            return $dataProviders[0];
+        }
         $result = array_shift($dataProviders);
         $result = $this->quoteKeys($result);
         foreach ($dataProviders as $dataProvider) {
