@@ -12,7 +12,7 @@ class CrossDataProvidersTest extends TestCase
     public function shouldCrossEmptyArray_empty()
     {
         // when
-        $result = CrossDataProviders::builder()->create([]);
+        $result = CrossDataProviders::create([]);
 
         // then
         $this->assertEmpty($result);
@@ -27,7 +27,7 @@ class CrossDataProvidersTest extends TestCase
         $array = [['A'], ['B'], ['C'], ['D'], ['E']];
 
         // when
-        $result = CrossDataProviders::builder()->create($array, []);
+        $result = CrossDataProviders::create($array, []);
 
         // then
         $this->assertEmpty($result);
@@ -42,7 +42,7 @@ class CrossDataProvidersTest extends TestCase
         $array = [['A'], ['B'], ['C'], ['D'], ['E']];
 
         // when
-        $result = CrossDataProviders::builder()->create([], $array);
+        $result = CrossDataProviders::create([], $array);
 
         // then
         $this->assertEmpty($result);
@@ -57,7 +57,7 @@ class CrossDataProvidersTest extends TestCase
         $input = [[1], [2], [3], [4], [5]];
 
         // when
-        $result = CrossDataProviders::builder()->create($input);
+        $result = CrossDataProviders::create($input);
 
         // then
         $this->assertEquals($input, $result);
@@ -73,7 +73,7 @@ class CrossDataProvidersTest extends TestCase
         $arrayA = [['A'], ['B'], ['C'], ['D'], ['E']];
 
         // when
-        $result = CrossDataProviders::builder()->create($array1, $arrayA);
+        $result = CrossDataProviders::create($array1, $arrayA);
 
         // then
         $expected = [
@@ -96,7 +96,7 @@ class CrossDataProvidersTest extends TestCase
         $arrayA = ['a' => ['A'], ['B'], ['C'], ['D']];
 
         // when
-        $result = CrossDataProviders::builder()->create($array1, $arrayA);
+        $result = CrossDataProviders::create($array1, $arrayA);
 
         // then
         $expected = [
@@ -129,7 +129,7 @@ class CrossDataProvidersTest extends TestCase
         $arrayRed = [['red'], ['green'], ['blue']];
 
         // when
-        $result = CrossDataProviders::builder()->create($array1, $arrayA, $arrayRed);
+        $result = CrossDataProviders::create($array1, $arrayA, $arrayRed);
 
         // then
         $expected = [
@@ -163,7 +163,7 @@ class CrossDataProvidersTest extends TestCase
         $arrayRed = ['r' => ['red'], ['green'], ['blue']];
 
         // when
-        $result = CrossDataProviders::builder()->create($array1, $arrayA, $arrayRed);
+        $result = CrossDataProviders::create($array1, $arrayA, $arrayRed);
 
         // then
         $expected = [
@@ -196,7 +196,7 @@ class CrossDataProvidersTest extends TestCase
         $arrayA = ['[4,5]' => ['A'], ['B']];
 
         // when
-        $result = CrossDataProviders::builder()->create($array1, $arrayA);
+        $result = CrossDataProviders::create($array1, $arrayA);
 
         // then
         $expected = [
