@@ -13,8 +13,8 @@ It allows you to create square matrices of your data providers!
 [![License](https://img.shields.io/github/license/T-Regx/CrossDataProviders.svg)](https://github.com/T-Regx/CrossDataProviders)
 [![Composer lock](https://img.shields.io/badge/.lock-uncommited-green.svg)](https://github.com/T-Regx/CrossDataProviders)
 
-[![PHP Version](https://img.shields.io/badge/PHP-5.3%2B-blue.svg)](https://packagist.org/packages/rawr/t-regx)
-[![PHP Version](https://img.shields.io/badge/PHP-5.6%2B-blue.svg)](https://packagist.org/packages/rawr/t-regx)
+[![PHP Version](https://img.shields.io/badge/PHP-5.6-blue.svg)](https://travis-ci.org/T-Regx/CrossDataProviders)
+[![PHP Version](https://img.shields.io/badge/PHP-7.0-blue.svg)](https://travis-ci.org/T-Regx/CrossDataProviders)
 [![PHP Version](https://img.shields.io/badge/PHP-7.1-blue.svg)](https://travis-ci.org/T-Regx/CrossDataProviders)
 [![PHP Version](https://img.shields.io/badge/PHP-7.2-blue.svg)](https://travis-ci.org/T-Regx/CrossDataProviders)
 [![PHP Version](https://img.shields.io/badge/PHP-7.3-blue.svg)](https://travis-ci.org/T-Regx/CrossDataProviders)
