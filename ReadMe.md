@@ -96,7 +96,7 @@ function services() {
 
 ## More advanced example
 
-Let's say that apart from the domain and the protocol, you'd also like to add the protocol port, and the service title. Further more, you'd like to have two strategies of connection: lazy and eager.
+Let's say that apart from the domain and the protocol, you'd also like to add the protocol port, and the service title. Further more, you'd like to have three strategies of connection: lazy, eager and a test dry run.
 
 ```php
 /**
