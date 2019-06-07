@@ -6,13 +6,17 @@ class DataProvidersBuilder
     /** @var array */
     private $dataProviders;
 
-    /** @var callable */
+    /** @var callable|null */
     private $mapper;
 
-    public function __construct(array $dataProviders, callable $mapper)
+    /** @var callable */
+    private $keyMapper;
+
+    public function __construct(array $dataProviders, $mapper, callable $keyMapper)
     {
         $this->dataProviders = $dataProviders;
         $this->mapper = $mapper;
+        $this->keyMapper = $keyMapper;
     }
 
     /**
@@ -29,9 +33,19 @@ class DataProvidersBuilder
      * @param callable $mapper
      * @return DataProvidersBuilder
      */
-    public function keyMapper(callable $mapper)
+    public function mapper(callable $mapper)
     {
         $this->mapper = $mapper;
+        return $this;
+    }
+
+    /**
+     * @param callable $mapper
+     * @return DataProvidersBuilder
+     */
+    public function keyMapper(callable $mapper)
+    {
+        $this->keyMapper = $mapper;
         return $this;
     }
 
@@ -40,6 +54,6 @@ class DataProvidersBuilder
      */
     public function build()
     {
-        return (new KeyMapper($this->mapper))->map((new ArrayMatrix())->cross($this->dataProviders));
+        return (new DataProviders($this->dataProviders, $this->mapper, $this->keyMapper))->create();
     }
 }

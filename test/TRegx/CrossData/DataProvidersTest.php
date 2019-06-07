@@ -66,6 +66,46 @@ class DataProvidersTest extends TestCase
     /**
      * @test
      */
+    public function shouldMap()
+    {
+        // given
+        $builder = new DataProvidersBuilder([], null, '\json_encode');
+
+        // when
+        $result = DataProviders::configure()
+            ->input([[1], [2]], [['A'], ['B']])
+            ->mapper(function (array $keys) {
+                return [join('+', $keys)];
+            })
+            ->create();
+
+        // then
+        $this->assertEquals(['[0,0]' => ['1+A'], '[0,1]' => ['1+B'], '[1,0]' => ['2+A'], '[1,1]' => ['2+B']], $result);
+    }
+
+    /**
+     * @test
+     */
+    public function shouldMap_wrapInArray()
+    {
+        // given
+        $builder = new DataProvidersBuilder([], null, '\json_encode');
+
+        // when
+        $result = DataProviders::configure()
+            ->input([[1], [2]], [['A'], ['B']])
+            ->mapper(function (array $keys) {
+                return join('+', $keys);
+            })
+            ->create();
+
+        // then
+        $this->assertEquals(['[0,0]' => ['1+A'], '[0,1]' => ['1+B'], '[1,0]' => ['2+A'], '[1,1]' => ['2+B']], $result);
+    }
+
+    /**
+     * @test
+     */
     public function shouldBuild()
     {
         // when
