@@ -24,7 +24,7 @@ It allows you to create square matrices of your data providers!
 
 1. [Installation](#installation)
     * [Composer](#installation)
-2. [Quick Examples](#quick-examples)
+2. [Examples](#examples)
 4. [Supported PHP versions](#supported-php-versions)
 
 # Installation
@@ -35,4 +35,110 @@ Installation for PHP 7.1 and later:
 $ composer require rawr/cross-data-providers
 ```
 
-# Quick Examples
+# Examples
+
+Ever wanted to use multiple PhpUnit @dataProvider's with each other? Well, look no more :) 
+
+Imagine you have a service that allows you to log in to GitHub, BitBucket, SourceForge and GitLab with either SSH, HTTP or HTTPS and you want to test each **possible configuration of those**.
+
+```php
+/**
+ * @test
+ * @dataProviders services
+ */
+public function shouldLogin(string $service, string $method) {
+    // given
+    $login = new Login($method);
+    
+    // when
+    $result = $login->log($service);
+    
+    // then
+    $this->assertTrue($result);
+}
+
+function services() {
+    return DataProviders::cross(
+      [
+        ['github.com'],
+        ['bitbucket.com'],
+        ['gitlab.com'],
+        ['sourceforge.net']
+      ],
+      [
+        ['http'],
+        ['https'],
+        ['ssh']
+      ]
+    );
+}
+```
+
+This is equivalent of having a regular dataProvider that looks like this
+```php
+function services() {
+    return [
+        ['github.com', 'http'],
+        ['github.com', 'https'],
+        ['github.com', 'ssh'],
+        ['bitbucket.com', 'http'],
+        ['bitbucket.com', 'https'],
+        ['bitbucket.com', 'ssh'],
+        ['gitlab.com', 'http'],
+        ['gitlab.com', 'https'],
+        ['gitlab.com', 'ssh'],
+        ['sourceforge.net', 'http'],
+        ['sourceforge.net', 'https'],
+        ['sourceforge.net', 'ssh'],
+    ];
+}
+```
+
+## More advanced example
+
+Let's say that apart from the domain and the protocol, you'd also like to add the protocol port, and the service title. Further more, you'd like to have two strategies of connection: lazy and eager.
+
+```php
+/**
+ * @test
+ * @dataProviders services
+ */
+public function shouldLogin(string $service, string $title, string $method, int $port, $strategy) {
+    // given
+    $login = new Login($method, $port);
+    $login->useStrategy($strategy);
+    
+    // when
+    $result = $login->log($service);
+    
+    // then
+    $this->assertTrue($result, "Failed to login to $title");
+}
+
+function services() {
+    return DataProviders::cross(
+      [
+        // First two paramters: $service and $title
+        ['github.com',      'GitHub'],
+        ['bitbucket.com',   'BitBucket'],
+        ['gitlab.com',      'GitLab'],
+        ['sourceforge.net', 'SourceForge'],
+        ['www.gitkraken.com', 'Git Kraken']
+      ],
+      [
+        // Second pair of parameters: $method and $port
+        ['http',  80],
+        ['https', 443],
+        ['ssh',   22]
+      ],
+      [
+        // Last parameter: $strategy
+        new EagerStrategy(),
+        new LazyStrategy(),
+        new DryRunStrategy(),
+      ]
+    );
+}
+```
+
+This is equal to a @dataProvider with 45 entries. The test will be run 45 times, each time with a unique combination of your parameter sets :)
