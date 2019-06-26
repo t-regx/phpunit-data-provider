@@ -44,7 +44,7 @@ Imagine you have a service that allows you to log in to GitHub, BitBucket, Sourc
 ```php
 /**
  * @test
- * @dataProviders services
+ * @dataProvider services
  */
 public function shouldLogin(string $service, string $method) {
     // given
@@ -101,7 +101,7 @@ Let's say that apart from the domain and the protocol, you'd also like to add th
 ```php
 /**
  * @test
- * @dataProviders services
+ * @dataProvider services
  */
 public function shouldLogin(string $service, string $title, string $method, int $port, $strategy) {
     // given
