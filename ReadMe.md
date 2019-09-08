@@ -32,7 +32,7 @@ It allows you to create square matrices of your data providers!
 Installation for PHP 5.6 and later:
 
 ```bash
-$ composer require rawr/cross-data-providers
+$ composer require --dev rawr/cross-data-providers
 ```
 
 # Examples
