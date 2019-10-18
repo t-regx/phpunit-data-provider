@@ -33,6 +33,8 @@ class KeyMapper
         if (is_int($key)) {
             return [$key];
         }
-        return $key;
+        // @codeCoverageIgnoreStart
+        throw new \InvalidArgumentException();
+        // @codeCoverageIgnoreEnd
     }
 }

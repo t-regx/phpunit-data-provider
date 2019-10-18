@@ -1,6 +1,7 @@
 <?php
 namespace TRegx\CrossData;
 
+use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 
 class DataProvidersTest extends TestCase
@@ -11,14 +12,22 @@ class DataProvidersTest extends TestCase
     public function shouldCross()
     {
         // when
-        $result = DataProviders::cross([[1], [2]], [['A'], ['B']]);
+        $result = DataProviders::cross(
+            [['login', '/sing-in'], ['logout', '/sign-out']],
+            [['ftp', 21], ['http', 80], ['ssh', 22], ['https', 443]]
+        );
 
         // then
         $expected = [
-            '[0,0]' => [1, 'A'],
-            '[0,1]' => [1, 'B'],
-            '[1,0]' => [2, 'A'],
-            '[1,1]' => [2, 'B'],
+            '[0,0]' => ['login', '/sing-in', 'ftp', 21],
+            '[0,1]' => ['login', '/sing-in', 'http', 80],
+            '[0,2]' => ['login', '/sing-in', 'ssh', 22],
+            '[0,3]' => ['login', '/sing-in', 'https', 443],
+
+            '[1,0]' => ['logout', '/sign-out', 'ftp', 21],
+            '[1,1]' => ['logout', '/sign-out', 'http', 80],
+            '[1,2]' => ['logout', '/sign-out', 'ssh', 22],
+            '[1,3]' => ['logout', '/sign-out', 'https', 443],
         ];
         $this->assertEquals($expected, $result);
     }
@@ -26,98 +35,54 @@ class DataProvidersTest extends TestCase
     /**
      * @test
      */
-    public function shouldKeyMap_regular()
-    {
-        // when
-        $result = DataProviders::configure()
-            ->input([[1], [2]])
-            ->keyMapper(function (array $keys) {
-                return join('+', $keys);
-            })
-            ->create();
-
-        // then
-        $this->assertEquals([[1], [2]], $result);
-    }
-
-    /**
-     * @test
-     */
-    public function shouldKeyMapper()
-    {
-        // when
-        $result = DataProviders::configure()
-            ->input([[1], [2]], [['A'], ['B']])
-            ->keyMapper(function ($keys) {
-                return join('+', $keys);
-            })
-            ->create();
-
-        // then
-        $expected = [
-            '0+0' => [1, 'A'],
-            '0+1' => [1, 'B'],
-            '1+0' => [2, 'A'],
-            '1+1' => [2, 'B'],
-        ];
-        $this->assertEquals($expected, $result);
-    }
-
-    /**
-     * @test
-     */
-    public function shouldMap()
-    {
-        // when
-        $result = DataProviders::configure()
-            ->input([[1], [2]], [['A'], ['B']])
-            ->mapper(function (array $keys) {
-                return [join('+', $keys)];
-            })
-            ->create();
-
-        // then
-        $this->assertEquals(['[0,0]' => ['1+A'], '[0,1]' => ['1+B'], '[1,0]' => ['2+A'], '[1,1]' => ['2+B']], $result);
-    }
-
-    /**
-     * @test
-     */
-    public function shouldMap_wrapInArray()
-    {
-        // when
-        $result = DataProviders::configure()
-            ->input([[1], [2]], [['A'], ['B']])
-            ->mapper(function (array $keys) {
-                return join('+', $keys);
-            })
-            ->create();
-
-        // then
-        $this->assertEquals(['[0,0]' => ['1+A'], '[0,1]' => ['1+B'], '[1,0]' => ['2+A'], '[1,1]' => ['2+B']], $result);
-    }
-
-    /**
-     * @test
-     */
-    public function shouldBuild()
+    public function shouldAllowArbitraryData_asLongAsItsMappedToValid()
     {
         // when
         $result = DataProviders::builder()
-            ->crossing([[1], [2]])
-            ->crossing([['A'], ['B']])
-            ->keyMapper(function ($keys) {
-                return join('+', $keys);
+            ->addJoinedSection(['one' => 1], ['two' => 2])
+            ->addJoinedSection(['letter-1' => 'A'], ['letter-2' => 'B'])
+            ->entryMapper(function ($entry) {
+                return array_values(array_flip($entry));
+            })
+            ->entryKeyMapper(function (array $keys) {
+                return join(' + ', $keys);
             })
             ->build();
 
         // then
         $expected = [
-            '0+0' => [1, 'A'],
-            '0+1' => [1, 'B'],
-            '1+0' => [2, 'A'],
-            '1+1' => [2, 'B'],
+            '0 + 0' => ['one', 'letter-1'],
+            '0 + 1' => ['one', 'letter-2'],
+
+            '1 + 0' => ['two', 'letter-1'],
+            '1 + 1' => ['two', 'letter-2'],
         ];
         $this->assertEquals($expected, $result);
+    }
+
+    /**
+     * @test
+     */
+    public function shouldThrowForAssociativeArray()
+    {
+        // then
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage('Arguments composed of an associative array');
+
+        // given
+        DataProviders::cross([['A'], ['value' => 'value']]);
+    }
+
+    /**
+     * @test
+     */
+    public function shouldThrowForInvalidIteration()
+    {
+        // then
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage("Argument list is supposed to be an array, 'string' given");
+
+        // given
+        DataProviders::cross([['A'], 'not an array']);
     }
 }

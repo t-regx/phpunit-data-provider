@@ -3,7 +3,7 @@ namespace TRegx\CrossData;
 
 class DataProvidersBuilder
 {
-    /** @var array */
+    /** @var array[] */
     private $dataProviders;
 
     /** @var callable|null */
@@ -20,12 +20,24 @@ class DataProvidersBuilder
     }
 
     /**
-     * @param array $singleDataProvider
+     * @param array[] $singleDataProvider
      * @return DataProvidersBuilder
      */
-    public function crossing(array $singleDataProvider)
+    public function addSection(...$singleDataProvider)
     {
-        $this->dataProviders[] = $singleDataProvider;
+        $this->dataProviders[] = array_map(function ($value) {
+            return [$value];
+        }, $singleDataProvider);
+        return $this;
+    }
+
+    /**
+     * @param array ...$sections
+     * @return DataProvidersBuilder
+     */
+    public function addJoinedSection(array ...$sections)
+    {
+        $this->dataProviders[] = $sections;
         return $this;
     }
 
@@ -33,7 +45,7 @@ class DataProvidersBuilder
      * @param callable $mapper
      * @return DataProvidersBuilder
      */
-    public function mapper(callable $mapper)
+    public function entryMapper(callable $mapper)
     {
         $this->mapper = $mapper;
         return $this;
@@ -43,7 +55,7 @@ class DataProvidersBuilder
      * @param callable $mapper
      * @return DataProvidersBuilder
      */
-    public function keyMapper(callable $mapper)
+    public function entryKeyMapper(callable $mapper)
     {
         $this->keyMapper = $mapper;
         return $this;

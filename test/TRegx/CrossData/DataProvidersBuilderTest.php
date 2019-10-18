@@ -15,15 +15,39 @@ class DataProvidersBuilderTest extends TestCase
 
         // when
         $result = $builder
-            ->crossing([[1], [2]])
-            ->crossing([['A'], ['B']])
-            ->keyMapper(function (array $keys) {
-                return join('+', $keys);
-            })
+            ->addSection('login', 'logout', 'recover')
+            ->addSection('as-user', 'as-admin')
             ->build();
 
         // then
-        $this->assertEquals(['0+0' => [1, 'A'], '0+1' => [1, 'B'], '1+0' => [2, 'A'], '1+1' => [2, 'B']], $result);
+        $this->assertThat($result, $this->equalTo([
+            '[0,0]' => ['login', 'as-user'],
+            '[0,1]' => ['login', 'as-admin'],
+            '[1,0]' => ['logout', 'as-user'],
+            '[1,1]' => ['logout', 'as-admin'],
+            '[2,0]' => ['recover', 'as-user'],
+            '[2,1]' => ['recover', 'as-admin'],
+        ]));
+    }
+
+    /**
+     * @test
+     */
+    public function test_joinedIteration()
+    {
+        // when
+        $result = $this->example_joinedIterations()->build();
+
+        // then
+        $this->assertThat($result, $this->equalTo([
+            '[0,0]' => ['ssh', 'user@page.com', 22, '/sign-up', 'login'],
+            '[0,1]' => ['ssh', 'user@page.com', 22, '/sign-out', 'logout'],
+            '[0,2]' => ['ssh', 'user@page.com', 22, '/restore-password', 'recover'],
+
+            '[1,0]' => ['https', 'https://page.com', 443, '/sign-up', 'login'],
+            '[1,1]' => ['https', 'https://page.com', 443, '/sign-out', 'logout'],
+            '[1,2]' => ['https', 'https://page.com', 443, '/restore-password', 'recover'],
+        ]));
     }
 
     /**
@@ -31,19 +55,101 @@ class DataProvidersBuilderTest extends TestCase
      */
     public function shouldMap()
     {
-        // given
-        $builder = new DataProvidersBuilder([], null, '\json_encode');
-
         // when
-        $result = $builder
-            ->crossing([[1], [2]])
-            ->crossing([['A'], ['B']])
-            ->mapper(function (array $keys) {
+        $result = $this->example_joinedIterations()
+            ->entryMapper(function (array $keys) {
+                return array_map('strtoupper', $keys);
+            })
+            ->build();
+
+        // then
+        $this->assertThat($result, $this->equalTo([
+            '[0,0]' => ['SSH', 'USER@PAGE.COM', '22', '/SIGN-UP', 'LOGIN'],
+            '[0,1]' => ['SSH', 'USER@PAGE.COM', '22', '/SIGN-OUT', 'LOGOUT'],
+            '[0,2]' => ['SSH', 'USER@PAGE.COM', '22', '/RESTORE-PASSWORD', 'RECOVER'],
+
+            '[1,0]' => ['HTTPS', 'HTTPS://PAGE.COM', '443', '/SIGN-UP', 'LOGIN'],
+            '[1,1]' => ['HTTPS', 'HTTPS://PAGE.COM', '443', '/SIGN-OUT', 'LOGOUT'],
+            '[1,2]' => ['HTTPS', 'HTTPS://PAGE.COM', '443', '/RESTORE-PASSWORD', 'RECOVER'],
+        ]));
+    }
+
+    /**
+     * @test
+     */
+    public function shouldMapKeys()
+    {
+        // when
+        $result = $this->example_joinedIterations()
+            ->entryKeyMapper(function (array $keys) {
                 return join('+', $keys);
             })
             ->build();
 
         // then
-        $this->assertEquals(['[0,0]' => ['1+A'], '[0,1]' => ['1+B'], '[1,0]' => ['2+A'], '[1,1]' => ['2+B']], $result);
+        $this->assertThat($result, $this->equalTo([
+            '0+0' => ['ssh', 'user@page.com', '22', '/sign-up', 'login'],
+            '0+1' => ['ssh', 'user@page.com', '22', '/sign-out', 'logout'],
+            '0+2' => ['ssh', 'user@page.com', '22', '/restore-password', 'recover'],
+
+            '1+0' => ['https', 'https://page.com', '443', '/sign-up', 'login'],
+            '1+1' => ['https', 'https://page.com', '443', '/sign-out', 'logout'],
+            '1+2' => ['https', 'https://page.com', '443', '/restore-password', 'recover'],
+        ]));
+    }
+
+    /**
+     * @test
+     */
+    public function shouldFlatMap()
+    {
+        // when
+        $result = $this->example_joinedIterations()
+            ->entryMapper(function (array $keys) {
+                return sprintf('%s://%s:%d%s', ...$keys);
+            })
+            ->build();
+
+        // then
+        $this->assertThat($result, $this->equalTo([
+            '[0,0]' => ['ssh://user@page.com:22/sign-up'],
+            '[0,1]' => ['ssh://user@page.com:22/sign-out'],
+            '[0,2]' => ['ssh://user@page.com:22/restore-password'],
+
+            '[1,0]' => ['https://https://page.com:443/sign-up'],
+            '[1,1]' => ['https://https://page.com:443/sign-out'],
+            '[1,2]' => ['https://https://page.com:443/restore-password'],
+        ]));
+    }
+
+    /**
+     * @return DataProvidersBuilder
+     */
+    private function example_joinedIterations()
+    {
+        return (new DataProvidersBuilder([], null, '\json_encode'))
+            ->addJoinedSection(['ssh', 'user@page.com', 22], ['https', 'https://page.com', 443])
+            ->addJoinedSection(['/sign-up', 'login'], ['/sign-out', 'logout'], ['/restore-password', 'recover']);
+    }
+
+    /**
+     * @test
+     */
+    public function test_singleIteration()
+    {
+        // given
+        $builder = new DataProvidersBuilder([], null, '\json_encode');
+
+        // when
+        $result = $builder
+            ->addSection('one', 'two', 'three')
+            ->build();
+
+        // then
+        $this->assertThat($result, $this->equalTo([
+            '[0]' => ['one'],
+            '[1]' => ['two'],
+            '[2]' => ['three'],
+        ]));
     }
 }

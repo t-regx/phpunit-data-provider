@@ -205,7 +205,7 @@ class ArrayMatrixTest extends TestCase
             '[1,0,"r"]'     => [3, 'A', 'red'], '[1,0,0]' => [3, 'A', 'green'], '[1,0,1]' => [3, 'A', 'blue'],  // A
             '[1,1,"r"]'     => [3, 'B', 'red'], '[1,1,0]' => [3, 'B', 'green'], '[1,1,1]' => [3, 'B', 'blue'],  // B
             '[1,2,"r"]'     => [3, 'C', 'red'], '[1,2,0]' => [3, 'C', 'green'], '[1,2,1]' => [3, 'C', 'blue'],  // C
-            //                     red                           green                           blue
+            //                           red                           green                           blue
         ];
         $this->assertEquals($expected, $result);
     }
@@ -228,6 +228,28 @@ class ArrayMatrixTest extends TestCase
             '["[6,7]",0]'       => [1, 'B'],
             '[0,"[4,5]"]'       => [2, 'A'],
             '[0,0]'             => [2, 'B'],
+        ];
+        $this->assertEquals($expected, $result);
+    }
+
+    /**
+     * @test
+     */
+    public function shouldCrossAssociativeArray_evenWithJaggedIterations()
+    {
+        // given
+        $array1 = ['3' => [1], '6' => [2, 3]];
+        $arrayA = ['a' => ['A'], 'x' => ['B']];
+
+        // when
+        $result = (new ArrayMatrix())->cross([$array1, $arrayA]);
+
+        // then
+        $expected = [
+            '[3,"a"]' => [1, 'A'],
+            '[3,"x"]' => [1, 'B'],
+            '[6,"a"]' => [2, 3, 'A'],
+            '[6,"x"]' => [2, 3, 'B'],
         ];
         $this->assertEquals($expected, $result);
     }
