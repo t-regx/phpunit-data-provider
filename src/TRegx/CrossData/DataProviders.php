@@ -84,7 +84,7 @@ class DataProviders
      * @param array ...$dataProviders
      * @return array
      */
-    public static function crossAll(array ...$dataProviders)
+    public static function cross(array ...$dataProviders)
     {
         return (new DataProviders($dataProviders, null, '\json_encode'))->create();
     }

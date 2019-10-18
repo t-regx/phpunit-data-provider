@@ -11,7 +11,7 @@ class DataProvidersTest extends TestCase
     public function shouldCross()
     {
         // when
-        $result = DataProviders::crossAll([[1], [2]], [['A'], ['B']]);
+        $result = DataProviders::cross([[1], [2]], [['A'], ['B']]);
 
         // then
         $expected = [
@@ -68,9 +68,6 @@ class DataProvidersTest extends TestCase
      */
     public function shouldMap()
     {
-        // given
-        $builder = new DataProvidersBuilder([], null, '\json_encode');
-
         // when
         $result = DataProviders::configure()
             ->input([[1], [2]], [['A'], ['B']])
@@ -88,9 +85,6 @@ class DataProvidersTest extends TestCase
      */
     public function shouldMap_wrapInArray()
     {
-        // given
-        $builder = new DataProvidersBuilder([], null, '\json_encode');
-
         // when
         $result = DataProviders::configure()
             ->input([[1], [2]], [['A'], ['B']])

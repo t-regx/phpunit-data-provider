@@ -58,7 +58,7 @@ public function shouldLogin(string $service, string $method) {
 }
 
 function services() {
-    return DataProviders::crossAll(
+    return DataProviders::cross(
       [
         ['github.com'],
         ['bitbucket.com'],
@@ -116,7 +116,7 @@ public function shouldLogin(string $service, string $title, string $method, int 
 }
 
 function services() {
-    return DataProviders::crossAll(
+    return DataProviders::cross(
       [
         // First two paramters: $service and $title
         ['github.com',      'GitHub'],
