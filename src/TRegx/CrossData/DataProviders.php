@@ -59,4 +59,14 @@ class DataProviders
             return (array)$input;
         }, \array_map($this->mapper, $entries));
     }
+
+    public static function pairs(...$values): array
+    {
+        return DataProviderPairs::getMixedPairs($values);
+    }
+
+    public static function distinctPairs(...$values): array
+    {
+        return DataProviderPairs::getDistinctPairs($values);
+    }
 }
