@@ -13,7 +13,6 @@ It allows you to create square matrices of your data providers!
 [![License](https://img.shields.io/github/license/T-Regx/CrossDataProviders.svg)](https://github.com/T-Regx/CrossDataProviders)
 [![Composer lock](https://img.shields.io/badge/.lock-uncommited-green.svg)](https://github.com/T-Regx/CrossDataProviders)
 
-[![PHP Version](https://img.shields.io/badge/PHP-5.6-blue.svg)](https://travis-ci.org/T-Regx/CrossDataProviders)
 [![PHP Version](https://img.shields.io/badge/PHP-7.0-blue.svg)](https://travis-ci.org/T-Regx/CrossDataProviders)
 [![PHP Version](https://img.shields.io/badge/PHP-7.1-blue.svg)](https://travis-ci.org/T-Regx/CrossDataProviders)
 [![PHP Version](https://img.shields.io/badge/PHP-7.2-blue.svg)](https://travis-ci.org/T-Regx/CrossDataProviders)
@@ -25,11 +24,10 @@ It allows you to create square matrices of your data providers!
 1. [Installation](#installation)
     * [Composer](#installation)
 2. [Examples](#examples)
-4. [Supported PHP versions](#supported-php-versions)
 
 # Installation
 
-Installation for PHP 5.6 and later:
+Installation for PHP 7.0 and later:
 
 ```bash
 $ composer require --dev rawr/cross-data-providers
@@ -165,7 +163,6 @@ function services() {
             new LazyStrategy(),
             new DryRunStrategy())
         ->build();
-    );
 }
 ```
 
@@ -199,6 +196,5 @@ function trimMethods() {
         ->addSection('trim', 'preg_replace', 'str_replace', 'mb_str_replace')
         ->addSection(' ', '\t', '\n', '\r', PHP_EOL)
         ->build();
-    );
 }
 ```
