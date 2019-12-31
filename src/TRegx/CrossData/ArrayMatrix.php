@@ -3,11 +3,7 @@ namespace TRegx\CrossData;
 
 class ArrayMatrix
 {
-    /**
-     * @param array $dataProviders
-     * @return array
-     */
-    public function cross(array $dataProviders)
+    public function cross(array $dataProviders): array
     {
         if (count($dataProviders) === 1) {
             return $dataProviders[0];
@@ -20,7 +16,7 @@ class ArrayMatrix
         return $result;
     }
 
-    private function crossTwo(array $array1, array $array2)
+    private function crossTwo(array $array1, array $array2): array
     {
         $result = [];
         foreach ($array1 as $key1 => $value1) {
@@ -31,7 +27,7 @@ class ArrayMatrix
         return $result;
     }
 
-    private function keyName($previous, $new)
+    private function keyName($previous, $new): string
     {
         $keys = json_decode($previous);
         if (!is_array($keys)) {
@@ -41,7 +37,7 @@ class ArrayMatrix
         return json_encode($keys);
     }
 
-    private function quoteKeys(array $array)
+    private function quoteKeys(array $array): array
     {
         $result = [];
         foreach ($array as $key => $value) {

@@ -19,10 +19,7 @@ class DataProviders
         $this->keyMapper = $keyMapper;
     }
 
-    /**
-     * @return array
-     */
-    public function create()
+    public function create(): array
     {
         $result = (new ArrayMatrix())->cross($this->dataProviders);
         $entries = (new KeyMapper($this->keyMapper))->map($result);
@@ -34,19 +31,12 @@ class DataProviders
         return $entries;
     }
 
-    /**
-     * @return DataProvidersBuilder
-     */
-    public static function builder()
+    public static function builder(): DataProvidersBuilder
     {
         return new DataProvidersBuilder([], null, '\json_encode');
     }
 
-    /**
-     * @param array ...$dataProviders
-     * @return array
-     */
-    public static function cross(array ...$dataProviders)
+    public static function cross(array ...$dataProviders): array
     {
         return (new DataProviders($dataProviders, null, '\json_encode'))->create();
     }
@@ -63,7 +53,7 @@ class DataProviders
         }
     }
 
-    private function mapEntries(array $entries)
+    private function mapEntries(array $entries): array
     {
         return \array_map(function ($input) {
             return (array)$input;

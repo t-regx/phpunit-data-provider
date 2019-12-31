@@ -19,11 +19,7 @@ class DataProvidersBuilder
         $this->keyMapper = $keyMapper;
     }
 
-    /**
-     * @param array[] $singleDataProvider
-     * @return DataProvidersBuilder
-     */
-    public function addSection(...$singleDataProvider)
+    public function addSection(...$singleDataProvider): DataProvidersBuilder
     {
         $this->dataProviders[] = array_map(function ($value) {
             return [$value];
@@ -31,40 +27,25 @@ class DataProvidersBuilder
         return $this;
     }
 
-    /**
-     * @param array ...$sections
-     * @return DataProvidersBuilder
-     */
-    public function addJoinedSection(array ...$sections)
+    public function addJoinedSection(array ...$sections): DataProvidersBuilder
     {
         $this->dataProviders[] = $sections;
         return $this;
     }
 
-    /**
-     * @param callable $mapper
-     * @return DataProvidersBuilder
-     */
-    public function entryMapper(callable $mapper)
+    public function entryMapper(callable $mapper): DataProvidersBuilder
     {
         $this->mapper = $mapper;
         return $this;
     }
 
-    /**
-     * @param callable $mapper
-     * @return DataProvidersBuilder
-     */
-    public function entryKeyMapper(callable $mapper)
+    public function entryKeyMapper(callable $mapper): DataProvidersBuilder
     {
         $this->keyMapper = $mapper;
         return $this;
     }
 
-    /**
-     * @return array
-     */
-    public function build()
+    public function build(): array
     {
         return (new DataProviders($this->dataProviders, $this->mapper, $this->keyMapper))->create();
     }
