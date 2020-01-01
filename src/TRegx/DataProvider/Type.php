@@ -1,5 +1,5 @@
 <?php
-namespace TRegx\CrossData;
+namespace TRegx\DataProvider;
 
 use function count;
 use function get_class;

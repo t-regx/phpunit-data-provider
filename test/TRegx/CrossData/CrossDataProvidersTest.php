@@ -2,7 +2,7 @@
 namespace Test\TRegx\CrossData;
 
 use PHPUnit\Framework\TestCase;
-use TRegx\CrossData\CrossDataProviders;
+use TRegx\DataProvider\CrossDataProviders;
 
 class CrossDataProvidersTest extends TestCase
 {

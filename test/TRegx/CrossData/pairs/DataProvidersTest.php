@@ -1,9 +1,9 @@
 <?php
-namespace Test\TRegx\CrossData\pairs;
+namespace Test\TRegx\DataProvider\pairs;
 
 use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
-use TRegx\CrossData\DataProviders;
+use TRegx\DataProvider\DataProviders;
 
 class DataProvidersTest extends TestCase
 {
@@ -106,25 +106,25 @@ class DataProvidersTest extends TestCase
 
         // then
         $this->assertEquals([
-            '42,42'                            => [$int, $int],
-            '42,array (3)'                     => [$int, $array],
-            '42,TRegx\CrossData\DataProviders' => [$int, $object],
-            '42,Closure'                       => [$int, $function],
+            '42,42'                               => [$int, $int],
+            '42,array (3)'                        => [$int, $array],
+            '42,TRegx\DataProvider\DataProviders' => [$int, $object],
+            '42,Closure'                          => [$int, $function],
 
-            'array (3),42'                            => [$array, $int],
-            'array (3),array (3)'                     => [$array, $array],
-            'array (3),TRegx\CrossData\DataProviders' => [$array, $object],
-            'array (3),Closure'                       => [$array, $function],
+            'array (3),42'                               => [$array, $int],
+            'array (3),array (3)'                        => [$array, $array],
+            'array (3),TRegx\DataProvider\DataProviders' => [$array, $object],
+            'array (3),Closure'                          => [$array, $function],
 
-            'TRegx\CrossData\DataProviders,42'                            => [$object, $int],
-            'TRegx\CrossData\DataProviders,array (3)'                     => [$object, $array],
-            'TRegx\CrossData\DataProviders,TRegx\CrossData\DataProviders' => [$object, $object],
-            'TRegx\CrossData\DataProviders,Closure'                       => [$object, $function],
+            'TRegx\DataProvider\DataProviders,42'                               => [$object, $int],
+            'TRegx\DataProvider\DataProviders,array (3)'                        => [$object, $array],
+            'TRegx\DataProvider\DataProviders,TRegx\DataProvider\DataProviders' => [$object, $object],
+            'TRegx\DataProvider\DataProviders,Closure'                          => [$object, $function],
 
-            'Closure,42'                            => [$function, $int],
-            'Closure,array (3)'                     => [$function, $array],
-            'Closure,TRegx\CrossData\DataProviders' => [$function, $object],
-            'Closure,Closure'                       => [$function, $function],
+            'Closure,42'                               => [$function, $int],
+            'Closure,array (3)'                        => [$function, $array],
+            'Closure,TRegx\DataProvider\DataProviders' => [$function, $object],
+            'Closure,Closure'                          => [$function, $function],
         ], $result);
     }
 }

@@ -2,7 +2,7 @@
 namespace Test\TRegx\CrossData;
 
 use PHPUnit\Framework\TestCase;
-use TRegx\CrossData\ArrayMatrix;
+use TRegx\DataProvider\ArrayMatrix;
 
 class ArrayMatrixTest extends TestCase
 {

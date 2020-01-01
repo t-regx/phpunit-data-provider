@@ -1,5 +1,5 @@
 <?php
-namespace TRegx\CrossData;
+namespace TRegx\DataProvider;
 
 class DataProviders
 {

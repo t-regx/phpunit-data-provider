@@ -2,7 +2,7 @@
 namespace Test\TRegx\CrossData;
 
 use PHPUnit\Framework\TestCase;
-use TRegx\CrossData\Type;
+use TRegx\DataProvider\Type;
 
 class TypeTest extends TestCase
 {

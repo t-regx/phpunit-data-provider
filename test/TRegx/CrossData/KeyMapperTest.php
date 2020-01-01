@@ -2,7 +2,7 @@
 namespace Test\TRegx\CrossData;
 
 use PHPUnit\Framework\TestCase;
-use TRegx\CrossData\KeyMapper;
+use TRegx\DataProvider\KeyMapper;
 
 class KeyMapperTest extends TestCase
 {
