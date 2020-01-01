@@ -24,6 +24,7 @@ It allows you to create square matrices of your data providers!
 1. [Installation](#installation)
     * [Composer](#installation)
 2. [Examples](#examples)
+3. [Pairs](#pairs)
 
 # Installation
 
@@ -173,16 +174,16 @@ function services() {
    
 ---
    
-The most common use case could look similar to this:
+The most common down-to-earth example could look similar to this:
 
 ```php
 /**
  * @test
  * @dataProvider trimMethods
  */
-public function shouldTrimWhitespace(string $stretegy, string $whitespace) {
+public function shouldTrimWhitespace(string $strategy, string $whitespace) {
     // given
-    $remover = new WhitespaceRemover($stretegy);
+    $remover = new WhitespaceRemover($strategy);
 
     // when
     $result = $remover->remove($whitespace);
@@ -198,3 +199,44 @@ function trimMethods() {
         ->build();
 }
 ```
+
+## Pairs
+
+Sometimes, a square matrix of data providers is not what we need. Sometimes a more overall solution is need. What if
+instead of `http`/`https` and `github`/`gitlab`/`bitbucket`/`sourceforge` that needed to be tested together, 
+there were file formats to be tested.
+
+Let's say your brand new `FileConverter::convert()` method must convert any image type to any other image type, including
+the same type again:
+
+```php
+/**
+ * @test
+ * @dataProvider formats
+ */
+public function shouldConvertFile(string $from, string $to) {
+    // given
+    $converter = new FileConverter();
+
+    // when
+    $result = $converter->convert($from, $to);
+
+    // then
+    $this->assertEquals($to, FormatUtils::detectFormat($result));
+}
+
+function formats() {
+    return DataProviders::pairs('png', 'bmp', 'jpg', 'gif');
+}
+```
+
+And that's it! It will mix and match every format (`'png'`, `'bmp'`, `'jpg'`, `'gif'`) and create pairs of each of those.
+
+It is an equivalent of 16 data providers:
+ - `['png', 'png']`, `['png', 'bmp']`, `['png', 'jpg']`, `['png', 'gif']`,
+ - `['bmp', 'png']`, `['bmp', 'bmp']`, `['bmp', 'jpg']`, etc.
+
+If you would like to ignore duplicate pairs (so to never convert from `png` to `png`), use `DataProviders::distinctPairs()`.
+
+Currently, there is no key-mapper for `DataProviders::pairs()`, but please, create an issue for a key-mapper and I'll create
+it shortly :)
