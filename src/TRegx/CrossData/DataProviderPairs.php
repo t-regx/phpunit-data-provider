@@ -21,7 +21,7 @@ class DataProviderPairs
         foreach ($values as $left) {
             foreach ($values as $right) {
                 if ($left !== $right || $allowDuplicates) {
-                    $result[] = [$left, $right];
+                    $result[self::formatPairKey($left, $right)] = [$left, $right];
                 }
             }
         }
@@ -39,6 +39,21 @@ class DataProviderPairs
 
     private static function getDuplicates(array $array): array
     {
-        return array_unique(array_diff_assoc($array, array_unique($array)));
+        return self::arrayScalarUnique(array_diff_assoc($array, self::arrayScalarUnique($array)));
+    }
+
+    private static function arrayScalarUnique(array $array): array
+    {
+        return array_unique(array_filter($array, [self::class, 'isComparable']));
+    }
+
+    private static function isComparable($input): bool
+    {
+        return !is_object($input) && !is_array($input);
+    }
+
+    private static function formatPairKey($left, $right): string
+    {
+        return Type::asString($left) . ',' . Type::asString($right);
     }
 }
