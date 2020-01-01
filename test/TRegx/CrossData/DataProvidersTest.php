@@ -1,8 +1,9 @@
 <?php
-namespace TRegx\CrossData;
+namespace Test\TRegx\CrossData;
 
 use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
+use TRegx\CrossData\DataProviders;
 
 class DataProvidersTest extends TestCase
 {
