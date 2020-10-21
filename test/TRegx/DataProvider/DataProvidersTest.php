@@ -58,4 +58,38 @@ class DataProvidersTest extends TestCase
         // given
         DataProviders::cross([['A'], 'not an array']);
     }
+
+    /**
+     * @test
+     */
+    public function shouldGetEach()
+    {
+        // when
+        $each = DataProviders::each(['One', 'Two', 'Three']);
+
+        // then
+        $expected = [
+            ['One'],
+            ['Two'],
+            ['Three'],
+        ];
+        $this->assertEquals($expected, $each);
+    }
+
+    /**
+     * @test
+     */
+    public function shouldGetEachNamed()
+    {
+        // when
+        $each = DataProviders::eachNamed(['One', 'Two', 'Three']);
+
+        // then
+        $expected = [
+            'One'   => ['One'],
+            'Two'   => ['Two'],
+            'Three' => ['Three'],
+        ];
+        $this->assertEquals($expected, $each);
+    }
 }

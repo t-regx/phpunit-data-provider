@@ -69,4 +69,14 @@ class DataProviders
     {
         return DataProviderPairs::getDistinctPairs($values);
     }
+
+    public static function each(array $array): array
+    {
+        return DataProvidersEach::each($array);
+    }
+
+    public static function eachNamed(array $array)
+    {
+        return DataProvidersEach::eachNamed($array);
+    }
 }
