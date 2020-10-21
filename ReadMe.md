@@ -25,6 +25,7 @@ It allows you to create square matrices of your data providers!
     * [Composer](#installation)
 2. [Examples](#examples)
 3. [Pairs](#pairs)
+3. [Each](#each)
 
 # Installation
 
@@ -240,3 +241,23 @@ If you would like to ignore duplicate pairs (so to never convert from `png` to `
 
 Currently, there is no key-mapper for `DataProviders::pairs()`, but please, create an issue for a key-mapper and I'll create
 it shortly :)
+
+## Each
+
+A simplified version, for basic data providers
+
+ - `each()`
+    ```php
+    function values() {
+        return DataProviders::each([
+           'One', 
+           'Two', 
+           'Three', 
+           'Four'
+        ]);
+    }
+    ```
+
+ - `eachNamed()`
+
+    ![each() example](each.png)
