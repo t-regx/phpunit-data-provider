@@ -10,16 +10,25 @@ use function is_scalar;
 
 class Type
 {
+    public static function asPrettyString($value): string
+    {
+        if (is_string($value)) {
+            return $value;
+        }
+        return self::asString($value);
+    }
+
     public static function asString($value): string
     {
         if ($value === null) {
             return 'null';
         }
         if (is_string($value)) {
-            return $value;
+            $var = \var_export($value, true);
+            return "string ($var)";
         }
         if (is_scalar($value)) {
-            return \var_export($value, true);
+            return gettype($value) . ' (' . \var_export($value, true) . ')';
         }
         if (is_array($value)) {
             $count = count($value);

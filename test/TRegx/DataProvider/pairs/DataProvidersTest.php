@@ -106,22 +106,22 @@ class DataProvidersTest extends TestCase
 
         // then
         $this->assertEquals([
-            '42,42'                               => [$int, $int],
-            '42,array (3)'                        => [$int, $array],
-            '42,TRegx\DataProvider\DataProviders' => [$int, $object],
-            '42,Closure'                          => [$int, $function],
+            'integer (42),integer (42)'                     => [$int, $int],
+            'integer (42),array (3)'                        => [$int, $array],
+            'integer (42),TRegx\DataProvider\DataProviders' => [$int, $object],
+            'integer (42),Closure'                          => [$int, $function],
 
-            'array (3),42'                               => [$array, $int],
+            'array (3),integer (42)'                     => [$array, $int],
             'array (3),array (3)'                        => [$array, $array],
             'array (3),TRegx\DataProvider\DataProviders' => [$array, $object],
             'array (3),Closure'                          => [$array, $function],
 
-            'TRegx\DataProvider\DataProviders,42'                               => [$object, $int],
+            'TRegx\DataProvider\DataProviders,integer (42)'                     => [$object, $int],
             'TRegx\DataProvider\DataProviders,array (3)'                        => [$object, $array],
             'TRegx\DataProvider\DataProviders,TRegx\DataProvider\DataProviders' => [$object, $object],
             'TRegx\DataProvider\DataProviders,Closure'                          => [$object, $function],
 
-            'Closure,42'                               => [$function, $int],
+            'Closure,integer (42)'                     => [$function, $int],
             'Closure,array (3)'                        => [$function, $array],
             'Closure,TRegx\DataProvider\DataProviders' => [$function, $object],
             'Closure,Closure'                          => [$function, $function],

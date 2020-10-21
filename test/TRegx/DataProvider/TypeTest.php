@@ -25,11 +25,11 @@ class TypeTest extends TestCase
     {
         return [
             'null'     => [null, 'null'],
-            'true'     => [true, 'true'],
-            'false'    => [false, 'false'],
-            'int'      => [2, '2'],
-            'float'    => [2.23, '2.23'],
-            'string'   => ["She's sexy", "She's sexy"],
+            'true'     => [true, 'boolean (true)'],
+            'false'    => [false, 'boolean (false)'],
+            'int'      => [2, 'integer (2)'],
+            'double'   => [2.23, 'double (2.23)'],
+            'string'   => ["She's sexy", "string ('She\'s sexy')"],
             'array'    => [[1, new \stdClass(), 3], 'array (3)'],
             'resource' => [self::getResource(), 'resource'],
             'stdClass' => [new \stdClass(), 'stdClass'],

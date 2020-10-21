@@ -54,6 +54,6 @@ class DataProviderPairs
 
     private static function formatPairKey($left, $right): string
     {
-        return Type::asString($left) . ',' . Type::asString($right);
+        return Type::asPrettyString($left) . ',' . Type::asPrettyString($right);
     }
 }
