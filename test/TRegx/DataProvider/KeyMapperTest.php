@@ -1,5 +1,5 @@
 <?php
-namespace Test\TRegx\CrossData;
+namespace Test\TRegx\DataProvider;
 
 use PHPUnit\Framework\TestCase;
 use TRegx\DataProvider\KeyMapper;

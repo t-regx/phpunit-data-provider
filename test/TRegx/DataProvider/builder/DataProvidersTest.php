@@ -1,5 +1,5 @@
 <?php
-namespace Test\TRegx\CrossData\builder;
+namespace Test\TRegx\DataProvider\builder;
 
 use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
