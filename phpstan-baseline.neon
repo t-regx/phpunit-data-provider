@@ -1,0 +1,282 @@
+parameters:
+	ignoreErrors:
+		-
+			message: "#^Method TRegx\\\\DataProvider\\\\ArrayMatrix\\:\\:cross\\(\\) has parameter \\$dataProviders with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/ArrayMatrix.php
+
+		-
+			message: "#^Method TRegx\\\\DataProvider\\\\ArrayMatrix\\:\\:cross\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/ArrayMatrix.php
+
+		-
+			message: "#^Method TRegx\\\\DataProvider\\\\ArrayMatrix\\:\\:crossTwo\\(\\) has parameter \\$array1 with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/ArrayMatrix.php
+
+		-
+			message: "#^Method TRegx\\\\DataProvider\\\\ArrayMatrix\\:\\:crossTwo\\(\\) has parameter \\$array2 with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/ArrayMatrix.php
+
+		-
+			message: "#^Method TRegx\\\\DataProvider\\\\ArrayMatrix\\:\\:crossTwo\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/ArrayMatrix.php
+
+		-
+			message: "#^Method TRegx\\\\DataProvider\\\\ArrayMatrix\\:\\:keyName\\(\\) has parameter \\$new with no type specified\\.$#"
+			count: 1
+			path: src/ArrayMatrix.php
+
+		-
+			message: "#^Method TRegx\\\\DataProvider\\\\ArrayMatrix\\:\\:keyName\\(\\) has parameter \\$previous with no type specified\\.$#"
+			count: 1
+			path: src/ArrayMatrix.php
+
+		-
+			message: "#^Method TRegx\\\\DataProvider\\\\ArrayMatrix\\:\\:quoteKeys\\(\\) has parameter \\$array with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/ArrayMatrix.php
+
+		-
+			message: "#^Method TRegx\\\\DataProvider\\\\ArrayMatrix\\:\\:quoteKeys\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/ArrayMatrix.php
+
+		-
+			message: "#^Method TRegx\\\\DataProvider\\\\DataProviderPairs\\:\\:arrayScalarUnique\\(\\) has parameter \\$array with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/DataProviderPairs.php
+
+		-
+			message: "#^Method TRegx\\\\DataProvider\\\\DataProviderPairs\\:\\:arrayScalarUnique\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/DataProviderPairs.php
+
+		-
+			message: "#^Method TRegx\\\\DataProvider\\\\DataProviderPairs\\:\\:formatPairKey\\(\\) has parameter \\$left with no type specified\\.$#"
+			count: 1
+			path: src/DataProviderPairs.php
+
+		-
+			message: "#^Method TRegx\\\\DataProvider\\\\DataProviderPairs\\:\\:formatPairKey\\(\\) has parameter \\$right with no type specified\\.$#"
+			count: 1
+			path: src/DataProviderPairs.php
+
+		-
+			message: "#^Method TRegx\\\\DataProvider\\\\DataProviderPairs\\:\\:getDistinctPairs\\(\\) has parameter \\$values with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/DataProviderPairs.php
+
+		-
+			message: "#^Method TRegx\\\\DataProvider\\\\DataProviderPairs\\:\\:getDistinctPairs\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/DataProviderPairs.php
+
+		-
+			message: "#^Method TRegx\\\\DataProvider\\\\DataProviderPairs\\:\\:getDuplicates\\(\\) has parameter \\$array with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/DataProviderPairs.php
+
+		-
+			message: "#^Method TRegx\\\\DataProvider\\\\DataProviderPairs\\:\\:getDuplicates\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/DataProviderPairs.php
+
+		-
+			message: "#^Method TRegx\\\\DataProvider\\\\DataProviderPairs\\:\\:getMixedPairs\\(\\) has parameter \\$values with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/DataProviderPairs.php
+
+		-
+			message: "#^Method TRegx\\\\DataProvider\\\\DataProviderPairs\\:\\:getMixedPairs\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/DataProviderPairs.php
+
+		-
+			message: "#^Method TRegx\\\\DataProvider\\\\DataProviderPairs\\:\\:getPairs\\(\\) has parameter \\$values with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/DataProviderPairs.php
+
+		-
+			message: "#^Method TRegx\\\\DataProvider\\\\DataProviderPairs\\:\\:getPairs\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/DataProviderPairs.php
+
+		-
+			message: "#^Method TRegx\\\\DataProvider\\\\DataProviderPairs\\:\\:isComparable\\(\\) has parameter \\$input with no type specified\\.$#"
+			count: 1
+			path: src/DataProviderPairs.php
+
+		-
+			message: "#^Method TRegx\\\\DataProvider\\\\DataProviderPairs\\:\\:validateDuplicates\\(\\) has parameter \\$values with no type specified\\.$#"
+			count: 1
+			path: src/DataProviderPairs.php
+
+		-
+			message: "#^Method TRegx\\\\DataProvider\\\\DataProviders\\:\\:__construct\\(\\) has parameter \\$mapper with no type specified\\.$#"
+			count: 1
+			path: src/DataProviders.php
+
+		-
+			message: "#^Method TRegx\\\\DataProvider\\\\DataProviders\\:\\:distinctPairs\\(\\) has parameter \\$values with no type specified\\.$#"
+			count: 1
+			path: src/DataProviders.php
+
+		-
+			message: "#^Method TRegx\\\\DataProvider\\\\DataProviders\\:\\:distinctPairs\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/DataProviders.php
+
+		-
+			message: "#^Method TRegx\\\\DataProvider\\\\DataProviders\\:\\:each\\(\\) has parameter \\$array with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/DataProviders.php
+
+		-
+			message: "#^Method TRegx\\\\DataProvider\\\\DataProviders\\:\\:each\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/DataProviders.php
+
+		-
+			message: "#^Method TRegx\\\\DataProvider\\\\DataProviders\\:\\:eachNamed\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: src/DataProviders.php
+
+		-
+			message: "#^Method TRegx\\\\DataProvider\\\\DataProviders\\:\\:eachNamed\\(\\) has parameter \\$array with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/DataProviders.php
+
+		-
+			message: "#^Method TRegx\\\\DataProvider\\\\DataProviders\\:\\:mapEntries\\(\\) has parameter \\$entries with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/DataProviders.php
+
+		-
+			message: "#^Method TRegx\\\\DataProvider\\\\DataProviders\\:\\:mapEntries\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/DataProviders.php
+
+		-
+			message: "#^Method TRegx\\\\DataProvider\\\\DataProviders\\:\\:pairs\\(\\) has parameter \\$values with no type specified\\.$#"
+			count: 1
+			path: src/DataProviders.php
+
+		-
+			message: "#^Method TRegx\\\\DataProvider\\\\DataProviders\\:\\:pairs\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/DataProviders.php
+
+		-
+			message: "#^Method TRegx\\\\DataProvider\\\\DataProviders\\:\\:validateDataProviders\\(\\) has parameter \\$entries with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/DataProviders.php
+
+		-
+			message: "#^Property TRegx\\\\DataProvider\\\\DataProviders\\:\\:\\$dataProviders type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/DataProviders.php
+
+		-
+			message: "#^Method TRegx\\\\DataProvider\\\\DataProvidersBuilder\\:\\:__construct\\(\\) has parameter \\$dataProviders with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/DataProvidersBuilder.php
+
+		-
+			message: "#^Method TRegx\\\\DataProvider\\\\DataProvidersBuilder\\:\\:__construct\\(\\) has parameter \\$mapper with no type specified\\.$#"
+			count: 1
+			path: src/DataProvidersBuilder.php
+
+		-
+			message: "#^Method TRegx\\\\DataProvider\\\\DataProvidersBuilder\\:\\:addJoinedSection\\(\\) has parameter \\$sections with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/DataProvidersBuilder.php
+
+		-
+			message: "#^Method TRegx\\\\DataProvider\\\\DataProvidersBuilder\\:\\:addSection\\(\\) has parameter \\$singleDataProvider with no type specified\\.$#"
+			count: 1
+			path: src/DataProvidersBuilder.php
+
+		-
+			message: "#^Method TRegx\\\\DataProvider\\\\DataProvidersBuilder\\:\\:build\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/DataProvidersBuilder.php
+
+		-
+			message: "#^Property TRegx\\\\DataProvider\\\\DataProvidersBuilder\\:\\:\\$dataProviders type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/DataProvidersBuilder.php
+
+		-
+			message: "#^Method TRegx\\\\DataProvider\\\\DataProvidersEach\\:\\:each\\(\\) has parameter \\$values with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/DataProvidersEach.php
+
+		-
+			message: "#^Method TRegx\\\\DataProvider\\\\DataProvidersEach\\:\\:each\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/DataProvidersEach.php
+
+		-
+			message: "#^Method TRegx\\\\DataProvider\\\\DataProvidersEach\\:\\:eachNamed\\(\\) has parameter \\$values with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/DataProvidersEach.php
+
+		-
+			message: "#^Method TRegx\\\\DataProvider\\\\DataProvidersEach\\:\\:eachNamed\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/DataProvidersEach.php
+
+		-
+			message: "#^Method TRegx\\\\DataProvider\\\\DataProvidersEach\\:\\:getDuplicates\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: src/DataProvidersEach.php
+
+		-
+			message: "#^Method TRegx\\\\DataProvider\\\\DataProvidersEach\\:\\:getDuplicates\\(\\) has parameter \\$array with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/DataProvidersEach.php
+
+		-
+			message: "#^Method TRegx\\\\DataProvider\\\\DataProvidersEach\\:\\:validateDuplicates\\(\\) has parameter \\$values with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/DataProvidersEach.php
+
+		-
+			message: "#^Method TRegx\\\\DataProvider\\\\DuplicatedValueException\\:\\:__construct\\(\\) has parameter \\$value with no type specified\\.$#"
+			count: 1
+			path: src/DuplicatedValueException.php
+
+		-
+			message: "#^Method TRegx\\\\DataProvider\\\\KeyMapper\\:\\:map\\(\\) has parameter \\$input with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/KeyMapper.php
+
+		-
+			message: "#^Method TRegx\\\\DataProvider\\\\KeyMapper\\:\\:map\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/KeyMapper.php
+
+		-
+			message: "#^Method TRegx\\\\DataProvider\\\\KeyMapper\\:\\:mapperArgument\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: src/KeyMapper.php
+
+		-
+			message: "#^Method TRegx\\\\DataProvider\\\\KeyMapper\\:\\:mapperArgument\\(\\) has parameter \\$key with no type specified\\.$#"
+			count: 1
+			path: src/KeyMapper.php
+
+		-
+			message: "#^Method TRegx\\\\DataProvider\\\\Type\\:\\:asPrettyString\\(\\) has parameter \\$value with no type specified\\.$#"
+			count: 1
+			path: src/Type.php
+
+		-
+			message: "#^Method TRegx\\\\DataProvider\\\\Type\\:\\:asString\\(\\) has parameter \\$value with no type specified\\.$#"
+			count: 1
+			path: src/Type.php
+
