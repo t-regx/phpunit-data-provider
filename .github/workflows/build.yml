@@ -1,17 +1,13 @@
-# https://help.github.com/en/categories/automating-your-workflow-with-github-actions
-
 on:
   pull_request:
   push:
 
-name: CI
+name: build
 
 jobs:
   unit-tests:
     name: Unit tests
-
     runs-on: ubuntu-20.04
-
     strategy:
       matrix:
         php-version:
@@ -47,7 +43,7 @@ jobs:
           composer update --with-dependencies --no-progress;
           composer show;
 
-      - name: Run Tests
+      - name: Run tests
         run: ./vendor/bin/phpunit test
 
       - name: Upload coverage results to Coveralls
