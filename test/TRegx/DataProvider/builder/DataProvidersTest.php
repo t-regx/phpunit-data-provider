@@ -1,7 +1,6 @@
 <?php
 namespace Test\TRegx\DataProvider\builder;
 
-use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 use TRegx\DataProvider\DataProviders;
 
