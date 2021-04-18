@@ -18,6 +18,7 @@ It allows you to create square matrices of your data providers!
 [![PHP Version](https://img.shields.io/badge/PHP-7.2-blue.svg)](https://travis-ci.org/T-Regx/CrossDataProviders)
 [![PHP Version](https://img.shields.io/badge/PHP-7.3-blue.svg)](https://travis-ci.org/T-Regx/CrossDataProviders)
 [![PHP Version](https://img.shields.io/badge/PHP-7.4-blue.svg)](https://travis-ci.org/T-Regx/CrossDataProviders)
+[![PHP Version](https://img.shields.io/badge/PHP-8.0-blue.svg)](https://travis-ci.org/T-Regx/CrossDataProviders)
 
 [![PRs Welcome](https://img.shields.io/badge/PR-welcome-brightgreen.svg?style=popout)](http://makeapullrequest.com)
 
