@@ -31,7 +31,7 @@ jobs:
         with:
           php-version: ${{ matrix.php-version }}
           tools: composer:v2
-          coverage: none
+          coverage: xdebug
 
       - name: Cache dependencies installed with composer
         uses: actions/cache@v1
@@ -49,3 +49,9 @@ jobs:
 
       - name: Run Tests
         run: ./vendor/bin/phpunit test
+
+      - name: Upload coverage results to Coveralls
+        env:
+          COVERALLS_REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          ./vendor/bin/php-coveralls --coverage_clover=build/logs/clover.xml -v
