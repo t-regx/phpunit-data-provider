@@ -1,5 +1,5 @@
-.idea
-build/cov/
-build/logs/
-composer.lock
+/.idea/
+/build/cov/
+/build/logs/
+/composer.lock
 /vendor/
