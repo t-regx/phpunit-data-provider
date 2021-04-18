@@ -4,6 +4,9 @@ namespace Test\TRegx\DataProvider;
 use PHPUnit\Framework\TestCase;
 use TRegx\DataProvider\ArrayMatrix;
 
+/**
+ * @covers \TRegx\DataProvider\ArrayMatrix
+ */
 class ArrayMatrixTest extends TestCase
 {
     /**

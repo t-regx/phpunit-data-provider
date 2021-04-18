@@ -4,6 +4,9 @@ namespace Test\TRegx\DataProvider;
 use PHPUnit\Framework\TestCase;
 use TRegx\DataProvider\KeyMapper;
 
+/**
+ * @covers \TRegx\DataProvider\KeyMapper
+ */
 class KeyMapperTest extends TestCase
 {
     /**
