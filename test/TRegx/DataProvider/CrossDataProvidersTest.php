@@ -4,6 +4,9 @@ namespace Test\TRegx\DataProvider;
 use PHPUnit\Framework\TestCase;
 use TRegx\DataProvider\CrossDataProviders;
 
+/**
+ * @covers \TRegx\DataProvider\CrossDataProviders
+ */
 class CrossDataProvidersTest extends TestCase
 {
     /**

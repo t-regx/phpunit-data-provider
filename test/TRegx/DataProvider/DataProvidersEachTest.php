@@ -5,6 +5,9 @@ use PHPUnit\Framework\TestCase;
 use TRegx\DataProvider\DataProvidersEach;
 use TRegx\DataProvider\DuplicatedValueException;
 
+/**
+ * @covers \TRegx\DataProvider\DuplicatedValueException
+ */
 class DataProvidersEachTest extends TestCase
 {
     /**

@@ -4,6 +4,9 @@ namespace Test\TRegx\DataProvider;
 use PHPUnit\Framework\TestCase;
 use TRegx\DataProvider\DataProvidersBuilder;
 
+/**
+ * @covers \TRegx\DataProvider\DataProvidersBuilder
+ */
 class DataProvidersBuilderTest extends TestCase
 {
     /**

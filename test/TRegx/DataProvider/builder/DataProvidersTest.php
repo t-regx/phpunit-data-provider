@@ -5,6 +5,9 @@ use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 use TRegx\DataProvider\DataProviders;
 
+/**
+ * @covers \TRegx\DataProvider\DataProviders
+ */
 class DataProvidersTest extends TestCase
 {
     /**
