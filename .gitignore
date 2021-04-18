@@ -4,4 +4,5 @@
 /build/cov/
 /build/logs/
 /composer.lock
+/phpstan.neon
 /vendor/

@@ -1,0 +1,16 @@
+includes:
+    - phpstan-baseline.neon
+
+parameters:
+  parallel:
+    # Don't be overly greedy on machines with more CPU's to be a good neighbor especially on CI
+    maximumNumberOfProcesses: 5
+
+  level: 6
+
+  scanDirectories:
+    - %currentWorkingDirectory%/src/
+    - %currentWorkingDirectory%/test/
+  paths:
+    - %currentWorkingDirectory%/src/
+    - %currentWorkingDirectory%/test/
