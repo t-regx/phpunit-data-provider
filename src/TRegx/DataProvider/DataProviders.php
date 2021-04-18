@@ -12,6 +12,9 @@ class DataProviders
     /** @var callable */
     private $keyMapper;
 
+    /**
+     * @param array<string|int, array<int, mixed>> $dataProviders
+     */
     public function __construct(array $dataProviders, $mapper, callable $keyMapper)
     {
         $this->dataProviders = $dataProviders;
@@ -19,6 +22,9 @@ class DataProviders
         $this->keyMapper = $keyMapper;
     }
 
+    /**
+     * @return array<string, array<int, mixed>>
+     */
     public function create(): array
     {
         $result = (new ArrayMatrix())->cross($this->dataProviders);
@@ -36,6 +42,11 @@ class DataProviders
         return new DataProvidersBuilder([], null, '\json_encode');
     }
 
+    /**
+     * @param array<string|int, array<int, mixed>> ...$dataProviders
+     *
+     * @return array<string, array<int, mixed>>
+     */
     public static function cross(array ...$dataProviders): array
     {
         return (new DataProviders($dataProviders, null, '\json_encode'))->create();
