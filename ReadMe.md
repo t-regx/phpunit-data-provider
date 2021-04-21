@@ -40,9 +40,10 @@ $ composer require --dev rawr/cross-data-providers
 
 # Examples
 
-Ever wanted to use multiple PhpUnit @dataProvider's with each other? Well, look no more :) 
+Ever wanted to use multiple PhpUnit @dataProvider's with each other? Well, look no more :)
 
-Imagine you have a service that allows you to log in to GitHub, BitBucket, SourceForge and GitLab with either SSH, HTTP or HTTPS and you want to test each **possible configuration of those**.
+Imagine you have a service that allows you to log in to GitHub, BitBucket, SourceForge and GitLab with either SSH, HTTP
+or HTTPS and you want to test each **possible configuration of those**.
 
 ```php
 /**
@@ -52,10 +53,10 @@ Imagine you have a service that allows you to log in to GitHub, BitBucket, Sourc
 public function shouldLogin(string $service, string $method, int $port) {
     // given
     $login = new Login($method, $port);
-    
+
     // when
     $result = $login->log($service);
-    
+
     // then
     $this->assertTrue($result);
 }
@@ -78,6 +79,7 @@ function services() {
 ```
 
 This is equivalent of having a regular dataProvider that is composed of 12 entries, that look like this:
+
 ```php
 function services() {
     return [
@@ -99,7 +101,8 @@ function services() {
 
 ## More advanced example
 
-Let's say that apart from the domain and the protocol, you'd also like to add the protocol port, and the service title. Further more, you'd like to have three strategies of connection: lazy, eager and a test dry run.
+Let's say that apart from the domain and the protocol, you'd also like to add the protocol port, and the service title.
+Further more, you'd like to have three strategies of connection: lazy, eager and a test dry run.
 
 ```php
 /**
@@ -110,10 +113,10 @@ public function shouldLogin(string $service, string $title, string $method, int 
     // given
     $login = new Login($method, $port);
     $login->useStrategy($strategy);
-    
+
     // when
     $result = $login->log($service);
-    
+
     // then
     $this->assertTrue($result, "Failed to login to $title");
 }
@@ -144,7 +147,8 @@ function services() {
 }
 ```
 
-This is equal to a @dataProvider with 45 entries. The test will be run 45 times, each time with a unique combination of your sections :)
+This is equal to a @dataProvider with 45 entries. The test will be run 45 times, each time with a unique combination of
+your sections :)
 
 ## DataProvider builder
 
@@ -171,13 +175,13 @@ function services() {
 }
 ```
 
- - `addSection()` simply adds another iteration of parameters. This is usually the default behaviour, since joined
-   sections appear quite rarely in most applications.
- - `addJoiningSection()` allows for specifying multiple arguments for your PhpUnit method, that are supposed to be
-   present together, like `address` and `title` or a `protocol` and `port`.
-   
+- `addSection()` simply adds another iteration of parameters. This is usually the default behaviour, since joined
+  sections appear quite rarely in most applications.
+- `addJoiningSection()` allows for specifying multiple arguments for your PhpUnit method, that are supposed to be
+  present together, like `address` and `title` or a `protocol` and `port`.
+
 ---
-   
+
 The most common down-to-earth example could look similar to this:
 
 ```php
@@ -207,11 +211,11 @@ function trimMethods() {
 ## Pairs
 
 Sometimes, a square matrix of data providers is not what we need. Sometimes a more overall solution is need. What if
-instead of `http`/`https` and `github`/`gitlab`/`bitbucket`/`sourceforge` that needed to be tested together, 
-there were file formats to be tested.
+instead of `http`/`https` and `github`/`gitlab`/`bitbucket`/`sourceforge` that needed to be tested together, there were
+file formats to be tested.
 
-Let's say your brand new `FileConverter::convert()` method must convert any image type to any other image type, including
-the same type again:
+Let's say your brand new `FileConverter::convert()` method must convert any image type to any other image type,
+including the same type again:
 
 ```php
 /**
@@ -234,33 +238,36 @@ function formats() {
 }
 ```
 
-And that's it! It will mix and match every format (`'png'`, `'bmp'`, `'jpg'`, `'gif'`) and create pairs of each of those.
+And that's it! It will mix and match every format (`'png'`, `'bmp'`, `'jpg'`, `'gif'`) and create pairs of each of
+those.
 
 It is an equivalent of 16 data providers:
- - `['png', 'png']`, `['png', 'bmp']`, `['png', 'jpg']`, `['png', 'gif']`,
- - `['bmp', 'png']`, `['bmp', 'bmp']`, `['bmp', 'jpg']`, etc.
 
-If you would like to ignore duplicate pairs (so to never convert from `png` to `png`), use `DataProviders::distinctPairs()`.
+- `['png', 'png']`, `['png', 'bmp']`, `['png', 'jpg']`, `['png', 'gif']`,
+- `['bmp', 'png']`, `['bmp', 'bmp']`, `['bmp', 'jpg']`, etc.
 
-Currently, there is no key-mapper for `DataProviders::pairs()`, but please, create an issue for a key-mapper and I'll create
-it shortly :)
+If you would like to ignore duplicate pairs (so to never convert from `png` to `png`),
+use `DataProviders::distinctPairs()`.
+
+Currently, there is no key-mapper for `DataProviders::pairs()`, but please, create an issue for a key-mapper and I'll
+create it shortly :)
 
 ## Each
 
 A simplified version, for basic data providers
 
- - `each()`
-    ```php
-    function values() {
-        return DataProviders::each([
-           'One', 
-           'Two', 
-           'Three', 
-           'Four'
-        ]);
-    }
-    ```
+- `each()`
+   ```php
+   function values() {
+       return DataProviders::each([
+          'One',
+          'Two',
+          'Three',
+          'Four'
+       ]);
+   }
+   ```
 
- - `eachNamed()`
+- `eachNamed()`
 
-    ![each() example](each.png)
+  ![each() example](each.png)

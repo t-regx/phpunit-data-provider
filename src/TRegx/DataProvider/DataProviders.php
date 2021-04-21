@@ -1,4 +1,5 @@
 <?php
+
 namespace TRegx\DataProvider;
 
 class DataProviders
@@ -56,7 +57,8 @@ class DataProviders
     {
         foreach ($entries as $value) {
             if (!is_array($value)) {
-                throw new \InvalidArgumentException(sprintf("Argument list is supposed to be an array, '%s' given", gettype($value)));
+                throw new \InvalidArgumentException(sprintf("Argument list is supposed to be an array, '%s' given",
+                    gettype($value)));
             }
             if (array_values($value) !== $value) {
                 throw new \InvalidArgumentException("Arguments composed of an associative array");

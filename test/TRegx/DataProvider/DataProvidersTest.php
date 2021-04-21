@@ -1,4 +1,5 @@
 <?php
+
 namespace Test\TRegx\DataProvider;
 
 use InvalidArgumentException;
@@ -89,8 +90,8 @@ class DataProvidersTest extends TestCase
 
         // then
         $expected = [
-            'One'   => ['One'],
-            'Two'   => ['Two'],
+            'One' => ['One'],
+            'Two' => ['Two'],
             'Three' => ['Three'],
         ];
         $this->assertEquals($expected, $each);
