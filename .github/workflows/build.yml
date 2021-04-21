@@ -37,13 +37,19 @@ jobs:
     needs: [php-lint]
     strategy:
       matrix:
-        php-version:
-          - 7.0
-          - 7.1
-          - 7.2
-          - 7.3
-          - 7.4
-          - 8.0
+        include:
+          - php-version: 7.0
+            coverage: none
+          - php-version: 7.1
+            coverage: none
+          - php-version: 7.2
+            coverage: none
+          - php-version: 7.3
+            coverage: none
+          - php-version: 7.4
+            coverage: none
+          - php-version: 8.0
+            coverage: xdebug
 
     steps:
       - name: Checkout
@@ -54,7 +60,7 @@ jobs:
         with:
           php-version: ${{ matrix.php-version }}
           tools: composer:v2
-          coverage: xdebug
+          coverage: "${{ matrix.coverage }}"
 
       - name: Cache dependencies installed with composer
         uses: actions/cache@v1
@@ -74,6 +80,7 @@ jobs:
         run: ./vendor/bin/phpunit test
 
       - name: Upload coverage results to Coveralls
+        if: "${{ matrix.coverage != 'none' }}"
         env:
           COVERALLS_REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
