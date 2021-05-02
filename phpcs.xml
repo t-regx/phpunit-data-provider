@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ruleset name="phpList Coding Standard">
+    <description>
+        This standard requires PHP_CodeSniffer >= 3.6.0.
+    </description>
+
+    <arg name="colors"/>
+    <arg name="extensions" value="php"/>
+
+    <!-- PHP -->
+    <rule ref="Generic.PHP.RequireStrictTypes"/>
+</ruleset>
