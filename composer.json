@@ -23,11 +23,5 @@
   "require-dev": {
     "phpunit/phpunit": "*",
     "php-coveralls/php-coveralls": "^2.4"
-  },
-  "archive": {
-    "exclude": [
-      "/test/**",
-      "/test"
-    ]
   }
 }
