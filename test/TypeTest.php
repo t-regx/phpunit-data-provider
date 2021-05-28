@@ -52,9 +52,11 @@ class TypeTest extends TestCase
         ];
     }
 
+    /**
+     * @return resource
+     */
     private static function getResource()
     {
-        $resources = get_resources();
-        return reset($resources);
+        return opendir(__DIR__);
     }
 }
