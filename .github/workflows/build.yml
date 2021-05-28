@@ -34,7 +34,7 @@ jobs:
   unit-tests:
     name: Unit tests
     runs-on: ubuntu-20.04
-    needs: [php-lint]
+    needs: [ php-lint ]
     strategy:
       matrix:
         include:
