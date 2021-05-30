@@ -49,6 +49,7 @@ class DataProvidersTest extends TestCase
         $this->expectExceptionMessage('Arguments composed of an associative array');
 
         // given
+        // @phpstan-ignore-next-line as we are explicitly testing whether violating the contract will raise an exception
         DataProviders::cross([['A'], ['value' => 'value']]);
     }
 
@@ -62,6 +63,7 @@ class DataProvidersTest extends TestCase
         $this->expectExceptionMessage("Argument list is supposed to be an array, 'string' given");
 
         // given
+        // @phpstan-ignore-next-line as we are explicitly testing whether violating the contract will raise an exception
         DataProviders::cross([['A'], 'not an array']);
     }
 
