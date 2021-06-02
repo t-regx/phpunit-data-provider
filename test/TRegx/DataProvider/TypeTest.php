@@ -1,4 +1,5 @@
 <?php
+
 namespace Test\TRegx\DataProvider;
 
 use PHPUnit\Framework\TestCase;
@@ -12,6 +13,7 @@ class TypeTest extends TestCase
     /**
      * @test
      * @dataProvider typesMap
+     *
      * @param mixed $value
      * @param string $expectedString
      */
@@ -27,18 +29,21 @@ class TypeTest extends TestCase
     function typesMap(): array
     {
         return [
-            'null'     => [null, 'null'],
-            'true'     => [true, 'boolean (true)'],
-            'false'    => [false, 'boolean (false)'],
-            'int'      => [2, 'integer (2)'],
-            'double'   => [2.23, 'double (2.23)'],
-            'string'   => ["She's sexy", "string ('She\'s sexy')"],
-            'array'    => [[1, new \stdClass(), 3], 'array (3)'],
+            'null' => [null, 'null'],
+            'true' => [true, 'boolean (true)'],
+            'false' => [false, 'boolean (false)'],
+            'int' => [2, 'integer (2)'],
+            'double' => [2.23, 'double (2.23)'],
+            'string' => ["She's sexy", "string ('She\'s sexy')"],
+            'array' => [[1, new \stdClass(), 3], 'array (3)'],
             'resource' => [self::getResource(), 'resource'],
             'stdClass' => [new \stdClass(), 'stdClass'],
-            'class'    => [new \stdClass(), 'stdClass'],
-            'function' => [function () {
-            }, 'Closure']
+            'class' => [new \stdClass(), 'stdClass'],
+            'function' => [
+                function () {
+                },
+                'Closure',
+            ],
         ];
     }
 

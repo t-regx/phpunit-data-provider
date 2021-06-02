@@ -1,4 +1,5 @@
 <?php
+
 namespace Test\TRegx\DataProvider;
 
 use PHPUnit\Framework\TestCase;
