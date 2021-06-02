@@ -1,4 +1,5 @@
 <?php
+
 namespace TRegx\DataProvider;
 
 use function array_diff_assoc;

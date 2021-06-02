@@ -1,4 +1,5 @@
 <?php
+
 namespace Test\TRegx\DataProvider;
 
 use PHPUnit\Framework\TestCase;
@@ -22,13 +23,13 @@ class KeyMapperTest extends TestCase
         // when
         $result = $keyMapper->map([
             '[1,"welcome",2]' => true,
-            '[2,"hello",3]'   => false,
+            '[2,"hello",3]' => false,
         ]);
 
         // then
         $expected = [
             '1+welcome+2' => true,
-            '2+hello+3'   => false,
+            '2+hello+3' => false,
         ];
         $this->assertEquals($expected, $result);
     }

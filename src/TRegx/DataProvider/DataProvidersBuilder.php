@@ -1,4 +1,5 @@
 <?php
+
 namespace TRegx\DataProvider;
 
 class DataProvidersBuilder

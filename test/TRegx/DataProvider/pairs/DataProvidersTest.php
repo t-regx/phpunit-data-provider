@@ -1,4 +1,5 @@
 <?php
+
 namespace Test\TRegx\DataProvider\pairs;
 
 use InvalidArgumentException;
@@ -20,25 +21,25 @@ class DataProvidersTest extends TestCase
 
         // then
         $this->assertEquals([
-            'one,one'   => ['one', 'one'],
-            'one,two'   => ['one', 'two'],
+            'one,one' => ['one', 'one'],
+            'one,two' => ['one', 'two'],
             'one,three' => ['one', 'three'],
-            'one,four'  => ['one', 'four'],
+            'one,four' => ['one', 'four'],
 
-            'two,one'   => ['two', 'one'],
-            'two,two'   => ['two', 'two'],
+            'two,one' => ['two', 'one'],
+            'two,two' => ['two', 'two'],
             'two,three' => ['two', 'three'],
-            'two,four'  => ['two', 'four'],
+            'two,four' => ['two', 'four'],
 
-            'three,one'   => ['three', 'one'],
-            'three,two'   => ['three', 'two'],
+            'three,one' => ['three', 'one'],
+            'three,two' => ['three', 'two'],
             'three,three' => ['three', 'three'],
-            'three,four'  => ['three', 'four'],
+            'three,four' => ['three', 'four'],
 
-            'four,one'   => ['four', 'one'],
-            'four,two'   => ['four', 'two'],
+            'four,one' => ['four', 'one'],
+            'four,two' => ['four', 'two'],
             'four,three' => ['four', 'three'],
-            'four,four'  => ['four', 'four'],
+            'four,four' => ['four', 'four'],
         ], $result);
     }
 
@@ -52,20 +53,20 @@ class DataProvidersTest extends TestCase
 
         // then
         $this->assertEquals([
-            'one,two'   => ['one', 'two'],
+            'one,two' => ['one', 'two'],
             'one,three' => ['one', 'three'],
-            'one,four'  => ['one', 'four'],
+            'one,four' => ['one', 'four'],
 
-            'two,one'   => ['two', 'one'],
+            'two,one' => ['two', 'one'],
             'two,three' => ['two', 'three'],
-            'two,four'  => ['two', 'four'],
+            'two,four' => ['two', 'four'],
 
-            'three,one'  => ['three', 'one'],
-            'three,two'  => ['three', 'two'],
+            'three,one' => ['three', 'one'],
+            'three,two' => ['three', 'two'],
             'three,four' => ['three', 'four'],
 
-            'four,one'   => ['four', 'one'],
-            'four,two'   => ['four', 'two'],
+            'four,one' => ['four', 'one'],
+            'four,two' => ['four', 'two'],
             'four,three' => ['four', 'three'],
         ], $result);
     }
@@ -109,25 +110,25 @@ class DataProvidersTest extends TestCase
 
         // then
         $this->assertEquals([
-            'integer (42),integer (42)'                     => [$int, $int],
-            'integer (42),array (3)'                        => [$int, $array],
+            'integer (42),integer (42)' => [$int, $int],
+            'integer (42),array (3)' => [$int, $array],
             'integer (42),TRegx\DataProvider\DataProviders' => [$int, $object],
-            'integer (42),Closure'                          => [$int, $function],
+            'integer (42),Closure' => [$int, $function],
 
-            'array (3),integer (42)'                     => [$array, $int],
-            'array (3),array (3)'                        => [$array, $array],
+            'array (3),integer (42)' => [$array, $int],
+            'array (3),array (3)' => [$array, $array],
             'array (3),TRegx\DataProvider\DataProviders' => [$array, $object],
-            'array (3),Closure'                          => [$array, $function],
+            'array (3),Closure' => [$array, $function],
 
-            'TRegx\DataProvider\DataProviders,integer (42)'                     => [$object, $int],
-            'TRegx\DataProvider\DataProviders,array (3)'                        => [$object, $array],
+            'TRegx\DataProvider\DataProviders,integer (42)' => [$object, $int],
+            'TRegx\DataProvider\DataProviders,array (3)' => [$object, $array],
             'TRegx\DataProvider\DataProviders,TRegx\DataProvider\DataProviders' => [$object, $object],
-            'TRegx\DataProvider\DataProviders,Closure'                          => [$object, $function],
+            'TRegx\DataProvider\DataProviders,Closure' => [$object, $function],
 
-            'Closure,integer (42)'                     => [$function, $int],
-            'Closure,array (3)'                        => [$function, $array],
+            'Closure,integer (42)' => [$function, $int],
+            'Closure,array (3)' => [$function, $array],
             'Closure,TRegx\DataProvider\DataProviders' => [$function, $object],
-            'Closure,Closure'                          => [$function, $function],
+            'Closure,Closure' => [$function, $function],
         ], $result);
     }
 }
