@@ -31,6 +31,11 @@ class DataProvidersEach
         return $result;
     }
 
+    /**
+     * @return void
+     *
+     * @throws DuplicatedValueException
+     */
     private static function validateDuplicates(array $values)
     {
         $duplicates = self::getDuplicates($values);
