@@ -53,6 +53,11 @@ class DataProviders
         return (new DataProviders($dataProviders, null, '\json_encode'))->create();
     }
 
+    /**
+     * @return void
+     *
+     * @throws \InvalidArgumentException
+     */
     private function validateDataProviders(array $entries)
     {
         foreach ($entries as $value) {
