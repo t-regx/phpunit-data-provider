@@ -1,6 +1,6 @@
 {
   "name": "rawr/cross-data-providers",
-  "description": "Allows you to use mix multiple PhpUnit @dataProvider without duplication",
+  "description": "Allows you to mix multiple PhpUnit @dataProvider without duplication",
   "license": "MIT",
   "type": "library",
   "autoload": {
@@ -22,6 +22,10 @@
   },
   "require-dev": {
     "phpunit/phpunit": "*",
-    "php-coveralls/php-coveralls": "^2.4"
+    "php-coveralls/php-coveralls": "^2.4",
+    "squizlabs/php_codesniffer": "^3.6"
+  },
+  "scripts": {
+    "phpcs": "phpcs"
   }
 }
