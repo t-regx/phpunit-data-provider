@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ruleset>
+    <file>./src</file>
+    <file>./test</file>
     <arg name="extensions" value="php"/>
     <rule ref="Generic.PHP.RequireStrictTypes"/>
 </ruleset>
