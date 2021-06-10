@@ -3,5 +3,6 @@
     <file>./src</file>
     <file>./test</file>
     <arg name="extensions" value="php"/>
+    <rule ref="PSR12"/>
     <rule ref="Generic.PHP.RequireStrictTypes"/>
 </ruleset>
