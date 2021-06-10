@@ -26,9 +26,11 @@
     "squizlabs/php_codesniffer": "^3.6"
   },
   "scripts": {
+    "phpcbf": "phpcbf",
     "phpcs": "phpcs"
   },
   "scripts-descriptions": {
+    "phpcbf": "Fixes all autofixable code style issues in the PHP files.",
     "phpcs": "Checks the coding style of the PHP files."
   }
 }
