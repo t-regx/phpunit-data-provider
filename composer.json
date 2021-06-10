@@ -27,5 +27,8 @@
   },
   "scripts": {
     "phpcs": "phpcs"
+  },
+  "scripts-descriptions": {
+    "phpcs": "Checks the coding style of the PHP files."
   }
 }
