@@ -27,7 +27,10 @@ class TypeTest extends TestCase
         $this->assertEquals($expectedString, $string);
     }
 
-    function typesMap(): array
+    /**
+     * @return array<string, array<{0: mixed, 1: string}>
+     */
+    public function typesMap(): array
     {
         return [
             'null' => [null, 'null'],
