@@ -29,7 +29,7 @@ class TypeTest extends TestCase
     }
 
     /**
-     * @return array<string, array<{0: mixed, 1: string}>
+     * @return array<string, array{0: mixed, 1: string}>
      */
     public function typesMap(): array
     {
