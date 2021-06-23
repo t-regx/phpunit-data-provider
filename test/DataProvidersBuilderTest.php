@@ -40,10 +40,10 @@ class DataProvidersBuilderTest extends TestCase
     /**
      * @test
      */
-    public function test_joinedIteration()
+    public function joinedIteration()
     {
         // when
-        $result = $this->example_joinedIterations()->build();
+        $result = $this->provideJoinedIterations()->build();
 
         // then
         $this->assertThat($result, $this->equalTo([
@@ -63,7 +63,7 @@ class DataProvidersBuilderTest extends TestCase
     public function shouldMap()
     {
         // when
-        $result = $this->example_joinedIterations()
+        $result = $this->provideJoinedIterations()
             ->entryMapper(function (array $keys) {
                 return array_map('strtoupper', $keys);
             })
@@ -87,7 +87,7 @@ class DataProvidersBuilderTest extends TestCase
     public function shouldMapKeys()
     {
         // when
-        $result = $this->example_joinedIterations()
+        $result = $this->provideJoinedIterations()
             ->entryKeyMapper(function (array $keys) {
                 return join('+', $keys);
             })
@@ -111,7 +111,7 @@ class DataProvidersBuilderTest extends TestCase
     public function shouldFlatMap()
     {
         // when
-        $result = $this->example_joinedIterations()
+        $result = $this->provideJoinedIterations()
             ->entryMapper(function (array $keys) {
                 return sprintf('%s://%s:%d%s', ...$keys);
             })
@@ -132,7 +132,7 @@ class DataProvidersBuilderTest extends TestCase
     /**
      * @return DataProvidersBuilder
      */
-    private function example_joinedIterations()
+    private function provideJoinedIterations()
     {
         return (new DataProvidersBuilder([], null, '\json_encode'))
             ->addJoinedSection(['ssh', 'user@page.com', 22], ['https', 'https://page.com', 443])
@@ -142,7 +142,7 @@ class DataProvidersBuilderTest extends TestCase
     /**
      * @test
      */
-    public function test_singleIteration()
+    public function singleIteration()
     {
         // given
         $builder = new DataProvidersBuilder([], null, '\json_encode');

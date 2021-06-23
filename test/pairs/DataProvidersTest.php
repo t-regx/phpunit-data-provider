@@ -98,7 +98,7 @@ class DataProvidersTest extends TestCase
     /**
      * @test
      */
-    public function shouldDisplayKeys_ofVariousTypes()
+    public function shouldDisplayKeysOfVariousTypes()
     {
         // given
         $int = 42;

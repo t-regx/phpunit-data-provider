@@ -15,7 +15,7 @@ class ArrayMatrixTest extends TestCase
     /**
      * @test
      */
-    public function shouldCrossEmptyArray_empty()
+    public function crossWithEmptyArrayShouldCross()
     {
         // when
         $result = (new ArrayMatrix())->cross([[]]);
@@ -27,7 +27,7 @@ class ArrayMatrixTest extends TestCase
     /**
      * @test
      */
-    public function shouldCrossEmptyArray_second()
+    public function crossWithNonEmptyAndEmptyArrayShouldCross()
     {
         // given
         $array = [['A'], ['B'], ['C'], ['D'], ['E']];
@@ -42,7 +42,7 @@ class ArrayMatrixTest extends TestCase
     /**
      * @test
      */
-    public function shouldCrossEmptyArray_first()
+    public function crossWithEmptyAndNonEmptyArrayShouldCross()
     {
         // given
         $array = [['A'], ['B'], ['C'], ['D'], ['E']];
@@ -57,7 +57,7 @@ class ArrayMatrixTest extends TestCase
     /**
      * @test
      */
-    public function shouldCross_singleArray_unchanged()
+    public function crossShouldReturnSingleArrayUnchanged()
     {
         // given
         $input = [[1], [2], [3], [4], [5]];
@@ -72,7 +72,7 @@ class ArrayMatrixTest extends TestCase
     /**
      * @test
      */
-    public function shouldCross_singleItemArrays()
+    public function crossShouldCrossSingleItemArrays()
     {
         // given
         $array1 = [[1], [2], [3], [4], [5]];
@@ -119,7 +119,7 @@ class ArrayMatrixTest extends TestCase
     /**
      * @test
      */
-    public function shouldCross_multipleItemArrays()
+    public function crossShouldCrossMultipleItemArrays()
     {
         // given
         $array1 = [[1, 2], [3, 4], [5, 6]];
@@ -143,7 +143,7 @@ class ArrayMatrixTest extends TestCase
     /**
      * @test
      */
-    public function shouldCross_singleItemArrays_withNames()
+    public function crossShouldCrossSingleItemArraysWithNames()
     {
         // given
         $array1 = [[1], 'two' => [2], [3]];
@@ -175,7 +175,7 @@ class ArrayMatrixTest extends TestCase
     /**
      * @test
      */
-    public function shouldCross_singleItemArrays_multiple()
+    public function crossShouldCrossSingleItemArraysWithMultipleTypes()
     {
         // given
         $array1 = [[1], [2], [3]];
@@ -232,7 +232,7 @@ class ArrayMatrixTest extends TestCase
     /**
      * @test
      */
-    public function shouldCross_singleItemArrays_multiple_withNames()
+    public function crossShouldCrossSingleItemArraysWithMultipleTypesAndWithNames()
     {
         // given
         $array1 = [[1], 'x' => [2], [3]];
@@ -289,7 +289,7 @@ class ArrayMatrixTest extends TestCase
     /**
      * @test
      */
-    public function shouldQuote_firstArray()
+    public function crossShouldQuoteFirstArray()
     {
         // given
         $array1 = ['[6,7]' => [1], [2]];
@@ -311,7 +311,7 @@ class ArrayMatrixTest extends TestCase
     /**
      * @test
      */
-    public function shouldCrossAssociativeArray_evenWithJaggedIterations()
+    public function crossShouldCrossAssociativeArrayEvenWithJaggedIterations()
     {
         // given
         $array1 = ['3' => [1], '6' => [2, 3]];
