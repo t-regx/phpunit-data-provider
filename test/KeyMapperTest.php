@@ -39,7 +39,7 @@ class KeyMapperTest extends TestCase
     /**
      * @test
      */
-    public function shouldKeyMapper_mapRegularKey()
+    public function keyMapperShouldMapRegularKey()
     {
         // given
         $keyMapper = new KeyMapper(function (array $keys) {
