@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Test\TRegx\DataProvider\builder;
+namespace TRegx\DataProvider\Test\Builder;
 
 use PHPUnit\Framework\TestCase;
 use TRegx\DataProvider\DataProviders;

@@ -9,11 +9,8 @@
     }
   },
   "autoload-dev": {
-    "classmap": [
-      "test/"
-    ],
     "psr-4": {
-      "Test\\TRegx\\DataProvider\\": "test/"
+      "TRegx\\DataProvider\\Test\\": "test/"
     }
   },
   "require": {

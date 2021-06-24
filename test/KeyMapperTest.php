@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Test\TRegx\DataProvider;
+namespace TRegx\DataProvider\Test;
 
 use PHPUnit\Framework\TestCase;
 use TRegx\DataProvider\KeyMapper;
