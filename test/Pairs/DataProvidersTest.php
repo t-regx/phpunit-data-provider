@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Test\TRegx\DataProvider\pairs;
+namespace TRegx\DataProvider\Test\Pairs;
 
 use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
