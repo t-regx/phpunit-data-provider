@@ -18,6 +18,7 @@ It allows you to create square matrices of your data providers!
 [![PHP Version](https://img.shields.io/badge/PHP-7.3-blue.svg)][1]
 [![PHP Version](https://img.shields.io/badge/PHP-7.4-blue.svg)][1]
 [![PHP Version](https://img.shields.io/badge/PHP-8.0-blue.svg)][1]
+[![PHP Version](https://img.shields.io/badge/PHP-8.1-blue.svg)][1]
 
 [1]: https://github.com/T-Regx/CrossDataProviders/runs/2375602376
 
