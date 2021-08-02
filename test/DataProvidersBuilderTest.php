@@ -15,7 +15,7 @@ class DataProvidersBuilderTest extends TestCase
     /**
      * @test
      */
-    public function test()
+    public function test(): void
     {
         // given
         $builder = new DataProvidersBuilder([], null, '\json_encode');
@@ -40,7 +40,7 @@ class DataProvidersBuilderTest extends TestCase
     /**
      * @test
      */
-    public function joinedIteration()
+    public function joinedIteration(): void
     {
         // when
         $result = $this->provideJoinedIterations()->build();
@@ -60,7 +60,7 @@ class DataProvidersBuilderTest extends TestCase
     /**
      * @test
      */
-    public function shouldMap()
+    public function shouldMap(): void
     {
         // when
         $result = $this->provideJoinedIterations()
@@ -84,7 +84,7 @@ class DataProvidersBuilderTest extends TestCase
     /**
      * @test
      */
-    public function shouldMapKeys()
+    public function shouldMapKeys(): void
     {
         // when
         $result = $this->provideJoinedIterations()
@@ -108,7 +108,7 @@ class DataProvidersBuilderTest extends TestCase
     /**
      * @test
      */
-    public function shouldFlatMap()
+    public function shouldFlatMap(): void
     {
         // when
         $result = $this->provideJoinedIterations()
@@ -132,7 +132,7 @@ class DataProvidersBuilderTest extends TestCase
     /**
      * @return DataProvidersBuilder
      */
-    private function provideJoinedIterations()
+    private function provideJoinedIterations(): DataProvidersBuilder
     {
         return (new DataProvidersBuilder([], null, '\json_encode'))
             ->addJoinedSection(['ssh', 'user@page.com', 22], ['https', 'https://page.com', 443])
@@ -142,7 +142,7 @@ class DataProvidersBuilderTest extends TestCase
     /**
      * @test
      */
-    public function singleIteration()
+    public function singleIteration(): void
     {
         // given
         $builder = new DataProvidersBuilder([], null, '\json_encode');

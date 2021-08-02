@@ -15,7 +15,7 @@ class DataProvidersTest extends TestCase
     /**
      * @test
      */
-    public function shouldAllowArbitraryDataAsLongAsItsMappedToValid()
+    public function shouldAllowArbitraryDataAsLongAsItsMappedToValid(): void
     {
         // when
         $result = DataProviders::builder()

@@ -34,11 +34,9 @@ class DataProvidersEach
     }
 
     /**
-     * @return void
-     *
      * @throws DuplicatedValueException
      */
-    private static function validateDuplicates(array $values)
+    private static function validateDuplicates(array $values): void
     {
         $duplicates = self::getDuplicates($values);
         if (!empty($duplicates)) {

@@ -56,11 +56,9 @@ class DataProviders
     }
 
     /**
-     * @return void
-     *
      * @throws \InvalidArgumentException
      */
-    private function validateDataProviders(array $entries)
+    private function validateDataProviders(array $entries): void
     {
         foreach ($entries as $value) {
             if (!is_array($value)) {

@@ -19,7 +19,7 @@ class TypeTest extends TestCase
      * @param mixed $value
      * @param string $expectedString
      */
-    public function shouldGetMessageWithType($value, string $expectedString)
+    public function shouldGetMessageWithType($value, string $expectedString): void
     {
         // when
         $string = Type::asString($value);
