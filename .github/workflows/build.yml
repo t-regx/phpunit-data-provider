@@ -16,6 +16,7 @@ jobs:
           - 7.3
           - 7.4
           - 8.0
+          - 8.1
 
     steps:
       - name: Checkout
@@ -79,6 +80,8 @@ jobs:
             coverage: none
           - php-version: 8.0
             coverage: xdebug
+          - php-version: 8.1
+            coverage: none
 
     steps:
       - name: Checkout
