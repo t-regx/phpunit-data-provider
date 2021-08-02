@@ -13,7 +13,6 @@ It allows you to create square matrices of your data providers!
 [![License](https://img.shields.io/github/license/T-Regx/CrossDataProviders.svg)](https://github.com/T-Regx/CrossDataProviders/blob/master/LICENSE)
 [![Composer lock](https://img.shields.io/badge/.lock-uncommited-green.svg)](https://github.com/T-Regx/CrossDataProviders)
 
-[![PHP Version](https://img.shields.io/badge/PHP-7.0-blue.svg)][1]
 [![PHP Version](https://img.shields.io/badge/PHP-7.1-blue.svg)][1]
 [![PHP Version](https://img.shields.io/badge/PHP-7.2-blue.svg)][1]
 [![PHP Version](https://img.shields.io/badge/PHP-7.3-blue.svg)][1]
@@ -32,7 +31,7 @@ It allows you to create square matrices of your data providers!
 
 # Installation
 
-Installation for PHP 7.0 and later:
+Installation for PHP 7.1 and later:
 
 ```bash
 $ composer require --dev rawr/cross-data-providers
@@ -40,7 +39,7 @@ $ composer require --dev rawr/cross-data-providers
 
 # Examples
 
-Ever wanted to use multiple PhpUnit @dataProvider's with each other? Well, look no more :) 
+Ever wanted to use multiple PhpUnit @dataProvider's with each other? Well, look no more :)
 
 Imagine you have a service that allows you to log in to GitHub, BitBucket, SourceForge and GitLab with either SSH, HTTP or HTTPS and you want to test each **possible configuration of those**.
 
@@ -52,10 +51,10 @@ Imagine you have a service that allows you to log in to GitHub, BitBucket, Sourc
 public function shouldLogin(string $service, string $method, int $port) {
     // given
     $login = new Login($method, $port);
-    
+
     // when
     $result = $login->log($service);
-    
+
     // then
     $this->assertTrue($result);
 }
@@ -110,10 +109,10 @@ public function shouldLogin(string $service, string $title, string $method, int 
     // given
     $login = new Login($method, $port);
     $login->useStrategy($strategy);
-    
+
     // when
     $result = $login->log($service);
-    
+
     // then
     $this->assertTrue($result, "Failed to login to $title");
 }
@@ -175,9 +174,9 @@ function services() {
    sections appear quite rarely in most applications.
  - `addJoiningSection()` allows for specifying multiple arguments for your PhpUnit method, that are supposed to be
    present together, like `address` and `title` or a `protocol` and `port`.
-   
+
 ---
-   
+
 The most common down-to-earth example could look similar to this:
 
 ```php
@@ -207,7 +206,7 @@ function trimMethods() {
 ## Pairs
 
 Sometimes, a square matrix of data providers is not what we need. Sometimes a more overall solution is need. What if
-instead of `http`/`https` and `github`/`gitlab`/`bitbucket`/`sourceforge` that needed to be tested together, 
+instead of `http`/`https` and `github`/`gitlab`/`bitbucket`/`sourceforge` that needed to be tested together,
 there were file formats to be tested.
 
 Let's say your brand new `FileConverter::convert()` method must convert any image type to any other image type, including
@@ -253,9 +252,9 @@ A simplified version, for basic data providers
     ```php
     function values() {
         return DataProviders::each([
-           'One', 
-           'Two', 
-           'Three', 
+           'One',
+           'Two',
+           'Three',
            'Four'
         ]);
     }
