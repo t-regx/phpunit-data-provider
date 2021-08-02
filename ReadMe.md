@@ -48,7 +48,7 @@ Imagine you have a service that allows you to log in to GitHub, BitBucket, Sourc
  * @test
  * @dataProvider services
  */
-public function shouldLogin(string $service, string $method, int $port) {
+public function shouldLogin(string $service, string $method, int $port): void {
     // given
     $login = new Login($method, $port);
 
@@ -59,7 +59,7 @@ public function shouldLogin(string $service, string $method, int $port) {
     $this->assertTrue($result);
 }
 
-function services() {
+public function services(): array {
     return DataProviders::cross(
       [
         ['github.com'],
@@ -78,7 +78,7 @@ function services() {
 
 This is equivalent of having a regular dataProvider that is composed of 12 entries, that look like this:
 ```php
-function services() {
+public function services(): array {
     return [
         ['github.com', 'http', 80],
         ['github.com', 'https', 443],
@@ -105,7 +105,7 @@ Let's say that apart from the domain and the protocol, you'd also like to add th
  * @test
  * @dataProvider services
  */
-public function shouldLogin(string $service, string $title, string $method, int $port, $strategy) {
+public function shouldLogin(string $service, string $title, string $method, int $port, $strategy): void {
     // given
     $login = new Login($method, $port);
     $login->useStrategy($strategy);
@@ -117,7 +117,7 @@ public function shouldLogin(string $service, string $title, string $method, int 
     $this->assertTrue($result, "Failed to login to $title");
 }
 
-function services() {
+public function services(): array {
     return DataProviders::cross(
       [
         // First section (two paramters): $service and $title
@@ -150,7 +150,7 @@ This is equal to a @dataProvider with 45 entries. The test will be run 45 times,
 The above example with `DataProviders::cross()`, can also be written with a help of a builder:
 
 ```php
-function services() {
+public function services(): array {
     return DataProviders::builder()
         ->addJoiningSection(
             ['github.com',        'GitHub'],
@@ -184,7 +184,7 @@ The most common down-to-earth example could look similar to this:
  * @test
  * @dataProvider trimMethods
  */
-public function shouldTrimWhitespace(string $strategy, string $whitespace) {
+public function shouldTrimWhitespace(string $strategy, string $whitespace): void {
     // given
     $remover = new WhitespaceRemover($strategy);
 
@@ -195,7 +195,7 @@ public function shouldTrimWhitespace(string $strategy, string $whitespace) {
     $this->assertEmpty($result);
 }
 
-function trimMethods() {
+public function trimMethods(): array {
     return DataProviders::builder()
         ->addSection('trim', 'preg_replace', 'str_replace', 'mb_str_replace')
         ->addSection(' ', '\t', '\n', '\r', PHP_EOL)
@@ -217,7 +217,7 @@ the same type again:
  * @test
  * @dataProvider formats
  */
-public function shouldConvertFile(string $from, string $to) {
+public function shouldConvertFile(string $from, string $to): void {
     // given
     $converter = new FileConverter();
 
@@ -228,7 +228,7 @@ public function shouldConvertFile(string $from, string $to) {
     $this->assertEquals($to, FormatUtils::detectFormat($result));
 }
 
-function formats() {
+public function formats(): array {
     return DataProviders::pairs('png', 'bmp', 'jpg', 'gif');
 }
 ```
@@ -250,7 +250,7 @@ A simplified version, for basic data providers
 
  - `each()`
     ```php
-    function values() {
+    function values(): array {
         return DataProviders::each([
            'One',
            'Two',
