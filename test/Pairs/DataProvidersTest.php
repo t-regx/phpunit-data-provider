@@ -16,7 +16,7 @@ class DataProvidersTest extends TestCase
     /**
      * @test
      */
-    public function shouldGetMixedPairs()
+    public function shouldGetMixedPairs(): void
     {
         // when
         $result = DataProviders::pairs('one', 'two', 'three', 'four');
@@ -48,7 +48,7 @@ class DataProvidersTest extends TestCase
     /**
      * @test
      */
-    public function shouldGetDistinctPairs()
+    public function shouldGetDistinctPairs(): void
     {
         // when
         $result = DataProviders::distinctPairs('one', 'two', 'three', 'four');
@@ -76,7 +76,7 @@ class DataProvidersTest extends TestCase
     /**
      * @test
      */
-    public function shouldNotContainDuplicates()
+    public function shouldNotContainDuplicates(): void
     {
         // then
         $this->expectException(InvalidArgumentException::class);
@@ -89,7 +89,7 @@ class DataProvidersTest extends TestCase
     /**
      * @test
      */
-    public function testEmpty()
+    public function testEmpty(): void
     {
         // when
         $this->assertEmpty(DataProviders::pairs());
@@ -98,7 +98,7 @@ class DataProvidersTest extends TestCase
     /**
      * @test
      */
-    public function shouldDisplayKeysOfVariousTypes()
+    public function shouldDisplayKeysOfVariousTypes(): void
     {
         // given
         $int = 42;

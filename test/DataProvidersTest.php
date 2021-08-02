@@ -16,7 +16,7 @@ class DataProvidersTest extends TestCase
     /**
      * @test
      */
-    public function shouldCross()
+    public function shouldCross(): void
     {
         // when
         $result = DataProviders::cross(
@@ -42,7 +42,7 @@ class DataProvidersTest extends TestCase
     /**
      * @test
      */
-    public function shouldThrowForAssociativeArray()
+    public function shouldThrowForAssociativeArray(): void
     {
         // then
         $this->expectException(InvalidArgumentException::class);
@@ -56,7 +56,7 @@ class DataProvidersTest extends TestCase
     /**
      * @test
      */
-    public function shouldThrowForInvalidIteration()
+    public function shouldThrowForInvalidIteration(): void
     {
         // then
         $this->expectException(InvalidArgumentException::class);
@@ -70,7 +70,7 @@ class DataProvidersTest extends TestCase
     /**
      * @test
      */
-    public function shouldGetEach()
+    public function shouldGetEach(): void
     {
         // when
         $each = DataProviders::each(['One', 'Two', 'Three']);
@@ -87,7 +87,7 @@ class DataProvidersTest extends TestCase
     /**
      * @test
      */
-    public function shouldGetEachNamed()
+    public function shouldGetEachNamed(): void
     {
         // when
         $each = DataProviders::eachNamed(['One', 'Two', 'Three']);

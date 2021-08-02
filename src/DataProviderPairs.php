@@ -32,11 +32,9 @@ class DataProviderPairs
     }
 
     /**
-     * @return void
-     *
      * @throws \InvalidArgumentException
      */
-    private static function validateDuplicates($values)
+    private static function validateDuplicates($values): void
     {
         $duplicates = self::getDuplicates($values);
         if ($duplicates) {

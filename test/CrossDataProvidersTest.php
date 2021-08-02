@@ -15,7 +15,7 @@ class CrossDataProvidersTest extends TestCase
     /**
      * @test
      */
-    public function shouldCross()
+    public function shouldCross(): void
     {
         // when
         $result = CrossDataProviders::cross([[1], [2]], [['A'], ['B']]);

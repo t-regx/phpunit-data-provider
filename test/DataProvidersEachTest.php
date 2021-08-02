@@ -16,7 +16,7 @@ class DataProvidersEachTest extends TestCase
     /**
      * @test
      */
-    public function eachNamedShouldThrowForInvalidType()
+    public function eachNamedShouldThrowForInvalidType(): void
     {
         // then
         $this->expectException(\InvalidArgumentException::class);
@@ -29,7 +29,7 @@ class DataProvidersEachTest extends TestCase
     /**
      * @test
      */
-    public function eachShouldThrowForDuplicated()
+    public function eachShouldThrowForDuplicated(): void
     {
         // then
         $this->expectException(DuplicatedValueException::class);
@@ -42,7 +42,7 @@ class DataProvidersEachTest extends TestCase
     /**
      * @test
      */
-    public function eachNamedShouldThrowForDuplicated()
+    public function eachNamedShouldThrowForDuplicated(): void
     {
         // then
         $this->expectException(DuplicatedValueException::class);
