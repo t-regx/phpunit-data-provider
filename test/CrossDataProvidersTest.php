@@ -27,6 +27,6 @@ class CrossDataProvidersTest extends TestCase
             '[1,0]' => [2, 'A'],
             '[1,1]' => [2, 'B'],
         ];
-        $this->assertEquals($expected, $result);
+        $this->assertEquals($expected, iterator_to_array($result));
     }
 }

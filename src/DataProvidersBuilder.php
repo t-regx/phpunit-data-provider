@@ -6,7 +6,7 @@ namespace TRegx\DataProvider;
 
 class DataProvidersBuilder
 {
-    /** @var array[] */
+    /** @var iterable[] */
     private $dataProviders;
 
     /** @var callable|null */
@@ -15,7 +15,12 @@ class DataProvidersBuilder
     /** @var callable */
     private $keyMapper;
 
-    public function __construct(array $dataProviders, $mapper, callable $keyMapper)
+    /**
+     * @param iterable[]    $dataProviders
+     * @param callable|null $mapper
+     * @param callable $keyMapper
+     */
+    public function __construct(array $dataProviders, ?callable $mapper, callable $keyMapper)
     {
         $this->dataProviders = $dataProviders;
         $this->mapper = $mapper;
@@ -30,7 +35,7 @@ class DataProvidersBuilder
         return $this;
     }
 
-    public function addJoinedSection(array ...$sections): DataProvidersBuilder
+    public function addJoinedSection(iterable ...$sections): DataProvidersBuilder
     {
         $this->dataProviders[] = $sections;
         return $this;
@@ -48,7 +53,7 @@ class DataProvidersBuilder
         return $this;
     }
 
-    public function build(): array
+    public function build(): iterable
     {
         return (new DataProviders($this->dataProviders, $this->mapper, $this->keyMapper))->create();
     }

@@ -6,7 +6,10 @@ namespace TRegx\DataProvider;
 
 class ArrayMatrix
 {
-    public function cross(array $dataProviders): array
+    /**
+     * @param iterable[] $dataProviders
+     */
+    public function cross(array $dataProviders): iterable
     {
         if (count($dataProviders) === 1) {
             return $dataProviders[0];
@@ -16,18 +19,18 @@ class ArrayMatrix
         foreach ($dataProviders as $dataProvider) {
             $result = $this->crossTwo($result, $dataProvider);
         }
+
         return $result;
     }
 
-    private function crossTwo(array $array1, array $array2): array
+    private function crossTwo(iterable $array1, iterable $array2): \Generator
     {
         $result = [];
         foreach ($array1 as $key1 => $value1) {
             foreach ($array2 as $key2 => $value2) {
-                $result[self::keyName($key1, $key2)] = array_merge($value1, $value2);
+                yield $this->keyName($key1, $key2) => array_merge($value1, $value2);
             }
         }
-        return $result;
     }
 
     private function keyName($previous, $new): string
@@ -40,12 +43,10 @@ class ArrayMatrix
         return json_encode($keys);
     }
 
-    private function quoteKeys(array $array): array
+    private function quoteKeys(iterable $array): \Generator
     {
-        $result = [];
         foreach ($array as $key => $value) {
-            $result[json_encode([$key])] = $value;
+            yield json_encode([$key]) => $value;
         }
-        return $result;
     }
 }

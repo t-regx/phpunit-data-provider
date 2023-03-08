@@ -14,14 +14,16 @@ class KeyMapper
         $this->mapper = $mapper;
     }
 
-    public function map(array $input): array
+    /**
+     * @param iterable $input
+     * @return \Generator<string, mixed>
+     */
+    public function map(iterable $input): \Generator
     {
-        $result = [];
         foreach ($input as $key => $value) {
             $mappedKey = call_user_func($this->mapper, $this->mapperArgument($key));
-            $result[$mappedKey] = $value;
+            yield $mappedKey => $value;
         }
-        return $result;
     }
 
     private function mapperArgument($key)

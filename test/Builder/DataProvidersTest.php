@@ -37,6 +37,6 @@ class DataProvidersTest extends TestCase
             '1 + 0' => ['two', 'letter-1'],
             '1 + 1' => ['two', 'letter-2'],
         ];
-        $this->assertEquals($expected, $result);
+        $this->assertEquals($expected, iterator_to_array($result));
     }
 }

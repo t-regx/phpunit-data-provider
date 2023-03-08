@@ -36,7 +36,7 @@ class DataProvidersTest extends TestCase
             '[1,2]' => ['logout', '/sign-out', 'ssh', 22],
             '[1,3]' => ['logout', '/sign-out', 'https', 443],
         ];
-        $this->assertEquals($expected, $result);
+        $this->assertEquals($expected, iterator_to_array($result));
     }
 
     /**
@@ -48,9 +48,7 @@ class DataProvidersTest extends TestCase
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage('Arguments composed of an associative array');
 
-        // given
-        // @phpstan-ignore-next-line as we are explicitly testing whether violating the contract will raise an exception
-        DataProviders::cross([['A'], ['value' => 'value']]);
+        iterator_to_array(DataProviders::cross([['A'], ['value' => 'value']]));
     }
 
     /**
@@ -62,9 +60,7 @@ class DataProvidersTest extends TestCase
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage("Argument list is supposed to be an array, 'string' given");
 
-        // given
-        // @phpstan-ignore-next-line as we are explicitly testing whether violating the contract will raise an exception
-        DataProviders::cross([['A'], 'not an array']);
+        iterator_to_array(DataProviders::cross([['A'], 'not an array']));
     }
 
     /**

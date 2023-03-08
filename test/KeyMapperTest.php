@@ -33,7 +33,7 @@ class KeyMapperTest extends TestCase
             '1+welcome+2' => true,
             '2+hello+3' => false,
         ];
-        $this->assertEquals($expected, $result);
+        $this->assertEquals($expected, iterator_to_array($result));
     }
 
     /**
@@ -57,6 +57,6 @@ class KeyMapperTest extends TestCase
             '[0]' => true,
             '[1]' => false,
         ];
-        $this->assertEquals($expected, $result);
+        $this->assertEquals($expected, iterator_to_array($result));
     }
 }

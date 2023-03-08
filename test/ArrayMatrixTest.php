@@ -36,7 +36,7 @@ class ArrayMatrixTest extends TestCase
         $result = (new ArrayMatrix())->cross([$array, []]);
 
         // then
-        $this->assertEmpty($result);
+        $this->assertEmpty(iterator_to_array($result));
     }
 
     /**
@@ -51,7 +51,7 @@ class ArrayMatrixTest extends TestCase
         $result = (new ArrayMatrix())->cross([[], $array]);
 
         // then
-        $this->assertEmpty($result);
+        $this->assertEmpty(iterator_to_array($result));
     }
 
     /**
@@ -113,7 +113,7 @@ class ArrayMatrixTest extends TestCase
             '[4,3]' => [5, 'D'],
             '[4,4]' => [5, 'E'],
         ];
-        $this->assertEquals($expected, $result);
+        $this->assertEquals($expected, iterator_to_array($result));
     }
 
     /**
@@ -137,7 +137,7 @@ class ArrayMatrixTest extends TestCase
             '[2,0]' => [5, 6, 'A', 'B', 'C'],
             '[2,1]' => [5, 6, 'D', 'E', 'F'],
         ];
-        $this->assertEquals($expected, $result);
+        $this->assertEquals($expected, iterator_to_array($result));
     }
 
     /**
@@ -169,7 +169,7 @@ class ArrayMatrixTest extends TestCase
             '[1,1]' => [3, 'C'],
             '[1,2]' => [3, 'D'],
         ];
-        $this->assertEquals($expected, $result);
+        $this->assertEquals($expected, iterator_to_array($result));
     }
 
     /**
@@ -226,7 +226,7 @@ class ArrayMatrixTest extends TestCase
             '[2,2,1]' => [3, 'C', 'green'],
             '[2,2,2]' => [3, 'C', 'blue'],
         ];
-        $this->assertEquals($expected, $result);
+        $this->assertEquals($expected, iterator_to_array($result));
     }
 
     /**
@@ -283,7 +283,7 @@ class ArrayMatrixTest extends TestCase
             '[1,2,0]' => [3, 'C', 'green'],
             '[1,2,1]' => [3, 'C', 'blue'],
         ];
-        $this->assertEquals($expected, $result);
+        $this->assertEquals($expected, iterator_to_array($result));
     }
 
     /**
@@ -305,7 +305,7 @@ class ArrayMatrixTest extends TestCase
             '[0,"[4,5]"]' => [2, 'A'],
             '[0,0]' => [2, 'B'],
         ];
-        $this->assertEquals($expected, $result);
+        $this->assertEquals($expected, iterator_to_array($result));
     }
 
     /**
@@ -327,6 +327,6 @@ class ArrayMatrixTest extends TestCase
             '[6,"a"]' => [2, 3, 'A'],
             '[6,"x"]' => [2, 3, 'B'],
         ];
-        $this->assertEquals($expected, $result);
+        $this->assertEquals($expected, iterator_to_array($result));
     }
 }

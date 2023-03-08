@@ -6,7 +6,7 @@ namespace TRegx\DataProvider;
 
 class DataProviders
 {
-    /** @var array */
+    /** @var iterable[] */
     private $dataProviders;
 
     /** @var callable|null */
@@ -16,9 +16,9 @@ class DataProviders
     private $keyMapper;
 
     /**
-     * @param array<string|int, array<int, mixed>> $dataProviders
+     * @param iterable[] $dataProviders
      */
-    public function __construct(array $dataProviders, $mapper, callable $keyMapper)
+    public function __construct(array $dataProviders, ?callable $mapper, callable $keyMapper)
     {
         $this->dataProviders = $dataProviders;
         $this->mapper = $mapper;
@@ -28,7 +28,7 @@ class DataProviders
     /**
      * @return array<string|int, array<int, mixed>>
      */
-    public function create(): array
+    public function create(): iterable
     {
         $result = (new ArrayMatrix())->cross($this->dataProviders);
         $entries = (new KeyMapper($this->keyMapper))->map($result);
@@ -36,8 +36,7 @@ class DataProviders
             $entries = $this->mapEntries($entries);
         }
 
-        $this->validateDataProviders($entries);
-        return $entries;
+        yield from $this->validateDataProviders($entries);
     }
 
     public static function builder(): DataProvidersBuilder
@@ -45,12 +44,7 @@ class DataProviders
         return new DataProvidersBuilder([], null, '\json_encode');
     }
 
-    /**
-     * @param array<string|int, array<int, mixed>> ...$dataProviders
-     *
-     * @return array<string|int, array<int, mixed>>
-     */
-    public static function cross(array ...$dataProviders): array
+    public static function cross(iterable ...$dataProviders): iterable
     {
         return (new DataProviders($dataProviders, null, '\json_encode'))->create();
     }
@@ -58,9 +52,9 @@ class DataProviders
     /**
      * @throws \InvalidArgumentException
      */
-    private function validateDataProviders(array $entries): void
+    private function validateDataProviders(iterable $entries): \Generator
     {
-        foreach ($entries as $value) {
+        foreach ($entries as $key => $value) {
             if (!is_array($value)) {
                 $message = sprintf("Argument list is supposed to be an array, '%s' given", gettype($value));
                 throw new \InvalidArgumentException($message);
@@ -68,14 +62,16 @@ class DataProviders
             if (array_values($value) !== $value) {
                 throw new \InvalidArgumentException("Arguments composed of an associative array");
             }
+
+            yield $key => $value;
         }
     }
 
-    private function mapEntries(array $entries): array
+    private function mapEntries(iterable $entries) : \Generator
     {
-        return \array_map(function ($input) {
-            return (array)$input;
-        }, \array_map($this->mapper, $entries));
+        foreach($entries as $key => $value) {
+            yield $key => (array)($this->mapper)($value);
+        }
     }
 
     public static function pairs(...$values): array

@@ -27,7 +27,7 @@ class DataProvidersBuilderTest extends TestCase
             ->build();
 
         // then
-        $this->assertThat($result, $this->equalTo([
+        $this->assertThat(iterator_to_array($result), $this->equalTo([
             '[0,0]' => ['login', 'as-user'],
             '[0,1]' => ['login', 'as-admin'],
             '[1,0]' => ['logout', 'as-user'],
@@ -46,7 +46,7 @@ class DataProvidersBuilderTest extends TestCase
         $result = $this->provideJoinedIterations()->build();
 
         // then
-        $this->assertThat($result, $this->equalTo([
+        $this->assertThat(iterator_to_array($result), $this->equalTo([
             '[0,0]' => ['ssh', 'user@page.com', 22, '/sign-up', 'login'],
             '[0,1]' => ['ssh', 'user@page.com', 22, '/sign-out', 'logout'],
             '[0,2]' => ['ssh', 'user@page.com', 22, '/restore-password', 'recover'],
@@ -70,7 +70,7 @@ class DataProvidersBuilderTest extends TestCase
             ->build();
 
         // then
-        $this->assertThat($result, $this->equalTo([
+        $this->assertThat(iterator_to_array($result), $this->equalTo([
             '[0,0]' => ['SSH', 'USER@PAGE.COM', '22', '/SIGN-UP', 'LOGIN'],
             '[0,1]' => ['SSH', 'USER@PAGE.COM', '22', '/SIGN-OUT', 'LOGOUT'],
             '[0,2]' => ['SSH', 'USER@PAGE.COM', '22', '/RESTORE-PASSWORD', 'RECOVER'],
@@ -94,7 +94,7 @@ class DataProvidersBuilderTest extends TestCase
             ->build();
 
         // then
-        $this->assertThat($result, $this->equalTo([
+        $this->assertThat(iterator_to_array($result), $this->equalTo([
             '0+0' => ['ssh', 'user@page.com', '22', '/sign-up', 'login'],
             '0+1' => ['ssh', 'user@page.com', '22', '/sign-out', 'logout'],
             '0+2' => ['ssh', 'user@page.com', '22', '/restore-password', 'recover'],
@@ -118,7 +118,7 @@ class DataProvidersBuilderTest extends TestCase
             ->build();
 
         // then
-        $this->assertThat($result, $this->equalTo([
+        $this->assertThat(iterator_to_array($result), $this->equalTo([
             '[0,0]' => ['ssh://user@page.com:22/sign-up'],
             '[0,1]' => ['ssh://user@page.com:22/sign-out'],
             '[0,2]' => ['ssh://user@page.com:22/restore-password'],
@@ -153,7 +153,7 @@ class DataProvidersBuilderTest extends TestCase
             ->build();
 
         // then
-        $this->assertThat($result, $this->equalTo([
+        $this->assertThat(iterator_to_array($result), $this->equalTo([
             '[0]' => ['one'],
             '[1]' => ['two'],
             '[2]' => ['three'],
