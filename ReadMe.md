@@ -9,7 +9,7 @@ It allows you to create square matrices of your data providers!
 [![Build Status](https://github.com/T-Regx/CrossDataProviders/workflows/build/badge.svg?branch=master)](https://github.com/T-Regx/CrossDataProviders/actions/)
 [![Coverage Status](https://coveralls.io/repos/github/T-Regx/CrossDataProviders/badge.svg?branch=master)](https://coveralls.io/github/T-Regx/CrossDataProviders?branch=master)
 [![Dependencies](https://img.shields.io/badge/dependencies-0-brightgreen.svg)](https://github.com/T-Regx/CrossDataProviders)
-[![Repository Size](https://github-size-badge.herokuapp.com/T-Regx/CrossDataProviders.svg)](https://github.com/T-Regx/CrossDataProviders)
+[![Repository Size](https://img.shields.io/github/repo-size/T-Regx/CrossDataProviders?label=size)](https://github.com/T-Regx/CrossDataProviders)
 [![License](https://img.shields.io/github/license/T-Regx/CrossDataProviders.svg)](https://github.com/T-Regx/CrossDataProviders/blob/master/LICENSE)
 [![Composer lock](https://img.shields.io/badge/.lock-uncommited-green.svg)](https://github.com/T-Regx/CrossDataProviders)
 
