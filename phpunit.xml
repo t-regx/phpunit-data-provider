@@ -1,0 +1,10 @@
+<phpunit bootstrap="vendor/autoload.php" failOnRisky="true">
+  <filter>
+    <whitelist>
+      <directory suffix=".php">./src</directory>
+      <exclude>
+        <directory suffix=".php">./vendor</directory>
+      </exclude>
+    </whitelist>
+  </filter>
+</phpunit>

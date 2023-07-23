@@ -1,4 +1,9 @@
 {
+  "autoload": {
+    "psr-4": {
+      "TRegx\\PhpUnit\\DataProviders\\": "src/"
+    }
+  },
   "autoload-dev": {
     "psr-4": {
       "Test\\": "test/",
