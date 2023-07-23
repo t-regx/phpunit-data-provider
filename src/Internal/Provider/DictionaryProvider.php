@@ -18,7 +18,7 @@ class DictionaryProvider extends DataProvider
     {
         $dataset = [];
         foreach ($this->dictionary as $key => $value) {
-            $dataset[] = new DataRow($key, $value);
+            $dataset[] = DataRow::associative($key, [$value]);
         }
         return $dataset;
     }

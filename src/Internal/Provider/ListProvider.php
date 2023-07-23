@@ -18,7 +18,7 @@ class ListProvider extends DataProvider
     {
         $dataset = [];
         foreach ($this->values as $value) {
-            $dataset[] = new DataRow($value, $value);
+            $dataset[] = DataRow::associative($value, [$value]);
         }
         return $dataset;
     }

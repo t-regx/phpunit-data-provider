@@ -11,6 +11,11 @@ trait AssertsIteration
         Assert::assertSame($expected, \iterator_to_array($provider));
     }
 
+    public function assertIteratesValues(DataProvider $provider, array $expected): void
+    {
+        Assert::assertSame($expected, \array_values(\iterator_to_array($provider)));
+    }
+
     public function assertIteratesNames(DataProvider $provider, array $expected)
     {
         Assert::assertSame($expected, \array_keys(\iterator_to_array($provider)));

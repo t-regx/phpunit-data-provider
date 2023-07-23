@@ -15,8 +15,14 @@ class PhpUnitDataset implements \IteratorAggregate
 
     public function getIterator()
     {
+        $sequence = 0;
         foreach ($this->dataProvider->dataset() as $row) {
-            yield $row->key => [$row->value];
+            if ($row->isAssociative()) {
+                $key = is_int($row->key) ? "[$row->key]" : $row->key;
+            } else {
+                $key = '#' . $sequence++;
+            }
+            yield $key => $row->values;
         }
     }
 }
