@@ -2,6 +2,7 @@
 namespace TRegx\PhpUnit\DataProviders;
 
 use TRegx\PhpUnit\DataProviders\Internal\Frame\DataRow;
+use TRegx\PhpUnit\DataProviders\Internal\Provider\CrossProvider;
 use TRegx\PhpUnit\DataProviders\Internal\Provider\DictionaryProvider;
 use TRegx\PhpUnit\DataProviders\Internal\Provider\DistinctPairsProvider;
 use TRegx\PhpUnit\DataProviders\Internal\Provider\JoinProvider;
@@ -41,6 +42,11 @@ abstract class DataProvider implements \IteratorAggregate
     public static function zip(array $dataProvider, array ...$dataProviders): DataProvider
     {
         return new ZipProvider(\array_merge([$dataProvider], $dataProviders));
+    }
+
+    public static function cross(array $dataProvider, array ...$dataProviders): DataProvider
+    {
+        return new CrossProvider(\array_merge([$dataProvider], $dataProviders));
     }
 
     public static function pairs($value1, $value2, ...$values): DataProvider

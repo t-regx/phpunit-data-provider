@@ -22,7 +22,11 @@ class DataRowModel
      */
     public function viewRows(): array
     {
-        return $this->viewRowsReindexed($this->dataProvider->dataset());
+        $dataset = $this->dataProvider->dataset();
+        if (empty($dataset)) {
+            return [];
+        }
+        return $this->viewRowsReindexed($dataset);
     }
 
     /**

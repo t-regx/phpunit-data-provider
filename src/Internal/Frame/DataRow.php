@@ -26,4 +26,13 @@ class DataRow
     {
         return $this->associative[$index];
     }
+
+    public function joined(DataRow $dataRow): DataRow
+    {
+        return new DataRow(
+            \array_merge($this->keys, $dataRow->keys),
+            \array_merge($this->associative, $dataRow->associative),
+            \array_merge($this->values, $dataRow->values)
+        );
+    }
 }
