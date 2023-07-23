@@ -8,6 +8,7 @@ use TRegx\PhpUnit\DataProviders\Internal\Provider\DistinctPairsProvider;
 use TRegx\PhpUnit\DataProviders\Internal\Provider\JoinProvider;
 use TRegx\PhpUnit\DataProviders\Internal\Provider\ListProvider;
 use TRegx\PhpUnit\DataProviders\Internal\Provider\PairsProvider;
+use TRegx\PhpUnit\DataProviders\Internal\Provider\SliceProvider;
 use TRegx\PhpUnit\DataProviders\Internal\Provider\TuplesProvider;
 use TRegx\PhpUnit\DataProviders\Internal\Provider\ZipProvider;
 use TRegx\PhpUnit\DataProviders\Internal\View\PhpUnitDataset;
@@ -57,6 +58,11 @@ abstract class DataProvider implements \IteratorAggregate
     public static function distinctPairs($value1, $value2, ...$values): DataProvider
     {
         return new DistinctPairsProvider(\array_merge([$value1, $value2], $values));
+    }
+
+    public function slice(int $start, int $count = null): DataProvider
+    {
+        return new SliceProvider($this, $start, $count);
     }
 
     public function getIterator(): \Iterator
