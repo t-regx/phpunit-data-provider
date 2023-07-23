@@ -3,6 +3,7 @@ namespace TRegx\PhpUnit\DataProviders;
 
 use TRegx\PhpUnit\DataProviders\Internal\Frame\DataRow;
 use TRegx\PhpUnit\DataProviders\Internal\Provider\DictionaryProvider;
+use TRegx\PhpUnit\DataProviders\Internal\Provider\DistinctPairsProvider;
 use TRegx\PhpUnit\DataProviders\Internal\Provider\JoinProvider;
 use TRegx\PhpUnit\DataProviders\Internal\Provider\ListProvider;
 use TRegx\PhpUnit\DataProviders\Internal\Provider\PairsProvider;
@@ -45,6 +46,11 @@ abstract class DataProvider implements \IteratorAggregate
     public static function pairs($value1, $value2, ...$values): DataProvider
     {
         return new PairsProvider(\array_merge([$value1, $value2], $values));
+    }
+
+    public static function distinctPairs($value1, $value2, ...$values): DataProvider
+    {
+        return new DistinctPairsProvider(\array_merge([$value1, $value2], $values));
     }
 
     public function getIterator(): \Iterator
