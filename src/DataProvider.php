@@ -5,6 +5,7 @@ use TRegx\PhpUnit\DataProviders\Internal\Frame\DataRow;
 use TRegx\PhpUnit\DataProviders\Internal\Provider\CrossProvider;
 use TRegx\PhpUnit\DataProviders\Internal\Provider\DictionaryProvider;
 use TRegx\PhpUnit\DataProviders\Internal\Provider\DistinctPairsProvider;
+use TRegx\PhpUnit\DataProviders\Internal\Provider\DropProvider;
 use TRegx\PhpUnit\DataProviders\Internal\Provider\JoinProvider;
 use TRegx\PhpUnit\DataProviders\Internal\Provider\ListProvider;
 use TRegx\PhpUnit\DataProviders\Internal\Provider\PairsProvider;
@@ -63,6 +64,11 @@ abstract class DataProvider implements \IteratorAggregate
     public function slice(int $start, int $count = null): DataProvider
     {
         return new SliceProvider($this, $start, $count);
+    }
+
+    public function drop(int $columnIndex, int...$columnIndices): DataProvider
+    {
+        return new DropProvider($this, \array_merge([$columnIndex], $columnIndices));
     }
 
     public function getIterator(): \Iterator

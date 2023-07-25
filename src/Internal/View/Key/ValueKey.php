@@ -16,9 +16,12 @@ class ValueKey implements Key
         if (is_int($this->value)) {
             return "[$this->value]";
         }
-        if ($segment) {
-            return "'$this->value'";
+        if (\is_string($this->value)) {
+            if ($segment) {
+                return "'$this->value'";
+            }
+            return $this->value;
         }
-        return $this->value;
+        return \uniqid();
     }
 }

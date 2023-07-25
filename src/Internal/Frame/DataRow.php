@@ -27,6 +27,11 @@ class DataRow
         return $this->associative[$index];
     }
 
+    public function set(array $values): DataRow
+    {
+        return new DataRow($this->keys, $this->associative, $values);
+    }
+
     public function joined(DataRow $dataRow): DataRow
     {
         return new DataRow(
