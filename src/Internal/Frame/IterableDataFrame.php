@@ -1,6 +1,8 @@
 <?php
 namespace TRegx\PhpUnit\DataProviders\Internal\Frame;
 
+use TRegx\PhpUnit\DataProviders\MalformedDataProviderException;
+
 class IterableDataFrame extends DataFrame
 {
     /** @var iterable */
@@ -17,6 +19,9 @@ class IterableDataFrame extends DataFrame
         $array = $this->array($this->dataProvider);
         $assoc = !$this->arraySequential($array);
         foreach ($array as $key => $values) {
+            if (!\is_array($values)) {
+                throw new MalformedDataProviderException();
+            }
             $datasets[] = new DataRow([$key], [$assoc], $values);
         }
         return $datasets;
