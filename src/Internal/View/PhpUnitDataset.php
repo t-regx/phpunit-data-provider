@@ -2,23 +2,40 @@
 namespace TRegx\PhpUnit\DataProviders\Internal\View;
 
 use TRegx\PhpUnit\DataProviders\DataProvider;
-use TRegx\PhpUnit\DataProviders\Internal\BrokenEncapsulationDataProvider;
+use TRegx\PhpUnit\DataProviders\Internal\View\Duplicates\ViewRowKeyset;
 
 class PhpUnitDataset implements \IteratorAggregate
 {
-    /** @var BrokenEncapsulationDataProvider */
-    private $dataProvider;
+    /** @var DataRowModel */
+    private $model;
 
     public function __construct(DataProvider $dataProvider)
     {
-        $this->dataProvider = new BrokenEncapsulationDataProvider($dataProvider);
+        $this->model = new DataRowModel($dataProvider);
     }
 
-    public function getIterator()
+    public function getIterator(): \Iterator
     {
-        $rows = new DataRowModel($this->dataProvider);
-        foreach ($rows->viewRows() as $row) {
-            yield $row->formatKeys() => $row->values;
+        return $this->dataRows($this->model->viewRows());
+    }
+
+    /**
+     * @param ViewRow[] $rows
+     */
+    private function dataRows(array $rows): \Iterator
+    {
+        $keyset = new ViewRowKeyset($rows);
+        $sequence = 0;
+        foreach ($rows as $row) {
+            yield $this->formatKeys($row, $keyset, $sequence) => $row->values;
         }
+    }
+
+    private function formatKeys(ViewRow $row, ViewRowKeyset $keyset, int &$sequence): string
+    {
+        if ($keyset->isDuplicate($row)) {
+            return $row->formatKeys(true) . ' !' . $sequence++;
+        }
+        return $row->formatKeys(false);
     }
 }
