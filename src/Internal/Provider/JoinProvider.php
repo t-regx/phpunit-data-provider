@@ -2,7 +2,7 @@
 namespace TRegx\PhpUnit\DataProviders\Internal\Provider;
 
 use TRegx\PhpUnit\DataProviders\DataProvider;
-use TRegx\PhpUnit\DataProviders\Internal\DataRow;
+use TRegx\PhpUnit\DataProviders\Internal\Frame\DataFrame;
 
 class JoinProvider extends DataProvider
 {
@@ -18,15 +18,11 @@ class JoinProvider extends DataProvider
     {
         $dataset = [];
         foreach ($this->dataProviders as $dataProvider) {
-            foreach ($dataProvider as $key => $values) {
-                $dataset[] = new DataRow($key, !$this->sequential($dataProvider), $values);
+            $frame = new DataFrame($dataProvider);
+            foreach ($frame->dataset() as $row) {
+                $dataset[] = $row;
             }
         }
         return $dataset;
-    }
-
-    private function sequential(array $array): bool
-    {
-        return \array_keys($array) === range(0, \count($array) - 1);
     }
 }

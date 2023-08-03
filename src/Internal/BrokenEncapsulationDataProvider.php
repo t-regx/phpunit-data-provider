@@ -2,6 +2,7 @@
 namespace TRegx\PhpUnit\DataProviders\Internal;
 
 use TRegx\PhpUnit\DataProviders\DataProvider;
+use TRegx\PhpUnit\DataProviders\Internal\Frame\DataRow;
 
 /**
  * {@see DataProvider} is the library's public interface,

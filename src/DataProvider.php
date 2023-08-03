@@ -1,7 +1,7 @@
 <?php
 namespace TRegx\PhpUnit\DataProviders;
 
-use TRegx\PhpUnit\DataProviders\Internal\DataRow;
+use TRegx\PhpUnit\DataProviders\Internal\Frame\DataRow;
 use TRegx\PhpUnit\DataProviders\Internal\PhpUnitDataset;
 use TRegx\PhpUnit\DataProviders\Internal\Provider\DictionaryProvider;
 use TRegx\PhpUnit\DataProviders\Internal\Provider\JoinProvider;

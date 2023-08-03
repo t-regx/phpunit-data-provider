@@ -2,7 +2,7 @@
 namespace TRegx\PhpUnit\DataProviders\Internal\Provider;
 
 use TRegx\PhpUnit\DataProviders\DataProvider;
-use TRegx\PhpUnit\DataProviders\Internal\DataRow;
+use TRegx\PhpUnit\DataProviders\Internal\Frame\DataRow;
 
 class ListProvider extends DataProvider
 {

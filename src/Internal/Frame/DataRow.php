@@ -1,5 +1,5 @@
 <?php
-namespace TRegx\PhpUnit\DataProviders\Internal;
+namespace TRegx\PhpUnit\DataProviders\Internal\Frame;
 
 class DataRow
 {
