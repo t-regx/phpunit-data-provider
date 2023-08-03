@@ -3,6 +3,7 @@ namespace TRegx\PhpUnit\DataProviders\Internal\View;
 
 use TRegx\PhpUnit\DataProviders\DataProvider;
 use TRegx\PhpUnit\DataProviders\Internal\BrokenEncapsulationDataProvider;
+use TRegx\PhpUnit\DataProviders\Internal\Frame\DataRow;
 use TRegx\PhpUnit\DataProviders\Internal\View\Key\SequenceKey;
 use TRegx\PhpUnit\DataProviders\Internal\View\Key\ValueKey;
 
@@ -21,16 +22,40 @@ class DataRowModel
      */
     public function viewRows(): array
     {
-        $sequence = 0;
+        return $this->viewRowsReindexed($this->dataProvider->dataset());
+    }
+
+    /**
+     * @param DataRow[] $dataRows
+     * @return ViewRow[]
+     */
+    private function viewRowsReindexed(array $dataRows): array
+    {
         $viewRows = [];
-        foreach ($this->dataProvider->dataset() as $dataRow) {
-            if ($dataRow->isAssociative()) {
-                $key = new ValueKey($dataRow->key);
-            } else {
-                $key = new SequenceKey($sequence++);
+        foreach ($dataRows as $dataRow) {
+            $viewRows[] = $this->viewRow($dataRow);
+        }
+        for ($i = 0; $i < \count($dataRows[0]->keys); $i++) {
+            $sequence = 0;
+            foreach ($viewRows as $row) {
+                if ($row->keys[$i] instanceof SequenceKey) {
+                    $row->keys[$i]->index = $sequence++;
+                }
             }
-            $viewRows[] = new ViewRow($key, $dataRow->values);
         }
         return $viewRows;
+    }
+
+    private function viewRow(DataRow $dataRow): ViewRow
+    {
+        $keys = [];
+        foreach ($dataRow->keys as $index => $key) {
+            if ($dataRow->isAssociative($index)) {
+                $keys[] = new ValueKey($key);
+            } else {
+                $keys[] = new SequenceKey();
+            }
+        }
+        return new ViewRow($keys, $dataRow->values);
     }
 }

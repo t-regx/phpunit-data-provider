@@ -18,7 +18,7 @@ class PhpUnitDataset implements \IteratorAggregate
     {
         $rows = new DataRowModel($this->dataProvider);
         foreach ($rows->viewRows() as $row) {
-            yield $row->key->toString(false) => $row->values;
+            yield $row->formatKeys() => $row->values;
         }
     }
 }

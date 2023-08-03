@@ -19,7 +19,7 @@ class DataFrame
         $sequential = $this->sequential($this->dataProvider);
         $dataset = [];
         foreach ($this->dataProvider as $key => $values) {
-            $dataset[] = new DataRow($key, !$sequential, $values);
+            $dataset[] = new DataRow([$key], [!$sequential], $values);
         }
         return $dataset;
     }

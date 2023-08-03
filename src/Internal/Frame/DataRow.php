@@ -3,27 +3,27 @@ namespace TRegx\PhpUnit\DataProviders\Internal\Frame;
 
 class DataRow
 {
-    /** @var mixed */
-    public $key;
-    /** @var bool */
+    /** @var mixed[] */
+    public $keys;
+    /** @var bool[] */
     private $associative;
     /** @var mixed[] */
     public $values;
 
-    public function __construct($key, bool $associative, array $values)
+    public function __construct(array $keys, array $assoc, array $values)
     {
-        $this->key = $key;
-        $this->associative = $associative;
+        $this->keys = $keys;
+        $this->associative = $assoc;
         $this->values = $values;
     }
 
     public static function associative($key, array $values): DataRow
     {
-        return new DataRow($key, true, $values);
+        return new DataRow([$key], [true], $values);
     }
 
-    public function isAssociative(): bool
+    public function isAssociative(int $index): bool
     {
-        return $this->associative;
+        return $this->associative[$index];
     }
 }

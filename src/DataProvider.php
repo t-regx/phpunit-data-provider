@@ -5,6 +5,7 @@ use TRegx\PhpUnit\DataProviders\Internal\Frame\DataRow;
 use TRegx\PhpUnit\DataProviders\Internal\Provider\DictionaryProvider;
 use TRegx\PhpUnit\DataProviders\Internal\Provider\JoinProvider;
 use TRegx\PhpUnit\DataProviders\Internal\Provider\ListProvider;
+use TRegx\PhpUnit\DataProviders\Internal\Provider\ZipProvider;
 use TRegx\PhpUnit\DataProviders\Internal\View\PhpUnitDataset;
 
 abstract class DataProvider implements \IteratorAggregate
@@ -27,6 +28,11 @@ abstract class DataProvider implements \IteratorAggregate
     public static function join(array $dataProvider, array ...$dataProviders): DataProvider
     {
         return new JoinProvider(\array_merge([$dataProvider], $dataProviders));
+    }
+
+    public static function zip(array $dataProvider, array ...$dataProviders): DataProvider
+    {
+        return new ZipProvider(\array_merge([$dataProvider], $dataProviders));
     }
 
     public function getIterator(): \Iterator
