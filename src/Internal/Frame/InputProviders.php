@@ -6,12 +6,30 @@ use TRegx\PhpUnit\DataProviders\Internal\IdempotentIterable;
 
 class InputProviders
 {
-    /** @var array */
-    private $dataProviders;
+    /** @var DataFrame[] */
+    private $frames = [];
 
     public function __construct(array $dataProviders)
     {
-        $this->dataProviders = $dataProviders;
+        foreach ($dataProviders as $dataProvider) {
+            $this->frames[] = $this->dataFrame($dataProvider);
+        }
+    }
+
+    private function dataFrame(iterable $dataProvider): DataFrame
+    {
+        if ($dataProvider instanceof DataProvider) {
+            return new DataProviderDataFrame($dataProvider);
+        }
+        return new IterableDataFrame($this->idempotentIterable($dataProvider));
+    }
+
+    private function idempotentIterable(iterable $dataProvider): iterable
+    {
+        if (\is_array($dataProvider)) {
+            return $dataProvider;
+        }
+        return new IdempotentIterable($dataProvider);
     }
 
     /**
@@ -19,26 +37,6 @@ class InputProviders
      */
     public function dataFrames(): array
     {
-        $result = [];
-        foreach ($this->dataProviders as $dataProvider) {
-            $result[] = $this->of($this->idempotentIterable($dataProvider));
-        }
-        return $result;
-    }
-
-    public function of(iterable $dataProvider): DataFrame
-    {
-        if ($dataProvider instanceof DataProvider) {
-            return new DataProviderDataFrame($dataProvider);
-        }
-        return new IterableDataFrame($dataProvider);
-    }
-
-    private function idempotentIterable(iterable $dataProvider): iterable
-    {
-        if ($dataProvider instanceof \Generator) {
-            return new IdempotentIterable($dataProvider);
-        }
-        return $dataProvider;
+        return $this->frames;
     }
 }
