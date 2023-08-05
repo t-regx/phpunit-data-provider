@@ -53,4 +53,36 @@ class CrossTest extends TestCase
             '[1], [1], [1]',
         ]);
     }
+
+    /**
+     * @test
+     */
+    public function shouldCrossJoinedOther()
+    {
+        $cross = DataProvider::cross(
+            DataProvider::join(
+                [['Jaime', 'Lannister'], ['Cersei', 'Lannister']],
+                [['Eddard', 'Stark'], ['Stannis', 'Baratheon']]),
+            [['Tyrion', 'Lannister']]);
+        $this->assertIteratesNames($cross, [
+            '[0], [0]',
+            '[1], [0]',
+            '[2], [0]',
+            '[3], [0]',
+        ]);
+    }
+
+    /**
+     * @test
+     */
+    public function shouldCrossJoinedJoined()
+    {
+        $heroes = DataProvider::join([['Jaime', 'Lannister']], [['Eddard', 'Stark']], [['Cersei', 'Lannister']]);
+        $cross = DataProvider::cross($heroes, $heroes);
+        $this->assertIteratesNames($cross, [
+            '[0], [0]', '[0], [1]', '[0], [2]',
+            '[1], [0]', '[1], [1]', '[1], [2]',
+            '[2], [0]', '[2], [1]', '[2], [2]',
+        ]);
+    }
 }

@@ -2,7 +2,7 @@
 namespace TRegx\PhpUnit\DataProviders\Internal\View;
 
 use TRegx\PhpUnit\DataProviders\DataProvider;
-use TRegx\PhpUnit\DataProviders\Internal\BrokenEncapsulationDataProvider;
+use TRegx\PhpUnit\DataProviders\Internal\Frame\DataFrame;
 use TRegx\PhpUnit\DataProviders\Internal\Frame\DataProviderDataFrame;
 use TRegx\PhpUnit\DataProviders\Internal\Frame\DataRow;
 use TRegx\PhpUnit\DataProviders\Internal\Frame\KeyTypes;
@@ -11,15 +11,15 @@ use TRegx\PhpUnit\DataProviders\Internal\View\Key\ValueKey;
 
 class DataRowModel
 {
-    /** @var BrokenEncapsulationDataProvider */
+    /** @var DataFrame */
     private $dataProvider;
     /** @var KeyTypes */
     private $keyTypes;
 
     public function __construct(DataProvider $dataProvider)
     {
-        $this->dataProvider = new BrokenEncapsulationDataProvider($dataProvider);
-        $this->keyTypes = new KeyTypes(new DataProviderDataFrame($this->dataProvider));
+        $this->dataProvider = new DataProviderDataFrame($dataProvider);
+        $this->keyTypes = new KeyTypes($this->dataProvider);
     }
 
     /**
@@ -27,32 +27,18 @@ class DataRowModel
      */
     public function viewRows(): array
     {
-        $dataset = $this->dataProvider->dataset();
-        if (empty($dataset)) {
-            return [];
-        }
-        return $this->viewRowsReindexed($dataset);
+        return $this->viewRowsMappedKeys(new ReindexedDataFrame($this->dataProvider));
     }
 
     /**
-     * @param DataRow[] $dataRows
+     * @param DataFrame $frame
      * @return ViewRow[]
      */
-    private function viewRowsReindexed(array $dataRows): array
+    private function viewRowsMappedKeys(DataFrame $frame): array
     {
         $viewRows = [];
-        foreach ($dataRows as $dataRow) {
+        foreach ($frame->dataset() as $dataRow) {
             $viewRows[] = $this->viewRow($dataRow);
-        }
-        for ($i = 0; $i < \count($dataRows[0]->keys); $i++) {
-            $sequence = 0;
-            foreach ($viewRows as $row) {
-                if (isset($row->keys[$i])) {
-                    if ($row->keys[$i] instanceof SequenceKey) {
-                        $row->keys[$i]->index = $sequence++;
-                    }
-                }
-            }
         }
         return $viewRows;
     }
@@ -64,7 +50,7 @@ class DataRowModel
             if ($dataRow->isAssociative($index)) {
                 $keys[] = new ValueKey($key);
             } else {
-                $keys[] = new SequenceKey();
+                $keys[] = new SequenceKey($key);
             }
         }
         return new ViewRow($keys, $dataRow->values);

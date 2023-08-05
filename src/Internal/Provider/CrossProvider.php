@@ -6,6 +6,7 @@ use TRegx\PhpUnit\DataProviders\DataProvider;
 use TRegx\PhpUnit\DataProviders\Internal\Frame\DataFrame;
 use TRegx\PhpUnit\DataProviders\Internal\Frame\DataRow;
 use TRegx\PhpUnit\DataProviders\Internal\Frame\InputProviders;
+use TRegx\PhpUnit\DataProviders\Internal\View\ReindexedDataFrame;
 
 class CrossProvider extends DataProvider
 {
@@ -19,7 +20,7 @@ class CrossProvider extends DataProvider
 
     protected function dataset(): array
     {
-        $dataProviders = $this->nonEmptyDataFrames();
+        $dataProviders = $this->nonEmptyReindexedFrames();
         if (empty($dataProviders)) {
             return [];
         }
@@ -29,9 +30,15 @@ class CrossProvider extends DataProvider
     /**
      * @return DataFrame[]
      */
-    private function nonEmptyDataFrames(): array
+    private function nonEmptyReindexedFrames(): array
     {
-        return \array_filter($this->inputProviders->dataFrames(), [$this, 'nonEmpty']);
+        $frames = [];
+        foreach ($this->inputProviders->dataFrames() as $frame) {
+            if ($this->nonEmpty($frame)) {
+                $frames[] = new ReindexedDataFrame($frame);
+            }
+        }
+        return $frames;
     }
 
     private function nonEmpty(DataFrame $dataProvider): bool
