@@ -38,8 +38,10 @@ class DataRowModel
         for ($i = 0; $i < \count($dataRows[0]->keys); $i++) {
             $sequence = 0;
             foreach ($viewRows as $row) {
-                if ($row->keys[$i] instanceof SequenceKey) {
-                    $row->keys[$i]->index = $sequence++;
+                if (isset($row->keys[$i])) {
+                    if ($row->keys[$i] instanceof SequenceKey) {
+                        $row->keys[$i]->index = $sequence++;
+                    }
                 }
             }
         }
