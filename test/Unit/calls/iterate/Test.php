@@ -5,6 +5,7 @@ use PHPUnit\Framework\TestCase;
 use Test\Fixture\Assertion\AssertsIteration;
 use Test\Fixture\Assertion\AssertsIteratorCalls;
 use Test\Fixture\Executes;
+use Test\Fixture\HistoryDataProvider;
 use Test\Fixture\HistoryIterator;
 use TRegx\PhpUnit\DataProviders\DataProvider;
 
@@ -30,14 +31,15 @@ class Test extends TestCase
 
     /**
      * @test
+     * @dataProvider providers
      */
-    public function shouldIterateOnceNested()
+    public function shouldIterateOnceNested(callable $provider)
     {
         // given
         $iterator = new HistoryIterator([['value']]);
         $shared = DataProvider::of($iterator);
         // when
-        $this->execute(DataProvider::join($shared, $shared));
+        $this->execute($provider($shared, $shared));
         // then
         $this->assertSingleIteration($iterator, 1);
     }
@@ -45,18 +47,31 @@ class Test extends TestCase
     public function providers(): DataProvider
     {
         return DataProvider::dictionary([
-            'of'    => function (HistoryIterator $iterator): DataProvider {
-                return DataProvider::of($iterator);
+            'of'    => function (iterable $iterable): DataProvider {
+                return DataProvider::of($iterable);
             },
-            'join'  => function (HistoryIterator $iterator): DataProvider {
-                return DataProvider::join($iterator, [['value']]);
+            'join'  => function (iterable $iterable): DataProvider {
+                return DataProvider::join($iterable, [['value']]);
             },
-            'zip'   => function (HistoryIterator $iterator): DataProvider {
-                return DataProvider::zip($iterator, [['value']]);
+            'zip'   => function (iterable $iterable): DataProvider {
+                return DataProvider::zip($iterable, [['value']]);
             },
-            'cross' => function (HistoryIterator $iterator): DataProvider {
-                return DataProvider::cross($iterator, [['value']]);
+            'cross' => function (iterable $iterable): DataProvider {
+                return DataProvider::cross($iterable, [['value']]);
             },
         ]);
+    }
+
+    /**
+     * @test
+     */
+    public function shouldIterateOnceDataProvider()
+    {
+        // given
+        $provider = new HistoryDataProvider(['one', 'two']);
+        // when
+        $this->execute(DataProvider::zip($provider));
+        // then
+        $this->assertSingleIterationProvider($provider);
     }
 }
