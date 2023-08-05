@@ -29,7 +29,7 @@ class ReindexedDataFrame extends DataFrame
      */
     private function reindexedRows(array $dataRows): array
     {
-        for ($i = 0; $i < \count($dataRows[0]->keys); $i++) {
+        for ($i = 0; $i < $this->widestRowWidth($dataRows); $i++) {
             $sequence = 0;
             foreach ($dataRows as $row) {
                 if (isset($row->keys[$i])) {
@@ -40,5 +40,16 @@ class ReindexedDataFrame extends DataFrame
             }
         }
         return $dataRows;
+    }
+
+    /**
+     * @param DataRow[] $dataRows
+     * @return int
+     */
+    private function widestRowWidth(array $dataRows): int
+    {
+        return max(\array_map(function (DataRow $row): int {
+            return \count($row->keys);
+        }, $dataRows));
     }
 }

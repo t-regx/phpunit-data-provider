@@ -24,7 +24,7 @@ class Test extends TestCase
     /**
      * @test
      */
-    public function shouldJoinZipAndOf()
+    public function shouldJoinUnevenKeysLongShort()
     {
         // when
         $joined = DataProvider::join(
@@ -40,6 +40,31 @@ class Test extends TestCase
             "'Robert', 'Baratheon'" => ['Robert', 'Baratheon'],
             '#0'                    => ['Balon', 'Greyjoy'],
             '#1'                    => ['Tywin', 'Lannister'],
+        ]);
+    }
+
+    /**
+     * @test
+     */
+    public function shouldJoinUnevenKeysShortLong()
+    {
+        // given
+        $singleKey = DataProvider::of([
+            ['Balon', 'Greyjoy'],
+            ['Tywin', 'Lannister']]);
+        $twoKeys = DataProvider::zip(
+            DataProvider::list('Stark', 'Baratheon'),
+            DataProvider::of([['Eddard'], ['Robert']]));
+        // when
+        $joined = DataProvider::join($singleKey, $twoKeys, $twoKeys);
+        // then
+        $this->assertIterates($joined, [
+            '#0'              => ['Balon', 'Greyjoy'],
+            '#1'              => ['Tywin', 'Lannister'],
+            "'Stark', #0"     => ['Stark', 'Eddard'],
+            "'Baratheon', #1" => ['Baratheon', 'Robert'],
+            "'Stark', #2"     => ['Stark', 'Eddard'],
+            "'Baratheon', #3" => ['Baratheon', 'Robert'],
         ]);
     }
 
