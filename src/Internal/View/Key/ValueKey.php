@@ -53,7 +53,7 @@ class ValueKey implements Key
             if ($includeType) {
                 return "(string) '$format'";
             }
-            if (preg_match('/^\d+$/', $this->value)) {
+            if (\is_int(\key([$this->value => true]))) {
                 return "'$format'";
             }
             if (\trim($this->value) !== $this->value || $segment) {

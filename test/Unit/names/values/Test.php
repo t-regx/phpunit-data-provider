@@ -70,4 +70,38 @@ class Test extends TestCase
             ["123\n", "'123\\n'"],
         ]);
     }
+
+    /**
+     * @test
+     * @dataProvider autoboxingStrings
+     */
+    public function shouldFormatNumericKeyAutoboxingStrings(string $numeric)
+    {
+        $this->assertIteratesNames(DataProvider::list($numeric), ["'$numeric'"]);
+    }
+
+    public function autoboxingStrings(): DataProvider
+    {
+        return DataProvider::list('5', '12', '0', '-1', '-99');
+    }
+
+    /**
+     * @test
+     * @dataProvider associativeStrings
+     */
+    public function shouldFormatNumericKeyAssociativeStrings(string $numeric)
+    {
+        $this->assertIteratesNames(DataProvider::list($numeric), [$numeric]);
+    }
+
+    public function associativeStrings(): DataProvider
+    {
+        return DataProvider::list(...[
+            '5abc', '12abc',                  // leading digits
+            'abc5', 'abc12',                  // leading digits
+            '00', '0012', '-0', '+0', '+2',   // numeric strings that aren't coalesced to integer
+            '1e3', '0133',                    // php loosely compared number notation 
+            '+a0', '-a0',                     // unary sign and trailing number
+        ]);
+    }
 }
