@@ -3,7 +3,6 @@ namespace TRegx\PhpUnit\DataProviders\Internal\Frame;
 
 use TRegx\PhpUnit\DataProviders\DataProvider;
 use TRegx\PhpUnit\DataProviders\Internal\IdempotentDataProvider;
-use TRegx\PhpUnit\DataProviders\Internal\IdempotentIterable;
 
 class InputProviders
 {
@@ -22,15 +21,7 @@ class InputProviders
         if ($dataProvider instanceof DataProvider) {
             return new DataProviderDataFrame(new IdempotentDataProvider($dataProvider));
         }
-        return new IterableDataFrame($this->idempotentIterable($dataProvider));
-    }
-
-    private function idempotentIterable(iterable $dataProvider): iterable
-    {
-        if (\is_array($dataProvider)) {
-            return $dataProvider;
-        }
-        return new IdempotentIterable($dataProvider);
+        return new IterableDataFrame($dataProvider);
     }
 
     /**

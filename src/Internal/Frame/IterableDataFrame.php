@@ -8,6 +8,8 @@ class IterableDataFrame extends DataFrame
 {
     /** @var iterable */
     private $dataProvider;
+    /** @var IdempotentDataProviderIterator|null */
+    private $cached = null;
 
     public function __construct(iterable $dataProvider)
     {
@@ -16,28 +18,27 @@ class IterableDataFrame extends DataFrame
 
     public function dataset(): array
     {
+        $dataProvider = $this->cachedDataProvider();
+        return $this->dataRows($dataProvider, !$dataProvider->sequential());
+    }
+
+    private function dataRows(iterable $dataProvider, bool $associative): array
+    {
         $datasets = [];
-        $array = $this->array($this->dataProvider);
-        $assoc = !$this->arraySequential($array);
-        foreach ($array as $key => $values) {
+        foreach ($dataProvider as $key => $values) {
             if (!\is_array($values)) {
                 throw new MalformedDataProviderException(new Type($values));
             }
-            $datasets[] = new DataRow([$key], [$assoc], $values);
+            $datasets[] = new DataRow([$key], [$associative], $values);
         }
         return $datasets;
     }
 
-    public function arraySequential(array $array): bool
+    private function cachedDataProvider(): IdempotentDataProviderIterator
     {
-        return \array_keys($array) === \range(0, \count($array) - 1);
-    }
-
-    private function array(iterable $dataProvider): array
-    {
-        if (\is_array($dataProvider)) {
-            return $dataProvider;
+        if ($this->cached === null) {
+            $this->cached = new IdempotentDataProviderIterator($this->dataProvider);
         }
-        return \iterator_to_array($dataProvider);
+        return $this->cached;
     }
 }
