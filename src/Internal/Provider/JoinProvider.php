@@ -2,24 +2,23 @@
 namespace TRegx\PhpUnit\DataProviders\Internal\Provider;
 
 use TRegx\PhpUnit\DataProviders\DataProvider;
-use TRegx\PhpUnit\DataProviders\Internal\Frame\DataFrame;
+use TRegx\PhpUnit\DataProviders\Internal\Frame\InputProviders;
 
 class JoinProvider extends DataProvider
 {
-    /** @var array */
-    private $dataProviders;
+    /** @var InputProviders */
+    private $inputProviders;
 
     public function __construct(array $dataProviders)
     {
-        $this->dataProviders = $dataProviders;
+        $this->inputProviders = new InputProviders($dataProviders);
     }
 
     protected function dataset(): array
     {
         $dataset = [];
-        foreach ($this->dataProviders as $dataProvider) {
-            $frame = new DataFrame($dataProvider);
-            foreach ($frame->dataset() as $row) {
+        foreach ($this->inputProviders->dataFrames() as $dataProvider) {
+            foreach ($dataProvider->dataset() as $row) {
                 $dataset[] = $row;
             }
         }

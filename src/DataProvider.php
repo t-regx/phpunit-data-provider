@@ -16,7 +16,7 @@ use TRegx\PhpUnit\DataProviders\Internal\View\PhpUnitDataset;
 
 abstract class DataProvider implements \IteratorAggregate
 {
-    public static function of(array $dataProvider): DataProvider
+    public static function of(iterable $dataProvider): DataProvider
     {
         return new JoinProvider([$dataProvider]);
     }
@@ -36,17 +36,17 @@ abstract class DataProvider implements \IteratorAggregate
         return new DictionaryProvider($dictionary);
     }
 
-    public static function join(array $dataProvider, array ...$dataProviders): DataProvider
+    public static function join(iterable $dataProvider, iterable ...$dataProviders): DataProvider
     {
         return new JoinProvider(\array_merge([$dataProvider], $dataProviders));
     }
 
-    public static function zip(array $dataProvider, array ...$dataProviders): DataProvider
+    public static function zip(iterable $dataProvider, iterable ...$dataProviders): DataProvider
     {
         return new ZipProvider(\array_merge([$dataProvider], $dataProviders));
     }
 
-    public static function cross(array $dataProvider, array ...$dataProviders): DataProvider
+    public static function cross(iterable $dataProvider, iterable ...$dataProviders): DataProvider
     {
         return new CrossProvider(\array_merge([$dataProvider], $dataProviders));
     }

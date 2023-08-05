@@ -17,6 +17,11 @@ class DataRow
         $this->values = $values;
     }
 
+    public static function empty(): DataRow
+    {
+        return new self([], [], []);
+    }
+
     public static function associative($key, array $values): DataRow
     {
         return new DataRow([$key], [true], $values);

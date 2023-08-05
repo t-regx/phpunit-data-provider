@@ -2,38 +2,43 @@
 namespace TRegx\PhpUnit\DataProviders\Internal\Provider;
 
 use TRegx\PhpUnit\DataProviders\DataProvider;
+use TRegx\PhpUnit\DataProviders\Internal\Frame\DataFrame;
 use TRegx\PhpUnit\DataProviders\Internal\Frame\DataRow;
+use TRegx\PhpUnit\DataProviders\Internal\Frame\InputProviders;
 
 class ZipProvider extends DataProvider
 {
-    /** @var array */
-    private $dataProviders;
+    /** @var InputProviders */
+    private $inputProviders;
+    /** @var DataFrame[] */
+    private $dataFrames;
 
     public function __construct(array $dataProviders)
     {
-        $this->dataProviders = $dataProviders;
+        $this->inputProviders = new InputProviders($dataProviders);
+        $this->dataFrames = $this->inputProviders->dataFrames();
     }
 
     protected function dataset(): array
     {
         $dataset = [];
-        for ($i = 0; $i < \count($this->dataProviders[0]); $i++) {
-            $keys = [];
-            $assocs = [];
-            $values = [];
-            foreach ($this->dataProviders as $dataProvider) {
-                $key = \array_keys($dataProvider)[$i];
-                $keys[] = $key;
-                $assocs[] = !$this->sequential($dataProvider);
-                $values[] = $dataProvider[$key];
-            }
-            $dataset[] = new DataRow($keys, $assocs, \array_merge(...$values));
+        for ($i = 0; $i < $this->count(); $i++) {
+            $dataset[] = $this->zippedRow($i);
         }
         return $dataset;
     }
 
-    private function sequential(array $array): bool
+    private function zippedRow(int $index): DataRow
     {
-        return \array_keys($array) === range(0, \count($array) - 1);
+        $joinedRow = DataRow::empty();
+        foreach ($this->dataFrames as $dataProvider) {
+            $joinedRow = $joinedRow->joined($dataProvider->dataset()[$index]);
+        }
+        return $joinedRow;
+    }
+
+    private function count(): int
+    {
+        return \count($this->dataFrames[0]->dataset());
     }
 }

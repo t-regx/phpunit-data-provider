@@ -3,21 +3,23 @@ namespace TRegx\PhpUnit\DataProviders\Internal\Provider;
 
 use Iterator;
 use TRegx\PhpUnit\DataProviders\DataProvider;
+use TRegx\PhpUnit\DataProviders\Internal\Frame\DataFrame;
 use TRegx\PhpUnit\DataProviders\Internal\Frame\DataRow;
+use TRegx\PhpUnit\DataProviders\Internal\Frame\InputProviders;
 
 class CrossProvider extends DataProvider
 {
-    /** @var array[] */
-    private $dataProviders;
+    /** @var InputProviders */
+    private $inputProviders;
 
     public function __construct(array $dataProviders)
     {
-        $this->dataProviders = $dataProviders;
+        $this->inputProviders = new InputProviders($dataProviders);
     }
 
     protected function dataset(): array
     {
-        $dataProviders = \array_filter($this->dataProviders);
+        $dataProviders = $this->nonEmptyDataFrames();
         if (empty($dataProviders)) {
             return [];
         }
@@ -25,21 +27,50 @@ class CrossProvider extends DataProvider
     }
 
     /**
+     * @return DataFrame[]
+     */
+    private function nonEmptyDataFrames(): array
+    {
+        return \array_filter($this->inputProviders->dataFrames(), [$this, 'nonEmpty']);
+    }
+
+    private function nonEmpty(DataFrame $dataProvider): bool
+    {
+        foreach ($dataProvider->dataset() as $value) {
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * @param DataFrame[] $dataProviders
      * @return DataRow[]|Iterator
      */
     private function cartesianProduct(array $dataProviders): \Iterator
     {
+        /**
+         * @var DataFrame|null $dataProvider
+         */
         $dataProvider = \array_shift($dataProviders);
         if (empty($dataProviders)) {
-            foreach ($dataProvider as $key => $row) {
-                yield new DataRow([$key], [true], $row);
+            foreach ($dataProvider->dataset() as $row) {
+                yield $this->toAssociative($row);
             }
         } else {
-            foreach ($dataProvider as $key => $values) {
+            foreach ($dataProvider->dataset() as $row) {
                 foreach ($this->cartesianProduct($dataProviders) as $dataRow) {
-                    yield DataRow::associative($key, $values)->joined($dataRow);
+                    yield $this->toAssociative($row)->joined($dataRow);
                 }
             }
         }
+    }
+
+    private function toAssociative(DataRow $row): DataRow
+    {
+        return new DataRow(
+            $row->keys,
+            \array_fill(0, \count($row->keys), true),
+            $row->values
+        );
     }
 }
