@@ -7,6 +7,7 @@ use TRegx\PhpUnit\DataProviders\Internal\Frame\DataFrame;
 use TRegx\PhpUnit\DataProviders\Internal\Frame\DataRow;
 use TRegx\PhpUnit\DataProviders\Internal\Frame\InputProviders;
 use TRegx\PhpUnit\DataProviders\Internal\View\ReindexedDataFrame;
+use TRegx\PhpUnit\DataProviders\IrregularDataProviderException;
 
 class CrossProvider extends DataProvider
 {
@@ -24,7 +25,23 @@ class CrossProvider extends DataProvider
         if (empty($dataProviders)) {
             return [];
         }
+
+        foreach ($this->inputProviders->dataFrames() as $frame) {
+            if (!$this->frameUniform($frame)) {
+                throw new IrregularDataProviderException('Failed to cross data providers with different amounts of parameters in rows');
+            }
+        }
+
         return \iterator_to_array($this->cartesianProduct($dataProviders));
+    }
+
+    private function frameUniform(DataFrame $frame): bool
+    {
+        $columns = new UniformSize();
+        foreach ($frame->dataset() as $dataset) {
+            $columns->next(\count($dataset->values));
+        }
+        return $columns->uniform();
     }
 
     /**
