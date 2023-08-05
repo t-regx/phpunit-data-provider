@@ -27,15 +27,15 @@ class PhpUnitDataset implements \IteratorAggregate
         $keyset = new ViewRowKeyset($rows);
         $sequence = 0;
         foreach ($rows as $row) {
-            yield $this->formatKeys($row, $keyset, $sequence) => $row->values;
+            yield $this->formatKeys($row, $keyset, !$this->model->uniformTypes(), $sequence) => $row->values;
         }
     }
 
-    private function formatKeys(ViewRow $row, ViewRowKeyset $keyset, int &$sequence): string
+    private function formatKeys(ViewRow $row, ViewRowKeyset $keyset, bool $includeType, int &$sequence): string
     {
         if ($keyset->isDuplicate($row)) {
-            return $row->formatKeys(true) . ' !' . $sequence++;
+            return $row->formatKeys(true, $includeType) . ' !' . $sequence++;
         }
-        return $row->formatKeys(false);
+        return $row->formatKeys(false, $includeType);
     }
 }

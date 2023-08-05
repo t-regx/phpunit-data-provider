@@ -63,6 +63,8 @@ class Test extends TestCase
             ["form\ffeed", 'form\ffeed'],
             ["vertical\vtab", 'vertical\vtab'],
 
+            ['4', "'4'"],
+            ['123', "'123'"],
             ['k2', 'k2'],
             ['2forU', '2forU'],
             ["123\n", "'123\\n'"],

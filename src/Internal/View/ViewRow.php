@@ -19,11 +19,11 @@ class ViewRow
         $this->manyKeys = \count($this->keys) > 1;
     }
 
-    public function formatKeys(bool $segmentKey): string
+    public function formatKeys(bool $segmentKey, bool $includeType): string
     {
         $keys = [];
         foreach ($this->keys as $key) {
-            $keys[] = $key->toString($this->manyKeys || $segmentKey);
+            $keys[] = $key->toString($this->manyKeys || $segmentKey, $includeType);
         }
         return join(', ', $keys);
     }

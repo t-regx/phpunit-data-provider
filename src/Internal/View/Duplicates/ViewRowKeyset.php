@@ -15,12 +15,12 @@ class ViewRowKeyset
     {
         $this->set = new Set();
         foreach ($viewRows as $row) {
-            $this->set->add($row->formatKeys(false));
+            $this->set->add($row->formatKeys(false, false));
         }
     }
 
     public function isDuplicate(ViewRow $row): bool
     {
-        return $this->set->isDuplicate($row->formatKeys(false));
+        return $this->set->isDuplicate($row->formatKeys(false, false));
     }
 }

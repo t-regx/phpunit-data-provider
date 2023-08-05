@@ -3,7 +3,9 @@ namespace TRegx\PhpUnit\DataProviders\Internal\View;
 
 use TRegx\PhpUnit\DataProviders\DataProvider;
 use TRegx\PhpUnit\DataProviders\Internal\BrokenEncapsulationDataProvider;
+use TRegx\PhpUnit\DataProviders\Internal\Frame\DataProviderDataFrame;
 use TRegx\PhpUnit\DataProviders\Internal\Frame\DataRow;
+use TRegx\PhpUnit\DataProviders\Internal\Frame\KeyTypes;
 use TRegx\PhpUnit\DataProviders\Internal\View\Key\SequenceKey;
 use TRegx\PhpUnit\DataProviders\Internal\View\Key\ValueKey;
 
@@ -11,10 +13,13 @@ class DataRowModel
 {
     /** @var BrokenEncapsulationDataProvider */
     private $dataProvider;
+    /** @var KeyTypes */
+    private $keyTypes;
 
     public function __construct(DataProvider $dataProvider)
     {
         $this->dataProvider = new BrokenEncapsulationDataProvider($dataProvider);
+        $this->keyTypes = new KeyTypes(new DataProviderDataFrame($this->dataProvider));
     }
 
     /**
@@ -63,5 +68,10 @@ class DataRowModel
             }
         }
         return new ViewRow($keys, $dataRow->values);
+    }
+
+    public function uniformTypes(): bool
+    {
+        return $this->keyTypes->uniformTypes();
     }
 }
