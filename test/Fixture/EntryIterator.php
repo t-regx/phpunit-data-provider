@@ -13,12 +13,14 @@ class EntryIterator implements Iterator
         $this->entries = $entries;
     }
 
+    #[\ReturnTypeWillChange]
     public function current()
     {
         [$key, $value] = \current($this->entries);
         return $value;
     }
 
+    #[\ReturnTypeWillChange]
     public function key()
     {
         [$key, $value] = \current($this->entries);

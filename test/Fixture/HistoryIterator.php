@@ -11,6 +11,7 @@ class HistoryIterator extends \IteratorIterator
         parent::__construct(new \ArrayIterator($values));
     }
 
+    #[\ReturnTypeWillChange]
     public function current()
     {
         $this->history[] = __FUNCTION__;
@@ -23,6 +24,7 @@ class HistoryIterator extends \IteratorIterator
         parent::next();
     }
 
+    #[\ReturnTypeWillChange]
     public function key()
     {
         $this->history[] = __FUNCTION__;
