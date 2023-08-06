@@ -1,4 +1,14 @@
 {
+  "name": "rawr/phpunit-data-provider",
+  "type": "library",
+  "description": "Lightweight builder for PhpUnit data providers",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Daniel Wilkowski",
+      "homepage": "https://t-regx.com/"
+    }
+  ],
   "autoload": {
     "psr-4": {
       "TRegx\\PhpUnit\\DataProviders\\": "src/"
