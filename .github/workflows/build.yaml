@@ -1,0 +1,72 @@
+name: build
+
+on:
+  pull_request:
+  push:
+    paths-ignore: 
+      - ".github/**"
+      - "ReadMe.md"
+
+jobs:
+  tests:
+    name: Tests
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        include:
+          - php-version: 7.1
+            coverage: none
+          - php-version: 7.2
+            coverage: none
+          - php-version: 7.3
+            coverage: none
+          - php-version: 7.4
+            coverage: none
+          - php-version: 8.0
+            coverage: xdebug
+          - php-version: 8.1
+            coverage: none
+          - php-version: 8.2
+            coverage: none
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Use PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php-version }}
+          tools: composer:v2
+          coverage: "${{ matrix.coverage }}"
+
+      - name: Cache dependencies
+        uses: actions/cache@v3
+        with:
+          path: ~/.cache/composer
+          key: php${{ matrix.php-version }}-composer-${{ hashFiles('**/composer.json') }}
+          restore-keys: php${{ matrix.php-version }}-composer-
+
+      - name: Install dependencies
+        run: |
+          composer install --no-progress;
+          composer show;
+
+      - name: Run tests (no coverage)
+        if: "${{ matrix.coverage == 'none' }}"
+        run: ./vendor/bin/phpunit test --no-coverage
+
+      - name: Run tests (coverage)
+        if: "${{ matrix.coverage != 'none' }}"
+        run: ./vendor/bin/phpunit test
+
+      - name: Install "php-coveralls/php-coveralls"
+        if: "${{ matrix.coverage != 'none' }}"
+        run: composer require php-coveralls/php-coveralls --no-progress
+
+      - name: Upload coverage results to Coveralls
+        if: "${{ matrix.coverage != 'none' }}"
+        continue-on-error: true
+        run: ./vendor/bin/php-coveralls --coverage_clover=build/logs/clover.xml -v
+        env:
+          COVERALLS_REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
