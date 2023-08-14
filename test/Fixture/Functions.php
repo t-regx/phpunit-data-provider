@@ -16,4 +16,11 @@ class Functions
             return [$argument];
         };
     }
+
+    public static function toNestedArray(): callable
+    {
+        return function ($argument): array {
+            return [[$argument]];
+        };
+    }
 }

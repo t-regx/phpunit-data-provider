@@ -6,6 +6,7 @@ use TRegx\PhpUnit\DataProviders\Internal\Provider\CrossProvider;
 use TRegx\PhpUnit\DataProviders\Internal\Provider\DictionaryProvider;
 use TRegx\PhpUnit\DataProviders\Internal\Provider\DistinctPairsProvider;
 use TRegx\PhpUnit\DataProviders\Internal\Provider\DropProvider;
+use TRegx\PhpUnit\DataProviders\Internal\Provider\FlatMapProvider;
 use TRegx\PhpUnit\DataProviders\Internal\Provider\JoinProvider;
 use TRegx\PhpUnit\DataProviders\Internal\Provider\ListProvider;
 use TRegx\PhpUnit\DataProviders\Internal\Provider\MapProvider;
@@ -65,6 +66,11 @@ abstract class DataProvider implements \IteratorAggregate
     public function map(callable $mapper): DataProvider
     {
         return new MapProvider($this, $mapper);
+    }
+
+    public function flatMap(callable $mapper): DataProvider
+    {
+        return new FlatMapProvider($this, $mapper);
     }
 
     public function slice(int $start, int $count = null): DataProvider
