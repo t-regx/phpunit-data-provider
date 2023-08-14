@@ -20,6 +20,6 @@ class Mapper
         if (\is_array($mapped)) {
             return \array_values($mapped);
         }
-        throw new UnexpectedValueException('Failed to map data row as array, given: ' . new Type($mapped));
+        throw new UnexpectedValueException('Failed to map data row. Expected array of arguments, given: ' . new Type($mapped));
     }
 }

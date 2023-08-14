@@ -50,7 +50,7 @@ class MapTest extends TestCase
             ->map(Functions::constant($value));
         // then
         $this->expectException(\UnexpectedValueException::class);
-        $this->expectExceptionMessage("Failed to map data row as array, given: $name");
+        $this->expectExceptionMessage("Failed to map data row. Expected array of arguments, given: $name");
         // when
         $this->execute($mapped);
     }
