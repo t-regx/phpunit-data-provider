@@ -3,7 +3,7 @@
 # Helper for PhpUnit @dataProvider
 
 Handy `require-dev` testing tool for [PhpUnit]. It allows to manage data providers
-with `zip()`, `join()`, `cross()`, `pairs()`, `slice()` and more.
+with `zip()`, `join()`, `cross()`, `pairs()`, `slice()`, `map()` and more.
 
 [![Build Status](https://github.com/t-regx/CrossDataProviders/workflows/build/badge.svg?branch=master)][build]
 [![Coverage Status](https://coveralls.io/repos/github/t-regx/CrossDataProviders/badge.svg?branch=master)][coveralls]
@@ -32,6 +32,7 @@ with `zip()`, `join()`, `cross()`, `pairs()`, `slice()` and more.
    * [`DataProvider::of()`](#dataproviderof)
    * [`DataProvider::tuples()`](#dataprovidertuples)
    * [`DataProvider::dictionary()`](#dataproviderdictionary)
+   * [`DataProvider.map()`](#dataprovidermap)
 3. [Documentation](#documentation)
    * [Functionalities](#functionalities)
    * [Features](#features)
@@ -298,6 +299,43 @@ public function ports(): DataProvider {
 }
 ```
 
+### `DataProvider.map()`
+
+Transform each row's values in `DataProvider` to any other set of values.
+
+💡 Useful for separating providers content and their form.
+
+```php
+/**
+* @test
+* @dataProvider folderIterators
+*/
+public function test(\Iterator $iterator, string $name): void {
+  // your test here
+}
+
+public function folderIterators(): DataProvider {
+  return $this->folders()->map(function (string $name, string $path): array {
+      return [
+          new \DirectoryIterator($path),
+          $name
+      ];
+  });
+}
+
+public function folders(): DataProvider {
+  return DataProvider::tuples(
+      ['temporary', '/tmp'],
+      ['user directory', '/home'],
+      ['system resources', '/usr/bin']);
+}
+```
+
+![map.png](.github/assets/example/map.png)
+
+Notes:
+- Names in `DataProvider` will be preserved.
+
 # Documentation
 
 ### Functionalities
@@ -313,8 +351,8 @@ public function ports(): DataProvider {
 
 - Editing existing providers:
 
-   - `DataProvider.slice()`, `DataProvider.drop()`. Methods `.slice()` and `.drop()` don't modify instance, but return a
-     new instance.
+   - [`DataProvider.map()`][map], `DataProvider.slice()`, `DataProvider.drop()`. These methods don't modify `DataProvider`
+     instance, but return a new instance.
 
 ### Features
 
@@ -582,3 +620,5 @@ To use version `3.0.0`, migrating from [`2.4.0`][previous] or earlier:
 [dictionary]: #dataproviderdictionary
 
 [pairs]: #dataproviderpairs
+
+[map]: #dataprovidermap
