@@ -33,6 +33,7 @@ with `zip()`, `join()`, `cross()`, `pairs()`, `slice()`, `map()` and more.
    * [`DataProvider::tuples()`](#dataprovidertuples)
    * [`DataProvider::dictionary()`](#dataproviderdictionary)
    * [`DataProvider.map()`](#dataprovidermap)
+   * [`DataProvider.slice()`](#dataproviderslice)
 3. [Documentation](#documentation)
    * [Functionalities](#functionalities)
    * [Features](#features)
@@ -336,6 +337,34 @@ public function folders(): DataProvider {
 Notes:
 - Names in `DataProvider` will be preserved.
 
+### `DataProvider.slice()`
+
+Remove leading or trailing rows from `DataProvider`.
+
+💡 Useful for adapting `DataProvider` to be zipped or limit provided values.
+
+```php
+/**
+ * @test 
+ * @dataProvider limitedColors
+ */
+public function test(string color, string $thing): void {
+  // your test here
+}
+
+public function limitedColors(): DataProvider {
+    return $this->colors()->slice(0, 2);    
+}
+
+public function colors(): DataProvider {
+  return DataProvider::tuples(
+    ['blue', 'sky'], 
+    ['yellow', 'sun'],
+    ['red', 'apple']
+  );
+}
+```
+
 # Documentation
 
 ### Functionalities
@@ -351,7 +380,7 @@ Notes:
 
 - Editing existing providers:
 
-   - [`DataProvider.map()`][map], `DataProvider.slice()`, `DataProvider.drop()`. These methods don't modify `DataProvider`
+   - [`DataProvider.map()`][map], [`DataProvider.slice()`][slice], `DataProvider.drop()`. These methods don't modify `DataProvider`
      instance, but return a new instance.
 
 ### Features
@@ -622,3 +651,5 @@ To use version `3.0.0`, migrating from [`2.4.0`][previous] or earlier:
 [pairs]: #dataproviderpairs
 
 [map]: #dataprovidermap
+
+[slice]: #dataproviderslice
