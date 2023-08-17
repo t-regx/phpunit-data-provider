@@ -33,6 +33,7 @@ with `zip()`, `join()`, `cross()`, `pairs()`, `slice()`, `map()` and more.
    * [`DataProvider::tuples()`](#dataprovidertuples)
    * [`DataProvider::dictionary()`](#dataproviderdictionary)
    * [`DataProvider.map()`](#dataprovidermap)
+   * [`DataProvider.flatMap()`](#dataproviderflatmap)
    * [`DataProvider.slice()`](#dataproviderslice)
 3. [Documentation](#documentation)
    * [Functionalities](#functionalities)
@@ -336,6 +337,41 @@ public function folders(): DataProvider {
 
 Notes:
 - Names in `DataProvider` will be preserved.
+
+
+### `DataProvider.flatMap()`
+
+Emit multiple argument rows for a single input row in `DataProvider`.
+
+💡 Useful for more control over regular `DataProvider::cross()`.
+
+
+```php
+/**
+ * @test 
+ * @dataProvider colors
+ */
+public function test(string $shade, string color, string $thing): void {
+  // your test here
+}
+
+public function shadedColors(): DataProvider {
+  return $this->colors()->flatMap(function (string $color, string $thing): array {
+    return [
+      'light' => ['light', $color, $thing],
+      'dark' => ['dark', $color, $thing],
+    ];
+  });
+}
+
+public function colors(): DataProvider {
+  return DataProvider::tuples(
+    ['blue', 'sky'], 
+    ['yellow', 'sun'],
+    ['red', 'apple']
+  );
+}
+```
 
 ### `DataProvider.slice()`
 
