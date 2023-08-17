@@ -236,7 +236,11 @@ public function rawArrayDataProvider(): array {
 }
 ```
 
-![tuples.png](.github/assets/example/of.png)
+![of.png](.github/assets/example/of.png)
+
+Notes:
+
+- Also accepts [`iterable`], [`\Generator`] and other [types accepted][accepted types] by [PhpUnit].
 
 ### `DataProvider::tuples()`
 
@@ -552,7 +556,7 @@ public function localServices(): array {
 
 - all types allowed
   by [PhpUnit]: [`array`], [`iterable`], [`\Traversable`], [`\Iterator`], [`\IteratorAggregate`], [`\Generator`]
-- `DataProvider` itself
+- `DataProvider` itself, allowing data providers to be composed together
 
 ### Notes
 
