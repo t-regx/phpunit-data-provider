@@ -35,7 +35,6 @@ class Test extends TestCase
      */
     public function shouldOnlyMarkDuplicates()
     {
-        // given
         // when
         $joined = DataProvider::join([
             'ned'     => ['Eddard'],
@@ -47,9 +46,9 @@ class Test extends TestCase
         // then
         $this->assertIteratesNames($joined, [
             'ned',
-            "'stannis' !0",
-            'balon',
             "'stannis' !1",
+            'balon',
+            "'stannis' !3",
         ]);
     }
 }
