@@ -6,6 +6,7 @@ use TRegx\PhpUnit\DataProviders\Internal\Provider\CrossProvider;
 use TRegx\PhpUnit\DataProviders\Internal\Provider\DictionaryProvider;
 use TRegx\PhpUnit\DataProviders\Internal\Provider\DistinctPairsProvider;
 use TRegx\PhpUnit\DataProviders\Internal\Provider\DropProvider;
+use TRegx\PhpUnit\DataProviders\Internal\Provider\EntriesProvider;
 use TRegx\PhpUnit\DataProviders\Internal\Provider\JoinProvider;
 use TRegx\PhpUnit\DataProviders\Internal\Provider\ListProvider;
 use TRegx\PhpUnit\DataProviders\Internal\Provider\MapProvider;
@@ -35,6 +36,11 @@ abstract class DataProvider implements \IteratorAggregate
     public static function dictionary(array $dictionary): DataProvider
     {
         return new DictionaryProvider($dictionary);
+    }
+
+    public static function entries(array $dictionary): DataProvider
+    {
+        return new EntriesProvider($dictionary);
     }
 
     public static function join(iterable $dataProvider, iterable ...$dataProviders): DataProvider

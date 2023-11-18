@@ -34,6 +34,7 @@ with `zip()`, `join()`, `cross()`, `pairs()`, `slice()`, `map()` and more.
    * [`DataProvider::dictionary()`](#dataproviderdictionary)
    * [`DataProvider.map()`](#dataprovidermap)
    * [`DataProvider.slice()`](#dataproviderslice)
+   * [`DataProvider.entries()`](#dataproviderentries)
 3. [Documentation](#documentation)
    * [Functionalities](#functionalities)
    * [Features](#features)
@@ -251,7 +252,7 @@ Provide multiple arguments for each a test. `DataProvider::tuples()` [names](#na
  * @test 
  * @dataProvider colors
  */
-public function test(string color, string $thing): void {
+public function test(string $color, string $thing): void {
   // your test here
 }
 
@@ -276,7 +277,7 @@ provided array key.
  * @test 
  * @dataProvider colors
  */
-public function test(string color): void {
+public function test(string $color): void {
   // your test here
 }
 
@@ -352,7 +353,7 @@ Remove leading or trailing rows from `DataProvider`.
  * @test 
  * @dataProvider limitedColors
  */
-public function test(string color, string $thing): void {
+public function test(string $color, string $thing): void {
   // your test here
 }
 
@@ -368,6 +369,31 @@ public function colors(): DataProvider {
   );
 }
 ```
+
+### `DataProvider.entries()`
+
+Provide two arguments for each a test, from key-value pairs.
+`DataProvider::entries()` [names](#names) each row based on the key-value pair.
+
+```php
+/**
+ * @test 
+ * @dataProvider colors
+ */
+public function test(string $color, string $thing): void {
+  // your test here
+}
+
+public function colors(): DataProvider {
+  return DataProvider::entries(
+    'blue'   => 'sky', 
+    'yellow' => 'sun',
+    'red'    => 'apple',
+  );
+}
+```
+
+![entries.png](.github/assets/example/entries.png)
 
 # Documentation
 
@@ -408,7 +434,7 @@ public function colors(): DataProvider {
  * @test 
  * @dataProvider colors
  */
-public function test(string color, string $thing): void {
+public function test(string $color, string $thing): void {
   // your test here
 }
 
