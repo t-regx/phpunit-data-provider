@@ -17,14 +17,14 @@ class DataRow
         $this->values = $values;
     }
 
-    public static function empty(): DataRow
+    public static function of(array $values): DataRow
     {
-        return new self([], [], []);
+        return new DataRow($values, \array_fill(0, \count($values), true), $values);
     }
 
-    public static function associative($key, array $values): DataRow
+    public static function dictionaryEntry($key, $value): DataRow
     {
-        return new DataRow([$key], [true], $values);
+        return new DataRow([$key], [true], [$value]);
     }
 
     public function isAssociative(int $index): bool
@@ -42,7 +42,6 @@ class DataRow
         return new DataRow(
             \array_merge($this->keys, $dataRow->keys),
             \array_merge($this->associative, $dataRow->associative),
-            \array_merge($this->values, $dataRow->values)
-        );
+            \array_merge($this->values, $dataRow->values));
     }
 }

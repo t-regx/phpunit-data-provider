@@ -19,7 +19,7 @@ class PairsProvider extends DataProvider
         $dataset = [];
         foreach ($this->values as $augend) {
             foreach ($this->values as $addend) {
-                $dataset[] = new DataRow([$augend, $addend], [true, true], [$augend, $addend]);
+                $dataset[] = DataRow::of([$augend, $addend]);
             }
         }
         return $dataset;

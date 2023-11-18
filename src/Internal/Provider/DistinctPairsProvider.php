@@ -22,7 +22,7 @@ class DistinctPairsProvider extends DataProvider
                 if ($index1 === $index2) {
                     continue;
                 }
-                $dataset[] = new DataRow([$augend, $addend], [true, true], [$augend, $addend]);
+                $dataset[] = DataRow::of([$augend, $addend]);
             }
         }
         return $dataset;

@@ -67,7 +67,7 @@ class ZipProvider extends DataProvider
 
     private function zippedRow(int $rowIndex): DataRow
     {
-        $joinedRow = DataRow::empty();
+        $joinedRow = DataRow::of([]);
         foreach ($this->dataFrames as $dataProvider) {
             $joinedRow = $joinedRow->joined($dataProvider->dataset()[$rowIndex]);
         }

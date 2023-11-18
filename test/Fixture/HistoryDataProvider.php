@@ -29,7 +29,7 @@ class HistoryDataProvider extends DataProvider
     {
         $datasets = [];
         foreach ($this->elements as $key => $value) {
-            $datasets[] = DataRow::associative($key, [$value]);
+            $datasets[] = DataRow::dictionaryEntry($key, $value);
         }
         return $datasets;
     }

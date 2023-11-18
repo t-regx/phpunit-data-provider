@@ -18,7 +18,7 @@ class EntriesProvider extends DataProvider
     {
         $dataset = [];
         foreach ($this->dictionary as $key => $value) {
-            $dataset[] = new DataRow([$key, $value], [true, true], [$key, $value]);
+            $dataset[] = DataRow::of([$key, $value]);
         }
         return $dataset;
     }

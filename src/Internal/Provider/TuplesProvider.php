@@ -18,7 +18,7 @@ class TuplesProvider extends DataProvider
     {
         $dataset = [];
         foreach ($this->sets as $set) {
-            $dataset[] = new DataRow($set, \array_fill(0, \count($set), true), $set);
+            $dataset[] = DataRow::of($set);
         }
         return $dataset;
     }
