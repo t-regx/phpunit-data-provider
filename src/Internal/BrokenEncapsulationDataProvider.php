@@ -5,19 +5,22 @@ use TRegx\PhpUnit\DataProviders\DataProvider;
 use TRegx\PhpUnit\DataProviders\Internal\Frame\DataRow;
 
 /**
- * {@see DataProvider} is the library's public interface,
+ * {@see DataProvider} is the library's public interface
  * intended to be passed to PhpUnit in "@dataProvider" annotation.
  *
- * Additionally, it can also be passed back into other the library
+ * Additionally, it can also be passed back into other library
  * entry points, to be crossed, zipped or joined. In order to properly
- * present array keys without scraping strings, we need to access
- * the datasets from the {@see DataProvider} internals..
+ * present array keys without scraping string keys, we need to access
+ * the datasets from the {@see DataProvider} internals.
  *
  * An alternative would be to expose two classes - one with entry point
  * facade methods, and the other one being the data provider object.
  * Out of two evils, protected method {@see DataProvider::dataset()} is
  * probably the more suitable choice.
  *
+ * Another alternative would be to parse string keys, to be represented
+ * internally, and to be rendered as string keys again.
+ * 
  * {@see DataProvider::dataset()} should remain a protected method,
  * not to unnecessarily confuse users of the interface with the method.
  * {@see DataProvider::dataset()} is not supposed to be called by the
@@ -26,7 +29,7 @@ use TRegx\PhpUnit\DataProviders\Internal\Frame\DataRow;
  * entry points.
  *
  * Class {@see BrokenEncapsulationDataProvider} extends {@see DataProvider}
- * to access {@see DataProvider::dataset()} without, using unhealthy
+ * to access {@see DataProvider::dataset()} without using unhealthy
  * hacks.
  */
 class BrokenEncapsulationDataProvider extends DataProvider
