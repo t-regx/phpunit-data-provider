@@ -1,7 +1,7 @@
 <?php
 namespace TRegx\PhpUnit\DataProviders\Internal\Frame;
 
-class ValueType
+class Type
 {
     /** @var mixed */
     private $value;
@@ -11,7 +11,7 @@ class ValueType
         $this->value = $value;
     }
 
-    public function type(): string
+    public function __toString(): string
     {
         if (\is_string($this->value)) {
             return 'string';

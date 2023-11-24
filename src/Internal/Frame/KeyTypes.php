@@ -17,8 +17,7 @@ class KeyTypes
         foreach ($frame->dataset() as $dataRow) {
             foreach ($dataRow->keys as $index => $key) {
                 if ($dataRow->isAssociative($index)) {
-                    $valueType = new ValueType($key);
-                    $types[$valueType->type()] = true;
+                    $types[$this->typeOf($key)] = true;
                 }
             }
         }
@@ -36,5 +35,10 @@ class KeyTypes
     private function arrayKeyTypes(array $types): bool
     {
         return $types == ['string', 'int'] || $types == ['int', 'string'];
+    }
+
+    private function typeOf($value): string
+    {
+        return new Type($value);
     }
 }
