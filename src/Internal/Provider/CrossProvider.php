@@ -6,7 +6,7 @@ use TRegx\PhpUnit\DataProviders\DataProvider;
 use TRegx\PhpUnit\DataProviders\Internal\Frame\DataFrame;
 use TRegx\PhpUnit\DataProviders\Internal\Frame\DataRow;
 use TRegx\PhpUnit\DataProviders\Internal\Frame\InputProviders;
-use TRegx\PhpUnit\DataProviders\Internal\View\ReindexedDataFrame;
+use TRegx\PhpUnit\DataProviders\Internal\View\ReindexedKeysDataFrame;
 use TRegx\PhpUnit\DataProviders\IrregularDataProviderException;
 
 class CrossProvider extends DataProvider
@@ -52,7 +52,7 @@ class CrossProvider extends DataProvider
         $frames = [];
         foreach ($this->inputProviders->dataFrames() as $frame) {
             if ($this->nonEmpty($frame)) {
-                $frames[] = new ReindexedDataFrame($frame);
+                $frames[] = new ReindexedKeysDataFrame($frame);
             }
         }
         return $frames;

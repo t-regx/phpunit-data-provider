@@ -4,7 +4,7 @@ namespace TRegx\PhpUnit\DataProviders\Internal\View;
 use TRegx\PhpUnit\DataProviders\Internal\Frame\DataFrame;
 use TRegx\PhpUnit\DataProviders\Internal\Frame\DataRow;
 
-class ReindexedDataFrame extends DataFrame
+class ReindexedKeysDataFrame extends DataFrame
 {
     /** @var DataFrame */
     private $frame;

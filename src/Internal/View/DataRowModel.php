@@ -27,7 +27,7 @@ class DataRowModel
      */
     public function viewRows(): array
     {
-        return $this->viewRowsMappedKeys(new ReindexedDataFrame($this->dataProvider));
+        return $this->viewRowsMappedKeys(new ReindexedKeysDataFrame($this->dataProvider));
     }
 
     /**
