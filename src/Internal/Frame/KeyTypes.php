@@ -15,13 +15,20 @@ class KeyTypes
     {
         $types = [];
         foreach ($frame->dataset() as $dataRow) {
-            foreach ($dataRow->keys as $index => $key) {
-                if ($dataRow->isAssociative($index)) {
-                    $types[$this->typeOf($key)] = true;
-                }
+            foreach ($this->associativeKeys($dataRow) as $key) {
+                $types[$this->typeOf($key)] = true;
             }
         }
         return \array_keys($types);
+    }
+
+    private function associativeKeys(DataRow $row): \Iterator
+    {
+        foreach ($row->keys as $index => $key) {
+            if ($row->isAssociative($index)) {
+                yield $key;
+            }
+        }
     }
 
     public function uniformTypes(): bool
