@@ -14,64 +14,27 @@ class ValueKey implements Key
     public function toString(bool $segment, bool $includeType): string
     {
         if (is_int($this->value)) {
-            if ($includeType) {
-                return "(int) [$this->value]";
-            }
-            return "[$this->value]";
+            return $this->integerValue($includeType);
         }
         if (\is_float($this->value)) {
-            $value = $this->formatFloat($this->value);
-            if ($includeType) {
-                return "(float) [$value]";
-            }
-            return "[$value]";
+            return $this->floatValue($includeType);
         }
         if (\is_bool($this->value)) {
-            $value = $this->value ? 'true' : 'false';
-            if ($includeType) {
-                return '(bool) ' . $value;
-            }
-            return $value;
+            return $this->booleanValue($includeType);
         }
         if ($this->value === null) {
-            if ($includeType) {
-                return '(null)';
-            }
-            return 'null';
+            return $this->valueOfType('null', $includeType);
         }
         if (\is_array($this->value)) {
-            if ($includeType) {
-                return '(array)';
-            }
-            return 'array';
+            return $this->valueOfType('array', $includeType);
         }
         if (\is_string($this->value)) {
-            $format = \str_replace(
-                ["\t", "\n", "\r", "\f", "\v"],
-                ['\t', '\n', '\r', '\f', '\v'],
-                $this->value);
-            if ($includeType) {
-                return "(string) '$format'";
-            }
-            if (\is_int(\key([$this->value => true]))) {
-                return "'$format'";
-            }
-            if (\trim($this->value) !== $this->value || $segment) {
-                return "'$format'";
-            }
-            return $format;
+            return $this->stringValue($includeType, $segment);
         }
         if (\is_resource($this->value)) {
-            if ($includeType) {
-                return '(resource)';
-            }
-            return 'resource';
+            return $this->valueOfType('resource', $includeType);
         }
-        $class = '\\' . \get_class($this->value);
-        if ($includeType) {
-            return "(object) $class";
-        }
-        return $class;
+        return $this->classValue($includeType);
     }
 
     private function formatFloat(float $value): string
@@ -81,5 +44,75 @@ class ValueKey implements Key
             return "$notation.0";
         }
         return $notation;
+    }
+
+    private function integerValue(bool $includeType): string
+    {
+        if ($includeType) {
+            return "(int) [$this->value]";
+        }
+        return "[$this->value]";
+    }
+
+    private function floatValue(bool $includeType): string
+    {
+        $value = $this->formatFloat($this->value);
+        if ($includeType) {
+            return "(float) [$value]";
+        }
+        return "[$value]";
+    }
+
+    private function booleanValue(bool $includeType): string
+    {
+        $value = $this->value ? 'true' : 'false';
+        if ($includeType) {
+            return '(bool) ' . $value;
+        }
+        return $value;
+    }
+
+    private function stringValue(bool $includeType, bool $segment): string
+    {
+        $value = $this->valueWithAsciiEntities();
+        if ($includeType) {
+            return "(string) '$value'";
+        }
+        if ($this->similarToSequentialKey() || $this->hasWhitespace() || $segment) {
+            return "'$value'";
+        }
+        return $value;
+    }
+
+    private function valueWithAsciiEntities(): string
+    {
+        return \str_replace(
+            ["\t", "\n", "\r", "\f", "\v"],
+            ['\t', '\n', '\r', '\f', '\v'],
+            $this->value);
+    }
+
+    private function similarToSequentialKey(): bool
+    {
+        return \is_int(\key([$this->value => true]));
+    }
+
+    private function hasWhitespace(): bool
+    {
+        return \trim($this->value) !== $this->value;
+    }
+
+    private function classValue(bool $includeType): string
+    {
+        $class = '\\' . \get_class($this->value);
+        if ($includeType) {
+            return "(object) $class";
+        }
+        return $class;
+    }
+
+    private function valueOfType(string $type, bool $includeType): string
+    {
+        return $includeType ? "($type)" : $type;
     }
 }
