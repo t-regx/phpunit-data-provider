@@ -29,17 +29,19 @@ class ReindexedKeysDataFrame extends DataFrame
      */
     private function reindexedRows(array $dataRows): array
     {
-        for ($i = 0; $i < $this->widestRowWidth($dataRows); $i++) {
-            $sequence = 0;
-            foreach ($dataRows as $row) {
-                if (isset($row->keys[$i])) {
-                    if (!$row->isAssociative($i)) {
-                        $row->keys[$i] = $sequence++;
-                    }
-                }
-            }
+        foreach ($this->columnIndices($dataRows) as $columnIndex) {
+            $this->reindexColumn($dataRows, $columnIndex);
         }
         return $dataRows;
+    }
+
+    /**
+     * @param DataRow[] $dataRows
+     * @return \Iterator
+     */
+    private function columnIndices(array $dataRows): iterable
+    {
+        return \range(0, $this->widestRowWidth($dataRows));
     }
 
     /**
@@ -51,5 +53,36 @@ class ReindexedKeysDataFrame extends DataFrame
         return max(\array_map(function (DataRow $row): int {
             return \count($row->keys);
         }, $dataRows));
+    }
+
+    /**
+     * @param DataRow[] $dataRows
+     * @param int $columnIndex
+     * @return void
+     */
+    private function reindexColumn(array $dataRows, int $columnIndex): void
+    {
+        $sequence = 0;
+        foreach ($this->rowsWithSequentialKeyAt($dataRows, $columnIndex) as $row) {
+            $row->keys[$columnIndex] = $sequence++;
+        }
+    }
+
+    /**
+     * @param DataRow[] $dataRows
+     * @param int $index
+     * @return \Iterator
+     */
+    private function rowsWithSequentialKeyAt(array $dataRows, int $index): \Iterator
+    {
+        foreach ($dataRows as $row) {
+            if (!isset($row->keys[$index])) {
+                continue;
+            }
+            if ($row->isAssociative($index)) {
+                continue;
+            }
+            yield $row;
+        }
     }
 }
