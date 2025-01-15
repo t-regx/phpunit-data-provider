@@ -73,7 +73,7 @@ abstract class DataProvider implements \IteratorAggregate
         return new MapProvider($this, $mapper);
     }
 
-    public function slice(int $start, int $count = null): DataProvider
+    public function slice(int $start, ?int $count = null): DataProvider
     {
         return new SliceProvider($this, $start, $count);
     }
