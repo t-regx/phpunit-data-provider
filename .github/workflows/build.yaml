@@ -3,8 +3,7 @@ name: build
 on:
   pull_request:
   push:
-    paths-ignore: 
-      - ".github/**"
+    paths-ignore:
       - "ReadMe.md"
 
 jobs:
@@ -27,6 +26,10 @@ jobs:
           - php-version: 8.1
             coverage: none
           - php-version: 8.2
+            coverage: none
+          - php-version: 8.3
+            coverage: none
+          - php-version: 8.4
             coverage: none
 
     steps:

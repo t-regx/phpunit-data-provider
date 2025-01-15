@@ -18,6 +18,8 @@ with `zip()`, `join()`, `cross()`, `pairs()`, `slice()`, `map()` and more.
 [![PHP Version](https://img.shields.io/badge/PHP-8.0-blue.svg)][1]
 [![PHP Version](https://img.shields.io/badge/PHP-8.1-blue.svg)][1]
 [![PHP Version](https://img.shields.io/badge/PHP-8.2-blue.svg)][1]
+[![PHP Version](https://img.shields.io/badge/PHP-8.3-blue.svg)][1]
+[![PHP Version](https://img.shields.io/badge/PHP-8.4-blue.svg)][1]
 
 [![PRs Welcome](https://img.shields.io/badge/PR-welcome-brightgreen.svg?style=popout)](https://github.com/t-regx/CrossDataProviders/pulls)
 
